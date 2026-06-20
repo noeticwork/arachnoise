@@ -69,6 +69,44 @@ _data = {
 &"fade_in": SubResource("Animation_wbfu4")
 }
 
+[sub_resource type="Animation" id="Animation_joorw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.6736865, 0.6736861, 0.6736858, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_3mrqo"]
+resource_name = "warble"
+length = 3.0333333
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.61, 1.26, 2.07, 2.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.6736865, 0.6736861, 0.6736858, 1), Color(0.52844673, 0.5284468, 0.5284466, 1), Color(0.7765989, 0.77659893, 0.7765987, 1), Color(0.62141263, 0.6214123, 0.62141234, 1), Color(0.62141263, 0.6214123, 0.62141234, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_joorw"]
+_data = {
+&"RESET": SubResource("Animation_joorw"),
+&"warble": SubResource("Animation_3mrqo")
+}
+
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_t88pq"]
 vertices = PackedVector2Array(652.71094, 1000.3125, 373.03125, 901.3125, 618.21094, 800.85156, 1857, 771.60156, 741.6172, 1199.0391, 523.4219, 1159.1875, 1109.6406, 286.8828, 1596.9297, 77.90625, 1632.2266, 231.5, 1221.1406, 1294.9531, 810.78125, 1332.4219, 775.6172, 494.03125, 1888.5234, 378.5078, 1619.1719, 1342.4688, 1857, 1090.0234)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 0, 3), PackedInt32Array(6, 7, 8), PackedInt32Array(9, 10, 4, 3), PackedInt32Array(11, 6, 8, 12, 3, 2), PackedInt32Array(13, 9, 3, 14)])
@@ -100,12 +138,14 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 scale = Vector2(1.3330803, 1.3330803)
 texture = ExtResource("5_3mrqo")
+metadata/_edit_use_anchors_ = true
 
 [node name="Plant2" type="TextureRect" parent="Game" unique_id=1395039098]
 offset_right = 1920.0
 offset_bottom = 1080.0
 scale = Vector2(1.3214962, 1.3214962)
 texture = ExtResource("6_joorw")
+metadata/_edit_use_anchors_ = true
 
 [node name="Web" type="Node2D" parent="Game" unique_id=400274507]
 
@@ -115,8 +155,13 @@ offset_right = 2549.0
 offset_bottom = 1442.0
 texture = ExtResource("3_t88pq")
 stretch_mode = 4
+metadata/_edit_use_anchors_ = true
 
 [node name="Anchors" type="Node2D" parent="Game/Web" unique_id=1309369719]
+modulate = Color(0.6736865, 0.6736861, 0.6736858, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Game/Web/Anchors" unique_id=45971607]
+libraries/ = SubResource("AnimationLibrary_joorw")
 
 [node name="1" parent="Game/Web/Anchors" unique_id=536966445 instance=ExtResource("4_sb48q")]
 position = Vector2(1123, 838)
@@ -143,40 +188,45 @@ position = Vector2(1154, 772.00006)
 rotation = -2.0948813
 scale = Vector2(1.2620218, 1.2620218)
 
-[node name="6" parent="Game/Web/Anchors" unique_id=424929340 instance=ExtResource("4_sb48q")]
-position = Vector2(1089.0001, 825)
-rotation = 0.7497225
-scale = Vector2(0.7930654, 0.7930654)
+[node name="6" parent="Game/Web/Anchors" unique_id=1715186931 instance=ExtResource("4_sb48q")]
+position = Vector2(1146.0001, 758)
+rotation = -2.4317784
+scale = Vector2(1.0969579, 1.0969579)
 
-[node name="7" parent="Game/Web/Anchors" unique_id=2050273704 instance=ExtResource("4_sb48q")]
-position = Vector2(1079.0001, 809)
-rotation = 1.2237805
-scale = Vector2(0.74485, 0.74485)
-
-[node name="8" parent="Game/Web/Anchors" unique_id=905053772 instance=ExtResource("4_sb48q")]
-position = Vector2(1068.0001, 794)
-rotation = 1.6128167
-scale = Vector2(0.6913277, 0.6913277)
-
-[node name="9" parent="Game/Web/Anchors" unique_id=736292855 instance=ExtResource("4_sb48q")]
-position = Vector2(1123, 838)
-rotation = -0.07602821
-scale = Vector2(0.69132775, 0.69132775)
-
-[node name="10" parent="Game/Web/Anchors" unique_id=888488986 instance=ExtResource("4_sb48q")]
-position = Vector2(1086.0001, 756)
-rotation = 2.2266035
-scale = Vector2(0.69132775, 0.69132775)
-
-[node name="11" parent="Game/Web/Anchors" unique_id=377696943 instance=ExtResource("4_sb48q")]
+[node name="7" parent="Game/Web/Anchors" unique_id=377696943 instance=ExtResource("4_sb48q")]
 position = Vector2(1117.0001, 748)
 rotation = -3.1165166
 scale = Vector2(0.6913277, 0.6913277)
 
-[node name="12" parent="Game/Web/Anchors" unique_id=1715186931 instance=ExtResource("4_sb48q")]
-position = Vector2(1146.0001, 758)
-rotation = -2.323369
-scale = Vector2(1.0969579, 1.0969579)
+[node name="8" parent="Game/Web/Anchors" unique_id=2040495656 instance=ExtResource("4_sb48q")]
+position = Vector2(1105.0001, 753)
+rotation = 2.75891
+scale = Vector2(0.69132775, 0.69132775)
+
+[node name="9" parent="Game/Web/Anchors" unique_id=888488986 instance=ExtResource("4_sb48q")]
+position = Vector2(1083, 763.99994)
+rotation = 2.2266035
+scale = Vector2(0.62867135, 0.62867135)
+
+[node name="10" parent="Game/Web/Anchors" unique_id=905053772 instance=ExtResource("4_sb48q")]
+position = Vector2(1068.0001, 794)
+rotation = 1.6128167
+scale = Vector2(0.6913277, 0.6913277)
+
+[node name="11" parent="Game/Web/Anchors" unique_id=2050273704 instance=ExtResource("4_sb48q")]
+position = Vector2(1079.0001, 809)
+rotation = 1.2237805
+scale = Vector2(0.74485, 0.74485)
+
+[node name="12" parent="Game/Web/Anchors" unique_id=424929340 instance=ExtResource("4_sb48q")]
+position = Vector2(1089.0001, 825)
+rotation = 0.74972254
+scale = Vector2(0.7930654, 0.7930654)
+
+[node name="13" parent="Game/Web/Anchors" unique_id=736292855 instance=ExtResource("4_sb48q")]
+position = Vector2(1103, 842.00006)
+rotation = 0.40026897
+scale = Vector2(0.7978127, 0.7978127)
 
 [node name="Spidey" parent="Game" unique_id=11989907 instance=ExtResource("5_t88pq")]
 position = Vector2(1010, 748)
