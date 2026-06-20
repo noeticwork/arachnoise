@@ -8,6 +8,9 @@
 [node name="AnchorWebline" type="Node2D" unique_id=536966445]
 script = ExtResource("1_v386r")
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1589302479]
+unique_name_in_owner = true
+
 [node name="LineTexture" type="TextureRect" parent="." unique_id=1528353604]
 unique_name_in_owner = true
 offset_left = -62.0
@@ -68,3 +71,13 @@ position = Vector2(8, 664)
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="end_anchor" unique_id=299085357]
 shape = SubResource("CircleShape2D_taomk")
+
+[connection signal="area_entered" from="anchor" to="." method="_on_anchor_area_entered"]
+[connection signal="area_entered" from="i" to="." method="_on_i_area_entered"]
+[connection signal="area_entered" from="ii" to="." method="_on_ii_area_entered"]
+[connection signal="area_entered" from="iii" to="." method="_on_iii_area_entered"]
+[connection signal="area_entered" from="iv" to="." method="_on_iv_area_entered"]
+[connection signal="area_entered" from="v" to="." method="_on_v_area_entered"]
+[connection signal="area_entered" from="vi" to="." method="_on_vi_area_entered"]
+[connection signal="area_entered" from="vii" to="." method="_on_vii_area_entered"]
+[connection signal="area_entered" from="end_anchor" to="." method="_on_end_anchor_area_entered"]

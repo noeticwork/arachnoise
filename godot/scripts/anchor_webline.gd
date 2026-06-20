@@ -22,6 +22,7 @@ var keys = {
 }
 
 func _ready() -> void:
+	
 	_randomize()
 
 func _randomize() -> void:
@@ -34,3 +35,49 @@ func _process(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action("refresh_random"):
 		_randomize()
+
+func _play_end_note() -> void:
+	pass
+	
+func _play_base_note() -> void:
+	if not %AudioStreamPlayer.playing:
+		var note: String = keys[key][0];
+		%AudioStreamPlayer.stream = load("res://assets/audio/Notes/Celeste/OCT1 31 Celeste%s1.wav" % note)
+	else:
+		# wait?
+		pass
+
+func _play_note(num: int) -> void:
+	if not %AudioStreamPlayer.playing:
+		var note: String = keys[key][num];
+		%AudioStreamPlayer.stream = load("res://assets/audio/Notes/Celeste/OCT1 31 Celeste%s1.wav" % note)
+	else:
+		# wait?
+		pass
+
+func _on_anchor_area_entered(area: Area2D) -> void:
+	_play_base_note()
+
+func _on_i_area_entered(area: Area2D) -> void:
+	_play_note(1)
+
+func _on_ii_area_entered(area: Area2D) -> void:
+	_play_note(2)
+
+func _on_iii_area_entered(area: Area2D) -> void:
+	_play_note(3)
+
+func _on_iv_area_entered(area: Area2D) -> void:
+	_play_note(4)
+
+func _on_v_area_entered(area: Area2D) -> void:
+	_play_note(5)
+
+func _on_vi_area_entered(area: Area2D) -> void:
+	_play_note(6)
+
+func _on_vii_area_entered(area: Area2D) -> void:
+	_play_note(7)
+
+func _on_end_anchor_area_entered(area: Area2D) -> void:
+	_play_end_note()
