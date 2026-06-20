@@ -21,6 +21,64 @@ var keys = {
 	"F":  ["F",  "Gm",  "Am",  "Bb", "C",  "Dm",  "Edim"]
 }
 
+# Returns the full asset path for a chord, or empty string if not found.
+func get_chord_asset_path(chord: String) -> String:
+	# 1. Detect the root and quality
+	var root: String
+	var quality: String
+
+	if chord.ends_with("dim"):
+		root = chord.trim_suffix("dim")
+		quality = "dim"
+	elif chord.ends_with("m"):
+		root = chord.trim_suffix("m")
+		quality = "min"
+	else:
+		root = chord
+		quality = "maj"
+
+	# 2. Build the filename we expect
+	var filename = root + quality + ".wav"
+
+	# 3. (Optional) Handle common enharmonic fallbacks
+	#    Add more if needed – these map chord names that don't exist
+	#    in your file list to the files you DO have.
+	var enharmonic_fallbacks = {
+		"Abm": "G#min",   # Ab minor = G# minor
+		"Cb":  "Bmaj",    # Cb major = B major
+		"E#dim": "Fdim",  # E# dim = F dim
+		# If you need Abdim as well, but you have Abdim.wav, so it's fine.
+	}
+	if not FileAccess.file_exists("res://assets/audio/Pads/" + filename):
+		var fallback = enharmonic_fallbacks.get(root + quality)
+		if fallback:
+			filename = fallback + ".wav"
+
+	# 4. Full path
+	var full_path = "res://assets/audio/Pads/" + filename
+	if FileAccess.file_exists(full_path):
+		return full_path
+	else:
+		push_error("Sound file not found: " + full_path)
+		return ""
+		
+func _sound_map(note: String) -> void:
+	var path = get_chord_asset_path(note)
+	if path.is_empty():
+		return
+
+	var audio_stream = load(path) as AudioStream
+	if audio_stream:
+		var player = %audio
+		if player.playing:
+			%automator.play("fade_out_pad")
+			player.finished.connect(func(): _sound_map(note))
+
+		player.stream = audio_stream
+		player.play()
+		# Optional: auto‑free when done
+		#player.finished.connect(player.queue_free)
+
 func _ready() -> void:
 	
 	_randomize()
@@ -40,26 +98,21 @@ func _play_end_note() -> void:
 	pass
 	
 func _play_base_note() -> void:
-	if not %AudioStreamPlayer.playing:
-		var note: String = keys[key][0];
-		%AudioStreamPlayer.stream = load("res://assets/audio/Notes/Celeste/OCT1 31 Celeste%s1.wav" % note)
-	else:
-		# wait?
-		pass
+	var note: String = keys[key][0];
+	_sound_map(note)
+	#if not %AudioStreamPlayer.playing:
+#
+	#else:
+		## wait?
+		#pass
 
 func _play_note(num: int) -> void:
-	if not %AudioStreamPlayer.playing:
-		var note: String = keys[key][num];
-		%AudioStreamPlayer.stream = load("res://assets/audio/Notes/Celeste/OCT1 31 Celeste%s1.wav" % note)
-	else:
-		# wait?
-		pass
-
-func _on_anchor_area_entered(area: Area2D) -> void:
-	_play_base_note()
-
-func _on_i_area_entered(area: Area2D) -> void:
-	_play_note(1)
+	#if not %AudioStreamPlayer.playing:
+	var note: String = keys[key][num-1];
+	_sound_map(note)
+	#else:
+		## wait?
+		#pass
 
 func _on_ii_area_entered(area: Area2D) -> void:
 	_play_note(2)
@@ -81,3 +134,34 @@ func _on_vii_area_entered(area: Area2D) -> void:
 
 func _on_end_anchor_area_entered(area: Area2D) -> void:
 	_play_end_note()
+
+
+func _on_anchor_body_entered(body: Node2D) -> void:
+	_play_base_note()
+ # Replace with function body.
+
+
+func _on_i_body_entered(body: Node2D) -> void:
+	_play_note(1)
+
+func _on_ii_body_entered(body: Node2D) -> void:
+	_play_note(2)
+
+func _on_iii_body_entered(body: Node2D) -> void:
+	_play_note(3)
+
+func _on_iv_body_entered(body: Node2D) -> void:
+	_play_note(4)
+
+func _on_v_body_entered(body: Node2D) -> void:
+	_play_note(5)
+
+func _on_vi_body_entered(body: Node2D) -> void:
+	_play_note(6)
+
+func _on_vii_body_entered(body: Node2D) -> void:
+	_play_note(7)
+
+
+func _on_end_anchor_body_entered(body: Node2D) -> void:
+	pass

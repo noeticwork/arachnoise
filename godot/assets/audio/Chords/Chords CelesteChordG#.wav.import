@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b2d35t3bsofwx"
+path="res://.godot/imported/Chords CelesteChordG#.wav-e5c9e8e331bd207125189aac36c7cbbd.sample"
+
+[deps]
+
+source_file="res://assets/audio/Chords/Chords CelesteChordG#.wav"
+dest_files=["res://.godot/imported/Chords CelesteChordG#.wav-e5c9e8e331bd207125189aac36c7cbbd.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
