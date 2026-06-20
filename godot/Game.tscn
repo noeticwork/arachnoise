@@ -2,9 +2,11 @@
 
 [ext_resource type="Texture2D" uid="uid://d1xyuj6sj648g" path="res://assets/marta-pawlik-Wr2Ss0fdeWU-unsplash.webp" id="1_wbfu4"]
 [ext_resource type="Script" uid="uid://0e4pgxdgfw2r" path="res://scripts/arachnoise.gd" id="1_xkndl"]
-[ext_resource type="Texture2D" uid="uid://dfwoahwny43j5" path="res://assets/web-lines-transp.png" id="3_u44n3"]
+[ext_resource type="Texture2D" uid="uid://b2pawjfwwiey" path="res://assets/outter_web.png" id="3_t88pq"]
 [ext_resource type="PackedScene" uid="uid://cjq1th6ivk3iu" path="res://scenes/anchor_webline.tscn" id="4_sb48q"]
+[ext_resource type="Texture2D" uid="uid://ctesy3rfpt0uw" path="res://assets/plants1.png" id="5_3mrqo"]
 [ext_resource type="PackedScene" uid="uid://dbcoikmgx1kmt" path="res://scenes/spidey.tscn" id="5_t88pq"]
+[ext_resource type="Texture2D" uid="uid://ntsie4npnnqe" path="res://assets/plants2.png" id="6_joorw"]
 
 [sub_resource type="Animation" id="Animation_u44n3"]
 length = 0.001
@@ -93,13 +95,25 @@ scroll_scale = Vector2(0.8, 0.8)
 [node name="Game" type="Parallax2D" parent="." unique_id=597068333]
 unique_name_in_owner = true
 
+[node name="Plant1" type="TextureRect" parent="Game" unique_id=1901718310]
+offset_right = 1920.0
+offset_bottom = 1080.0
+scale = Vector2(1.3330803, 1.3330803)
+texture = ExtResource("5_3mrqo")
+
+[node name="Plant2" type="TextureRect" parent="Game" unique_id=1395039098]
+offset_right = 1920.0
+offset_bottom = 1080.0
+scale = Vector2(1.3214962, 1.3214962)
+texture = ExtResource("6_joorw")
+
 [node name="Web" type="Node2D" parent="Game" unique_id=400274507]
 
 [node name="FixedLines" type="TextureRect" parent="Game/Web" unique_id=557434635]
 modulate = Color(1, 1, 1, 0.5254902)
 offset_right = 2549.0
 offset_bottom = 1442.0
-texture = ExtResource("3_u44n3")
+texture = ExtResource("3_t88pq")
 stretch_mode = 4
 
 [node name="Anchors" type="Node2D" parent="Game/Web" unique_id=1309369719]
@@ -169,6 +183,7 @@ position = Vector2(1010, 748)
 scale = Vector2(2, 2)
 
 [node name="WebNav" type="NavigationRegion2D" parent="Game" unique_id=1797785414]
+visible = false
 navigation_polygon = SubResource("NavigationPolygon_t88pq")
 
 [node name="Specular" type="Parallax2D" parent="." unique_id=1039060562]
