@@ -21,46 +21,46 @@ texture = ExtResource("2_taomk")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="anchor" unique_id=1323083959]
 shape = SubResource("CircleShape2D_taomk")
 
-[node name="A" type="Area2D" parent="." unique_id=846230492]
+[node name="i" type="Area2D" parent="." unique_id=846230492]
 position = Vector2(3, 62)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="A" unique_id=2140478228]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="i" unique_id=2140478228]
 shape = SubResource("CircleShape2D_taomk")
 
-[node name="B" type="Area2D" parent="." unique_id=2090790315]
+[node name="ii" type="Area2D" parent="." unique_id=2090790315]
 position = Vector2(10, 149)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="B" unique_id=700656625]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ii" unique_id=700656625]
 shape = SubResource("CircleShape2D_taomk")
 
-[node name="C" type="Area2D" parent="." unique_id=443312610]
+[node name="iii" type="Area2D" parent="." unique_id=443312610]
 position = Vector2(19, 238)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="C" unique_id=1049294329]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="iii" unique_id=1049294329]
 shape = SubResource("CircleShape2D_taomk")
 
-[node name="D" type="Area2D" parent="." unique_id=121378607]
+[node name="iv" type="Area2D" parent="." unique_id=121378607]
 position = Vector2(17, 347)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="D" unique_id=322355708]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="iv" unique_id=322355708]
 shape = SubResource("CircleShape2D_taomk")
 
-[node name="E" type="Area2D" parent="." unique_id=1079414515]
+[node name="v" type="Area2D" parent="." unique_id=1079414515]
 position = Vector2(17, 434)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="E" unique_id=2142645458]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="v" unique_id=2142645458]
 shape = SubResource("CircleShape2D_taomk")
 
-[node name="F" type="Area2D" parent="." unique_id=298278294]
+[node name="vi" type="Area2D" parent="." unique_id=298278294]
 position = Vector2(15, 501)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="F" unique_id=1030032297]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="vi" unique_id=1030032297]
 shape = SubResource("CircleShape2D_taomk")
 
-[node name="G" type="Area2D" parent="." unique_id=1979234706]
+[node name="vii" type="Area2D" parent="." unique_id=1979234706]
 position = Vector2(17, 589)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="G" unique_id=1228391614]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="vii" unique_id=1228391614]
 shape = SubResource("CircleShape2D_taomk")
 
 [node name="end_anchor" type="Area2D" parent="." unique_id=1111661198]
