@@ -23,6 +23,24 @@ tracks/0/keys = {
 "values": [Vector2i(0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_vnujn"]
+resource_name = "idle"
+length = 0.5
+loop_mode = 1
+step = 0.083333336
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2i(0, 1), Vector2i(1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_6e28j"]
 resource_name = "walk"
 length = 0.5000167
@@ -44,6 +62,7 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nkwvm"]
 _data = {
 &"RESET": SubResource("Animation_s6tvk"),
+&"idle": SubResource("Animation_vnujn"),
 &"walk": SubResource("Animation_6e28j")
 }
 
@@ -63,6 +82,7 @@ script = ExtResource("1_vnujn")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=368742240]
 texture = ExtResource("2_vnujn")
 hframes = 3
+vframes = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1653173207]
 visible = false
