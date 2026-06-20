@@ -260,6 +260,7 @@ key = "E"
 
 [node name="Spidey" parent="Game" unique_id=11989907 instance=ExtResource("5_t88pq")]
 position = Vector2(1010, 748)
+scale = Vector2(2, 2)
 
 [node name="Camera2D" type="Camera2D" parent="Game/Spidey" unique_id=706635895]
 physics_interpolation_mode = 1
@@ -302,4 +303,4 @@ limit_bottom = 1440
 metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
 
 [node name="Mosquito" parent="." unique_id=486585636 instance=ExtResource("11_yhmtn")]
-position = Vector2(1429, 467)
+position = Vector2(1375.6515, 452.03534)
