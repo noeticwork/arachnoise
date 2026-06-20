@@ -1,10 +1,70 @@
 [gd_scene format=3 uid="uid://cjq1th6ivk3iu"]
 
 [ext_resource type="Script" uid="uid://b82jokq3nvki7" path="res://scripts/anchor_webline.gd" id="1_v386r"]
+[ext_resource type="Texture2D" uid="uid://bgpkloleaquvf" path="res://assets/line1-2.png" id="2_taomk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_taomk"]
 
 [node name="AnchorWebline" type="Node2D" unique_id=536966445]
 script = ExtResource("1_v386r")
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=1528353604]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="LineTexture" type="TextureRect" parent="." unique_id=1528353604]
+unique_name_in_owner = true
+offset_left = -62.0
+offset_top = -45.0
+offset_right = 80.0
+offset_bottom = 694.0
+texture = ExtResource("2_taomk")
+
+[node name="anchor" type="Area2D" parent="." unique_id=277028738]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="anchor" unique_id=1323083959]
+shape = SubResource("CircleShape2D_taomk")
+
+[node name="A" type="Area2D" parent="." unique_id=846230492]
+position = Vector2(3, 62)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="A" unique_id=2140478228]
+shape = SubResource("CircleShape2D_taomk")
+
+[node name="B" type="Area2D" parent="." unique_id=2090790315]
+position = Vector2(10, 149)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="B" unique_id=700656625]
+shape = SubResource("CircleShape2D_taomk")
+
+[node name="C" type="Area2D" parent="." unique_id=443312610]
+position = Vector2(19, 238)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="C" unique_id=1049294329]
+shape = SubResource("CircleShape2D_taomk")
+
+[node name="D" type="Area2D" parent="." unique_id=121378607]
+position = Vector2(17, 347)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="D" unique_id=322355708]
+shape = SubResource("CircleShape2D_taomk")
+
+[node name="E" type="Area2D" parent="." unique_id=1079414515]
+position = Vector2(17, 434)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="E" unique_id=2142645458]
+shape = SubResource("CircleShape2D_taomk")
+
+[node name="F" type="Area2D" parent="." unique_id=298278294]
+position = Vector2(15, 501)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="F" unique_id=1030032297]
+shape = SubResource("CircleShape2D_taomk")
+
+[node name="G" type="Area2D" parent="." unique_id=1979234706]
+position = Vector2(17, 589)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="G" unique_id=1228391614]
+shape = SubResource("CircleShape2D_taomk")
+
+[node name="end_anchor" type="Area2D" parent="." unique_id=1111661198]
+position = Vector2(8, 664)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="end_anchor" unique_id=299085357]
+shape = SubResource("CircleShape2D_taomk")

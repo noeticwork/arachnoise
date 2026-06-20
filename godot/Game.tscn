@@ -3,6 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://d1xyuj6sj648g" path="res://assets/marta-pawlik-Wr2Ss0fdeWU-unsplash.webp" id="1_wbfu4"]
 [ext_resource type="Script" uid="uid://0e4pgxdgfw2r" path="res://scripts/arachnoise.gd" id="1_xkndl"]
 [ext_resource type="Texture2D" uid="uid://dfwoahwny43j5" path="res://assets/web-lines-transp.png" id="3_u44n3"]
+[ext_resource type="PackedScene" uid="uid://cjq1th6ivk3iu" path="res://scenes/anchor_webline.tscn" id="4_sb48q"]
+[ext_resource type="PackedScene" uid="uid://dbcoikmgx1kmt" path="res://scenes/spidey.tscn" id="5_t88pq"]
 
 [sub_resource type="Animation" id="Animation_u44n3"]
 length = 0.001
@@ -56,22 +58,83 @@ offset_right = 2560.0
 offset_bottom = 1440.0
 texture = ExtResource("1_wbfu4")
 
-[node name="Polygon2D" type="Polygon2D" parent="." unique_id=1493820092]
-modulate = Color(1, 1, 1, 0.20392157)
-polygon = PackedVector2Array(321, 488, 2252, 43, 2032, 887, 1642, 1345, 1169, 1301, 739, 1388, 524, 1153, 426, 884)
-
 [node name="Midground" type="Parallax2D" parent="." unique_id=1313288988]
 
 [node name="Game" type="Parallax2D" parent="." unique_id=597068333]
 
-[node name="Specular" type="Parallax2D" parent="." unique_id=1039060562]
+[node name="Web" type="Node2D" parent="Game" unique_id=400274507]
 
-[node name="FixedLines" type="TextureRect" parent="." unique_id=557434635]
+[node name="FixedLines" type="TextureRect" parent="Game/Web" unique_id=557434635]
 modulate = Color(1, 1, 1, 0.5254902)
 offset_right = 2549.0
 offset_bottom = 1442.0
 texture = ExtResource("3_u44n3")
 stretch_mode = 4
 
-[node name="Polygon2D2" type="Polygon2D" parent="." unique_id=1226538895]
-polygon = PackedVector2Array(1113, 755, 1141, 759, 1153, 772, 1154, 790, 1149, 811, 1138, 823, 1115, 831, 1087, 818, 1076, 792, 1087, 769)
+[node name="Anchors" type="Node2D" parent="Game/Web" unique_id=1309369719]
+
+[node name="1" parent="Game/Web/Anchors" unique_id=536966445 instance=ExtResource("4_sb48q")]
+position = Vector2(1123, 838)
+rotation = -0.07602821
+scale = Vector2(0.69132775, 0.69132775)
+
+[node name="2" parent="Game/Web/Anchors" unique_id=958637222 instance=ExtResource("4_sb48q")]
+position = Vector2(1157.0001, 826)
+rotation = -0.6379097
+scale = Vector2(1.4525352, 0.9386376)
+
+[node name="3" parent="Game/Web/Anchors" unique_id=137692516 instance=ExtResource("4_sb48q")]
+position = Vector2(1161.0001, 810)
+rotation = -1.1435091
+scale = Vector2(1.0835181, 1.0835181)
+
+[node name="4" parent="Game/Web/Anchors" unique_id=477313117 instance=ExtResource("4_sb48q")]
+position = Vector2(1162.0001, 795)
+rotation = -1.6018195
+scale = Vector2(0.9615322, 0.9615322)
+
+[node name="5" parent="Game/Web/Anchors" unique_id=579269807 instance=ExtResource("4_sb48q")]
+position = Vector2(1154, 772.00006)
+rotation = -2.0948813
+scale = Vector2(1.2620218, 1.2620218)
+
+[node name="6" parent="Game/Web/Anchors" unique_id=424929340 instance=ExtResource("4_sb48q")]
+position = Vector2(1089.0001, 825)
+rotation = 0.7497225
+scale = Vector2(0.7930654, 0.7930654)
+
+[node name="7" parent="Game/Web/Anchors" unique_id=2050273704 instance=ExtResource("4_sb48q")]
+position = Vector2(1079.0001, 809)
+rotation = 1.2237805
+scale = Vector2(0.74485, 0.74485)
+
+[node name="8" parent="Game/Web/Anchors" unique_id=905053772 instance=ExtResource("4_sb48q")]
+position = Vector2(1068.0001, 794)
+rotation = 1.6128167
+scale = Vector2(0.6913277, 0.6913277)
+
+[node name="9" parent="Game/Web/Anchors" unique_id=736292855 instance=ExtResource("4_sb48q")]
+position = Vector2(1123, 838)
+rotation = -0.07602821
+scale = Vector2(0.69132775, 0.69132775)
+
+[node name="10" parent="Game/Web/Anchors" unique_id=888488986 instance=ExtResource("4_sb48q")]
+position = Vector2(1086.0001, 756)
+rotation = 2.2266035
+scale = Vector2(0.69132775, 0.69132775)
+
+[node name="11" parent="Game/Web/Anchors" unique_id=377696943 instance=ExtResource("4_sb48q")]
+position = Vector2(1117.0001, 748)
+rotation = -3.1165166
+scale = Vector2(0.6913277, 0.6913277)
+
+[node name="12" parent="Game/Web/Anchors" unique_id=1715186931 instance=ExtResource("4_sb48q")]
+position = Vector2(1146.0001, 758)
+rotation = -2.323369
+scale = Vector2(1.0969579, 1.0969579)
+
+[node name="Spidey" parent="Game" unique_id=11989907 instance=ExtResource("5_t88pq")]
+position = Vector2(1010, 748)
+scale = Vector2(2, 2)
+
+[node name="Specular" type="Parallax2D" parent="." unique_id=1039060562]

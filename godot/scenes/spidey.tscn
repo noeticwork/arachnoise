@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://dbcoikmgx1kmt"]
 
+[ext_resource type="Texture2D" uid="uid://cmtj86psi8aio" path="res://assets/spider.png" id="1_h1cbf"]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_bcyx4"]
-radius = 31.06445
+radius = 14.142136
 
 [node name="Spidey" type="CharacterBody2D" unique_id=11989907]
 
@@ -9,5 +11,8 @@ radius = 31.06445
 shape = SubResource("CircleShape2D_bcyx4")
 
 [node name="Temp" type="TextureRect" parent="." unique_id=348163235]
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+texture = ExtResource("1_h1cbf")
