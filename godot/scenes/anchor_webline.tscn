@@ -5,10 +5,6 @@
 [node name="AnchorWebline" type="Node2D" unique_id=536966445]
 script = ExtResource("1_v386r")
 
-[node name="Line2D" type="Line2D" parent="." unique_id=670150608]
-visible = false
-points = PackedVector2Array(-2, 1, 990, 1)
-
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1528353604]
 offset_right = 40.0
 offset_bottom = 40.0
