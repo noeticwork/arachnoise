@@ -57,7 +57,8 @@ func _on_loitering_state_entered() -> void:
 	get_tree().create_timer(wait_length).timeout.connect(_buzz_spidey)
 
 func _on_enticing_state_entered() -> void:
-	$BuzzTrack.play()
+	#$BuzzTrack.play()
+	pass
 
 func _on_trapping_state_entered() -> void:
 	pass # Replace with function body.

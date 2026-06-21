@@ -61,6 +61,7 @@ script = ExtResource("1_v386r")
 
 [node name="audio" type="AudioStreamPlayer" parent="." unique_id=1589302479]
 unique_name_in_owner = true
+max_polyphony = 4
 
 [node name="automator" type="AnimationPlayer" parent="." unique_id=639839811]
 unique_name_in_owner = true

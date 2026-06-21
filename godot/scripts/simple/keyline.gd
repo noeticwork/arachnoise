@@ -2,6 +2,31 @@ extends Node2D
 @export var line_texture: Texture2D
 @export var key: String
 
+const CHORDS_CELESTE_CHORD_A_ = preload("uid://bfjk7g0xsbpor")
+const CHORDS_CELESTE_CHORD_A = preload("uid://cwyhxuygctll7")
+const CHORDS_CELESTE_CHORD_B = preload("uid://cua26fklf6oly")
+const CHORDS_CELESTE_CHORD_C_ = preload("uid://l6fuxoousrev")
+const CHORDS_CELESTE_CHORD_C = preload("uid://c1upbeoqkl10r")
+const CHORDS_CELESTE_CHORD_D_ = preload("uid://cwmn3diw6o661")
+const CHORDS_CELESTE_CHORD_D = preload("uid://bsuvcihm754yo")
+const CHORDS_CELESTE_CHORD_E = preload("uid://bbs2bvxjxqxf6")
+const CHORDS_CELESTE_CHORD_F_ = preload("uid://if3xjart8ptt")
+const CHORDS_CELESTE_CHORD_F = preload("uid://c77i1ad2pp5b5")
+const CHORDS_CELESTE_CHORD_G_ = preload("uid://b2d35t3bsofwx")
+const CHORDS_CELESTE_CHORD_G = preload("uid://c42502k45gsqd")
+const CHORDS_HARP_CHORD_A_ = preload("uid://cbdpotvl0mgdk")
+const CHORDS_HARP_CHORD_A = preload("uid://dk7ajpmb4noij")
+const CHORDS_HARP_CHORD_B = preload("uid://gknj3wu3wqy2")
+const CHORDS_HARP_CHORD_C_ = preload("uid://bi5j2y83dv32a")
+const CHORDS_HARP_CHORD_C = preload("uid://dmsnfnboo2b0f")
+const CHORDS_HARP_CHORD_D_ = preload("uid://bvxk6o72bkpbk")
+const CHORDS_HARP_CHORD_D = preload("uid://bfuic887mgphl")
+const CHORDS_HARP_CHORD_E = preload("uid://cf5pbxk3ddme1")
+const CHORDS_HARP_CHORD_F_ = preload("uid://bksln65scf2qs")
+const CHORDS_HARP_CHORD_F = preload("uid://dcfdy8erf3hov")
+const CHORDS_HARP_CHORD_G_ = preload("uid://brhclmaew6afg")
+const CHORDS_HARP_CHORD_G = preload("uid://50ktl8bssh2y")
+
 signal plucked(key: String, note: int)
 
 # We're going to make use of our 'anchor' lines, 1-12 (main scene),

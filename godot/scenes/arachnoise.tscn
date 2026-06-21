@@ -204,7 +204,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0.4, 1.09, 7.133333),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [-50.760999999999996, -5.0, -3.0]
+"values": [-50.761, -5.0, -3.0]
 }
 tracks/6/type = "method"
 tracks/6/imported = false
@@ -334,6 +334,17 @@ tracks/4/keys = {
 "points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("%Game/../FleeTrack")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
+}
 
 [sub_resource type="Animation" id="Animation_gxsx8"]
 resource_name = "flee"
@@ -392,6 +403,37 @@ tracks/4/keys = {
 "handle_modes": PackedInt32Array(0),
 "points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("%Game/../FleeTrack")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.4, 1.9666667),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}, {
+"args": [],
+"method": &"stop"
+}]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("%Game/../BuzzTrack")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"stop"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_rqdwu"]
@@ -460,15 +502,9 @@ tracks/5/path = NodePath("%Game/../BuzzTrack")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(1.1, 2.7333333, 4.7, 8.266666, 10.966666),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(1.1, 5.133333, 9.9),
+"transitions": PackedFloat32Array(1, 1, 1),
 "values": [{
-"args": [0.0],
-"method": &"play"
-}, {
-"args": [0.0],
-"method": &"play"
-}, {
 "args": [0.0],
 "method": &"play"
 }, {
@@ -508,7 +544,17 @@ stream_10/stream = ExtResource("14_jsoai")
 stream_11/stream = ExtResource("15_bisgb")
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_si8k2"]
-random_pitch = 1.1892071
+random_volume_offset_db = 3.0
+streams_count = 5
+stream_0/stream = ExtResource("43_si8k2")
+stream_1/stream = ExtResource("44_4tgpc")
+stream_2/stream = ExtResource("45_1ojfu")
+stream_3/stream = ExtResource("46_4uwls")
+stream_4/stream = ExtResource("47_lda8q")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_4tgpc"]
+random_pitch = 1.4142135
+random_volume_offset_db = 1.0
 streams_count = 5
 stream_0/stream = ExtResource("43_si8k2")
 stream_1/stream = ExtResource("44_4tgpc")
@@ -682,8 +728,7 @@ scale = Vector2(2, 2)
 [node name="Camera" type="Camera2D" parent="Game/Spidey" unique_id=706635895]
 physics_interpolation_mode = 1
 top_level = true
-position = Vector2(1270.8976, 733.8804)
-zoom = Vector2(2, 2)
+position = Vector2(1280, 720)
 limit_left = 0
 limit_top = 0
 limit_right = 2560
@@ -713,8 +758,7 @@ position = Vector2(129, -1122)
 [node name="Camera2D" type="Camera2D" parent="Game/Title" unique_id=1624204100]
 physics_interpolation_mode = 1
 top_level = true
-position = Vector2(1270.8976, 733.8804)
-zoom = Vector2(2, 2)
+position = Vector2(1280, 720)
 limit_left = 0
 limit_top = 0
 limit_right = 2560
@@ -912,7 +956,14 @@ metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
 
 [node name="BuzzTrack" type="AudioStreamPlayer" parent="." unique_id=2126528275]
 stream = SubResource("AudioStreamRandomizer_si8k2")
-pitch_scale = 1.5
+max_polyphony = 2
+playback_type = 1
+
+[node name="FleeTrack" type="AudioStreamPlayer" parent="." unique_id=1419739690]
+stream = SubResource("AudioStreamRandomizer_4tgpc")
+volume_db = 2.0
+pitch_scale = 1.75
+max_polyphony = 2
 playback_type = 1
 
 [connection signal="plucked" from="Game/Web/Keylines/1" to="." method="_on__plucked"]

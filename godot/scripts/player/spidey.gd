@@ -22,15 +22,17 @@ func _physics_process(_delta):
 	velocity = input_direction * move_speed
 	
 	if not velocity.is_zero_approx():
-		if input_direction.x > 0:
-			sprite.flip_h = true
-		elif input_direction.x < 0:
-			sprite.flip_h = false
-		
-		if input_direction.y > 0:
-			sprite.flip_v = false
-		elif input_direction.y < 0:
-			sprite.flip_v = true
+		if abs(input_direction.x) > 0.4:
+			if input_direction.x > 0:
+				sprite.flip_h = true
+			elif input_direction.x < 0:
+				sprite.flip_h = false
+				
+		if abs(input_direction.y) > 0.4:
+			if input_direction.y > 0:
+				sprite.flip_v = false
+			elif input_direction.y < 0:
+				sprite.flip_v = true
 			
 	move_and_slide()
 	pick_new_state()
