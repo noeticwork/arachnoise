@@ -33,12 +33,17 @@ extends Node2D
 func _ready() -> void:
 	$Automator.play("fade_in")
 	
-	pass # Replace with function body.
-
 func _input(event: InputEvent) -> void:
-	if event.is_action("refresh_random"):
-		%Pads.play()
+	pass
+	#if event.is_action("refresh_random"):
+		#%Pads.play()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	pass
+
+
+func _on_waiting_state_entered() -> void:
+	# Random timer from 4-7s, mosquito 'appears' - root note chosen, gradient radial blur with note
+	# color and pulse animation near random screen edge. 
 	pass

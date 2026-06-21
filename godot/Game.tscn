@@ -24,6 +24,10 @@
 [ext_resource type="AudioStream" uid="uid://dy7tieg36yrsv" path="res://assets/audio/Pads/Ebmaj.wav" id="21_4my3f"]
 [ext_resource type="AudioStream" uid="uid://g8qwmi3a6lu2" path="res://assets/audio/Pads/Emaj.wav" id="22_aeq37"]
 [ext_resource type="AudioStream" uid="uid://2gaj2mcdriaw" path="res://assets/audio/Pads/Fmaj.wav" id="23_suycs"]
+[ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="25_jsoai"]
+[ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="26_bisgb"]
+[ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="27_y5ctq"]
+[ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="28_w7ht3"]
 
 [sub_resource type="Animation" id="Animation_u44n3"]
 length = 0.001
@@ -123,11 +127,6 @@ _data = {
 &"RESET": SubResource("Animation_joorw"),
 &"warble": SubResource("Animation_3mrqo")
 }
-
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_t88pq"]
-vertices = PackedVector2Array(652.71094, 1000.3125, 373.03125, 901.3125, 618.21094, 800.85156, 1857, 771.60156, 741.6172, 1199.0391, 523.4219, 1159.1875, 1109.6406, 286.8828, 1596.9297, 77.90625, 1632.2266, 231.5, 1221.1406, 1294.9531, 810.78125, 1332.4219, 775.6172, 494.03125, 1888.5234, 378.5078, 1619.1719, 1342.4688, 1857, 1090.0234)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 0, 3), PackedInt32Array(6, 7, 8), PackedInt32Array(9, 10, 4, 3), PackedInt32Array(11, 6, 8, 12, 3, 2), PackedInt32Array(13, 9, 3, 14)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(768, 487, 1105, 278, 1604, 64, 1641, 225, 1899, 373, 1867, 772, 1867, 1094, 1623, 1353, 1221, 1305, 805, 1343, 735, 1208, 505, 1166, 636, 1005, 345, 902, 611, 793)])
 
 [sub_resource type="Resource" id="Resource_lvtmh"]
 script = ExtResource("10_gwjdr")
@@ -285,13 +284,19 @@ rotation = 0.40026897
 scale = Vector2(0.7978127, 0.7978127)
 key = "E"
 
+[node name="StaticBody2D" type="StaticBody2D" parent="Game/Web" unique_id=1706141425]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Game/Web/StaticBody2D" unique_id=1997433225]
+polygon = PackedVector2Array(740.67175, 457.1033, 10.095453, 11.919809, 8.516629, 1442.978, 2555.603, 1443.6498, 2560.0142, -8.431654, 21.095104, 11.832018, 741.6717, 457.0953, 893.61334, 323.87842, 1140.1187, 260.90906, 1624.377, 166.0412, 1702.3961, 293.4226, 1906.7089, 331.79318, 1834.6857, 830.38385, 1849.3988, 1170.2773, 1557.0044, 1372.6173, 1140.7144, 1337.9387, 873.0661, 1383.0762, 667.95526, 1244.7087, 537.6369, 954.73956, 572.0076, 750.45874, 722.3428, 541.25226)
+
 [node name="Spidey" parent="Game" unique_id=11989907 instance=ExtResource("5_t88pq")]
-position = Vector2(1010, 748)
+position = Vector2(1394.165, 766.8976)
+scale = Vector2(2, 2)
 
 [node name="Camera2D" type="Camera2D" parent="Game/Spidey" unique_id=706635895]
 physics_interpolation_mode = 1
 top_level = true
-position = Vector2(1003.99805, 756.037)
+position = Vector2(1388, 777.99994)
 zoom = Vector2(2, 2)
 limit_left = 0
 limit_top = 0
@@ -304,10 +309,6 @@ process_physics_priority = 300
 script = ExtResource("8_yx171")
 metadata/_custom_type_script = "uid://bd046eokvcnu2"
 
-[node name="WebNav" type="NavigationRegion2D" parent="Game" unique_id=1797785414]
-visible = false
-navigation_polygon = SubResource("NavigationPolygon_t88pq")
-
 [node name="Specular" type="Parallax2D" parent="." unique_id=1039060562]
 scroll_scale = Vector2(1.2, 1.2)
 
@@ -315,7 +316,7 @@ scroll_scale = Vector2(1.2, 1.2)
 
 [node name="PhantomCamera2D" type="Node2D" parent="." unique_id=1378882844 node_paths=PackedStringArray("follow_target")]
 top_level = true
-position = Vector2(1003.99805, 756.037)
+position = Vector2(1388, 777.99994)
 script = ExtResource("9_yhmtn")
 follow_mode = 1
 follow_target = NodePath("../Game/Spidey")
@@ -334,3 +335,123 @@ position = Vector2(1429, 467)
 [node name="Pads" type="AudioStreamPlayer" parent="." unique_id=631962834]
 unique_name_in_owner = true
 stream = SubResource("AudioStreamRandomizer_202ut")
+volume_db = -9.0
+
+[node name="StateChart" type="Node" parent="." unique_id=603539153]
+script = ExtResource("25_jsoai")
+metadata/_custom_type_script = "uid://couw105c3bde4"
+
+[node name="CompoundState" type="Node" parent="StateChart" unique_id=859930531]
+script = ExtResource("26_bisgb")
+initial_state = NodePath("Waiting")
+metadata/_custom_type_script = "uid://jk2jm1g6q853"
+
+[node name="Waiting" type="Node" parent="StateChart/CompoundState" unique_id=1737078083]
+script = ExtResource("27_y5ctq")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="PreyArrived" type="Node" parent="StateChart/CompoundState/Waiting" unique_id=1904662808]
+script = ExtResource("28_w7ht3")
+to = NodePath("../../BaseNote")
+event = &"PreyArrives"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="PreyIgnored" type="Node" parent="StateChart/CompoundState/Waiting" unique_id=1793246992]
+script = ExtResource("28_w7ht3")
+to = NodePath("..")
+event = &"NoPreyReply"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="BaseNote" type="Node" parent="StateChart/CompoundState" unique_id=51817268]
+script = ExtResource("27_y5ctq")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="PreyEscapes" type="Node" parent="StateChart/CompoundState/BaseNote" unique_id=1081387748]
+script = ExtResource("28_w7ht3")
+to = NodePath("../../Waiting")
+event = &"PreyEscapes"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="BaseResponded" type="Node" parent="StateChart/CompoundState/BaseNote" unique_id=1781134351]
+script = ExtResource("28_w7ht3")
+to = NodePath("../../Solving")
+event = &"BaseResponded"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="Solving" type="Node" parent="StateChart/CompoundState" unique_id=306911471]
+script = ExtResource("26_bisgb")
+initial_state = NodePath("Phrase1")
+metadata/_custom_type_script = "uid://jk2jm1g6q853"
+
+[node name="Phrase1" type="Node" parent="StateChart/CompoundState/Solving" unique_id=52036655]
+script = ExtResource("27_y5ctq")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="PreyReleased" type="Node" parent="StateChart/CompoundState/Solving/Phrase1" unique_id=297655030]
+script = ExtResource("28_w7ht3")
+to = NodePath("../../../Waiting")
+event = &"ReleasePrey"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="PhraseResponded" type="Node" parent="StateChart/CompoundState/Solving/Phrase1" unique_id=1665331395]
+script = ExtResource("28_w7ht3")
+to = NodePath("../../Phrase2")
+event = &"PhraseResponded"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="Phrase2" type="Node" parent="StateChart/CompoundState/Solving" unique_id=1873010558]
+script = ExtResource("27_y5ctq")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="PreyReleased" type="Node" parent="StateChart/CompoundState/Solving/Phrase2" unique_id=1702450332]
+script = ExtResource("28_w7ht3")
+to = NodePath("../../../Waiting")
+event = &"ReleasePrey"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="PhraseResponded" type="Node" parent="StateChart/CompoundState/Solving/Phrase2" unique_id=1148824580]
+script = ExtResource("28_w7ht3")
+to = NodePath("../../Phrase3")
+event = &"PhraseResponded"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="Phrase3" type="Node" parent="StateChart/CompoundState/Solving" unique_id=1253446240]
+script = ExtResource("27_y5ctq")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="PreyReleased" type="Node" parent="StateChart/CompoundState/Solving/Phrase3" unique_id=1882426831]
+script = ExtResource("28_w7ht3")
+to = NodePath("../../../Waiting")
+event = &"ReleasePrey"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="PhraseResponded" type="Node" parent="StateChart/CompoundState/Solving/Phrase3" unique_id=1101919766]
+script = ExtResource("28_w7ht3")
+to = NodePath("../../../Success")
+event = &"PhraseResponded"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="Success" type="Node" parent="StateChart/CompoundState" unique_id=1615214126]
+script = ExtResource("27_y5ctq")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="NomNomNom" type="Node" parent="StateChart/CompoundState/Success" unique_id=463923727]
+script = ExtResource("28_w7ht3")
+to = NodePath("../../Waiting")
+event = &"NomNomNom"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1978846586]
+
+[connection signal="state_entered" from="StateChart/CompoundState/Waiting" to="." method="_on_waiting_state_entered"]

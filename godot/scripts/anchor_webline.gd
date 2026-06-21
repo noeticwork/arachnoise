@@ -20,7 +20,7 @@ var keys = {
 	"Bb": ["Bb", "Cm",  "Dm",  "Eb", "F",  "Gm",  "Adim"],
 	"F":  ["F",  "Gm",  "Am",  "Bb", "C",  "Dm",  "Edim"]
 }
-# Root notes available as sharp names in your file list
+
 var sharp_notes = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
 
 # Flat → sharp root conversion
@@ -75,8 +75,6 @@ func _sound_map(note: String) -> void:
 
 		player.stream = audio_stream
 		player.play()
-		# Optional: auto‑free when done
-		#player.finished.connect(player.queue_free)
 
 func _ready() -> void:
 	
