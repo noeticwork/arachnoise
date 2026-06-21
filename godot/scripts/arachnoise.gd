@@ -4,7 +4,7 @@ const Mozzie = preload("res://scenes/prey/mozzie.tscn")
 
 @onready var automator: AnimationPlayer = $Automator
 @onready var game: Parallax2D = %Game
-
+var initial_buzz = false
 # Okay, we're vaguely setup. 
 
 # We're going to make use of our 'anchor' lines, 1-13,
@@ -29,6 +29,7 @@ const Mozzie = preload("res://scenes/prey/mozzie.tscn")
 
 func _ready() -> void:
 	$Automator.play("fade_in")
+	$Ambience.finished.connect(func(): $Ambience.play())
 
 func _buzz_spidey():
 	if $Game/Prey/Container.get_child_count() == 0:
@@ -53,7 +54,7 @@ func _on_loitering_state_entered() -> void:
 		$Game/Prey/Automator.play_with_capture("flee", 1.5)
 		get_tree().create_timer(2.5).timeout.connect(_drop_prey)
 	
-	var wait_length = randi_range(4,7) * 2
+	var wait_length = randi_range(4,7) * (2 if not initial_buzz else 4)
 	get_tree().create_timer(wait_length).timeout.connect(_buzz_spidey)
 
 func _on_enticing_state_entered() -> void:

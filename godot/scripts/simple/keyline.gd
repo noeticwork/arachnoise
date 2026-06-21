@@ -88,17 +88,20 @@ func get_chord_asset_path(chord: String, instrument: String = "CelesteChord") ->
 		push_error("Missing chord file: " + full_path)
 		return ""
 		
-func _sound_map(note: String) -> void:
+func _sound_map(note: String, global_postition: Vector2) -> void:
 	var path = get_chord_asset_path(note)
 	if path.is_empty():
 		return
 
 	var audio_stream = load(path) as AudioStream
 	if audio_stream:
-		var player = %audio
+		var player:= AudioStreamPlayer2D.new()
+		add_child(player)
 		player.stream = audio_stream
 		player.play()
-
+		player.position = global_postition
+		player.finished.connect(player.queue_free)
+		
 func _ready() -> void:
 	$%LineTexture.texture = line_texture
 	#_randomize()
@@ -118,9 +121,9 @@ func _input(event: InputEvent) -> void:
 func _play_end_note() -> void:
 	pass
 	
-func _play_base_note() -> void:
+func _play_base_note(global_postition: Vector2) -> void:
 	var note: String = keys[key][0];
-	_sound_map(note)
+	_sound_map(note, global_postition)
 	emit_signal("plucked", key, 0)
 	
 	#if not %AudioStreamPlayer.playing:
@@ -129,41 +132,41 @@ func _play_base_note() -> void:
 		## wait?
 		#pass
 
-func _play_note(num: int) -> void:
+func _play_note(num: int, global_postition: Vector2) -> void:
 	#if not %AudioStreamPlayer.playing:
 	var note: String = keys[key][num-1];
 	emit_signal("plucked", key, num-1)
-	_sound_map(note)
+	_sound_map(note, global_postition)
 	#else:
 		## wait?
 		#pass
 
 
 func _on_anchor_body_entered(body: Node2D) -> void:
-	_play_base_note()
+	_play_base_note($anchor.global_position)
  # Replace with function body.
 
 
 func _on_i_body_entered(body: Node2D) -> void:
-	_play_note(1)
+	_play_note(1, $i.global_position)
 
 func _on_ii_body_entered(body: Node2D) -> void:
-	_play_note(2)
+	_play_note(2, $ii.global_position)
 
 func _on_iii_body_entered(body: Node2D) -> void:
-	_play_note(3)
+	_play_note(3, $iii.global_position)
 
 func _on_iv_body_entered(body: Node2D) -> void:
-	_play_note(4)
+	_play_note(4, $iv.global_position)
 
 func _on_v_body_entered(body: Node2D) -> void:
-	_play_note(5)
+	_play_note(5, $v.global_position)
 
 func _on_vi_body_entered(body: Node2D) -> void:
-	_play_note(6)
+	_play_note(6, $vi.global_position)
 
 func _on_vii_body_entered(body: Node2D) -> void:
-	_play_note(7)
+	_play_note(7, $vii.global_position)
 
 
 func _on_end_anchor_body_entered(body: Node2D) -> void:

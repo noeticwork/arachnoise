@@ -58,6 +58,7 @@ _data = {
 
 [node name="Keyline" type="Node2D" unique_id=536966445]
 script = ExtResource("1_v386r")
+key = null
 
 [node name="audio" type="AudioStreamPlayer" parent="." unique_id=1589302479]
 unique_name_in_owner = true
