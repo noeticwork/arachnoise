@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cjq1th6ivk3iu"]
 
-[ext_resource type="Script" uid="uid://b82jokq3nvki7" path="res://scripts/anchor_webline.gd" id="1_v386r"]
+[ext_resource type="Script" uid="uid://b82jokq3nvki7" path="res://scripts/simple/keyline.gd" id="1_v386r"]
 [ext_resource type="Texture2D" uid="uid://bgpkloleaquvf" path="res://assets/line1-2.png" id="2_taomk"]
 
 [sub_resource type="Animation" id="Animation_n0h70"]
@@ -28,10 +28,10 @@ tracks/0/path = NodePath("audio:volume_db")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.43333334),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1.8211423),
 "update": 0,
-"values": [0.0, -80.0]
+"values": [0.0, -15.257999999999996]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -40,7 +40,7 @@ tracks/1/path = NodePath("audio")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.33333334),
+"times": PackedFloat32Array(0.2),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -56,7 +56,7 @@ _data = {
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_taomk"]
 
-[node name="AnchorWebline" type="Node2D" unique_id=536966445]
+[node name="Keyline" type="Node2D" unique_id=536966445]
 script = ExtResource("1_v386r")
 
 [node name="audio" type="AudioStreamPlayer" parent="." unique_id=1589302479]

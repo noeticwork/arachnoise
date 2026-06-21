@@ -6,6 +6,7 @@ class_name spider
 @onready var state_machine = animation_tree.get("parameters/playback")
 @onready var anim_player = $AnimationPlayer
 @onready var sprite = $Sprite2D
+@export var state_chart: StateChart
 
 var input_direction: Vector2 = Vector2.ZERO
 var current_state: String = ""

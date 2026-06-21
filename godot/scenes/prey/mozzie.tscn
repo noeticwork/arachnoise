@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://b4yvx8smk5w76"]
 
-[ext_resource type="Script" uid="uid://bosf0xbedn6pb" path="res://scenes/mosq.gd" id="1_0jdj5"]
-[ext_resource type="Texture2D" uid="uid://cu2dblhnyoptt" path="res://assets/mosq-sheet.png" id="1_5ckur"]
-[ext_resource type="AudioStream" uid="uid://vt48wbt6nkhg" path="res://assets/audio/SFX/SFX_Insect_Mosquito_01.wav" id="3_wxp4s"]
+[ext_resource type="Script" uid="uid://bosf0xbedn6pb" path="res://scripts/prey/mozzie.gd" id="1_1nlms"]
+[ext_resource type="Texture2D" uid="uid://cu2dblhnyoptt" path="res://assets/mosq-sheet.png" id="2_kyhq6"]
+[ext_resource type="AudioStream" uid="uid://vt48wbt6nkhg" path="res://assets/audio/SFX/SFX_Insect_Mosquito_01.wav" id="3_dn1xa"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bcyx4"]
 radius = 14.142136
@@ -61,10 +61,10 @@ transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition
 
 [node name="Mosquito" type="CharacterBody2D" unique_id=11989907]
 scale = Vector2(2, 2)
-script = ExtResource("1_0jdj5")
+script = ExtResource("1_1nlms")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=368742240]
-texture = ExtResource("1_5ckur")
+texture = ExtResource("2_kyhq6")
 hframes = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1653173207]
@@ -83,4 +83,4 @@ tree_root = SubResource("AnimationNodeStateMachine_wr2nf")
 anim_player = NodePath("../AnimationPlayer")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1783092621]
-stream = ExtResource("3_wxp4s")
+stream = ExtResource("3_dn1xa")

@@ -1,10 +1,14 @@
 [gd_scene format=3 uid="uid://dbcoikmgx1kmt"]
 
-[ext_resource type="Script" uid="uid://dej0ennxt7r3" path="res://scripts/spidey.gd" id="1_vnujn"]
+[ext_resource type="Script" uid="uid://dej0ennxt7r3" path="res://scripts/player/spidey.gd" id="1_vnujn"]
 [ext_resource type="Texture2D" uid="uid://ryj21ldgr7r6" path="res://assets/spideranim.png" id="2_vnujn"]
+[ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="3_s6tvk"]
+[ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="4_6e28j"]
+[ext_resource type="Script" uid="uid://c1vp0ojjvaby1" path="res://addons/godot_state_charts/parallel_state.gd" id="4_wr2nf"]
+[ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="5_nkwvm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bcyx4"]
-radius = 4.0
+radius = 11.045361
 
 [sub_resource type="Animation" id="Animation_s6tvk"]
 length = 0.16666667
@@ -85,8 +89,11 @@ states/walk/node = SubResource("AnimationNodeAnimation_vnujn")
 states/walk/position = Vector2(319.7143, 104)
 transitions = ["Start", "walk", SubResource("AnimationNodeStateMachineTransition_s6tvk"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_6e28j"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_nkwvm")]
 
-[node name="Spidey" type="CharacterBody2D" unique_id=11989907]
+[node name="Spidey" type="CharacterBody2D" unique_id=11989907 node_paths=PackedStringArray("state_chart")]
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("1_vnujn")
+state_chart = NodePath("Gestalt")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=368742240]
 texture = ExtResource("2_vnujn")
@@ -96,12 +103,43 @@ vframes = 3
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1653173207 groups=["spider"]]
 shape = SubResource("CircleShape2D_bcyx4")
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=246371436]
-debug_enabled = true
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1122754271]
 libraries/ = SubResource("AnimationLibrary_nkwvm")
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=1641555617]
 tree_root = SubResource("AnimationNodeStateMachine_wr2nf")
 anim_player = NodePath("../AnimationPlayer")
+
+[node name="Gestalt" type="Node" parent="." unique_id=1362935359]
+script = ExtResource("3_s6tvk")
+metadata/_custom_type_script = "uid://couw105c3bde4"
+
+[node name="ParallelState" type="Node" parent="Gestalt" unique_id=325612221]
+script = ExtResource("4_wr2nf")
+
+[node name="Menu" type="Node" parent="Gestalt/ParallelState" unique_id=781824210]
+script = ExtResource("4_6e28j")
+initial_state = NodePath("MainMenu")
+
+[node name="MainMenu" type="Node" parent="Gestalt/ParallelState/Menu" unique_id=1411117514]
+script = ExtResource("5_nkwvm")
+
+[node name="Credits" type="Node" parent="Gestalt/ParallelState/Menu" unique_id=1581252068]
+script = ExtResource("5_nkwvm")
+
+[node name="Interacting" type="Node" parent="Gestalt/ParallelState" unique_id=284531658]
+script = ExtResource("4_6e28j")
+initial_state = NodePath("Loitering")
+metadata/_custom_type_script = "uid://jk2jm1g6q853"
+
+[node name="Loitering" type="Node" parent="Gestalt/ParallelState/Interacting" unique_id=2098864098]
+script = ExtResource("5_nkwvm")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="Enticing" type="Node" parent="Gestalt/ParallelState/Interacting" unique_id=1278358897]
+script = ExtResource("5_nkwvm")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="Trapping" type="Node" parent="Gestalt/ParallelState/Interacting" unique_id=2145242576]
+script = ExtResource("5_nkwvm")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"

@@ -1,6 +1,18 @@
 [gd_scene format=3 uid="uid://c5i31pnrjvtkr"]
 
-[ext_resource type="Script" uid="uid://dojk1fnb2a207" path="res://scripts/minor_webline.gd" id="1_hj66i"]
+[sub_resource type="GDScript" id="GDScript_il60t"]
+script/source = "extends Node2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
 
 [node name="MinorWebline" type="Node2D" unique_id=1892095486]
-script = ExtResource("1_hj66i")
+script = SubResource("GDScript_il60t")
