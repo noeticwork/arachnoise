@@ -36,6 +36,7 @@
 [ext_resource type="AudioStream" uid="uid://dy7tieg36yrsv" path="res://assets/audio/Pads/Ebmaj.wav" id="21_4my3f"]
 [ext_resource type="AudioStream" uid="uid://g8qwmi3a6lu2" path="res://assets/audio/Pads/Emaj.wav" id="22_aeq37"]
 [ext_resource type="AudioStream" uid="uid://2qwhp3i6ipm5" path="res://assets/audio/SFX/AMBIENCE_Environment_Loop.wav" id="23_cqhyb"]
+[ext_resource type="PackedScene" uid="uid://8lu3to7ghsg8" path="res://scenes/title.tscn" id="23_k33hi"]
 [ext_resource type="AudioStream" uid="uid://2gaj2mcdriaw" path="res://assets/audio/Pads/Fmaj.wav" id="23_suycs"]
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="25_jsoai"]
 [ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="26_bisgb"]
@@ -90,6 +91,30 @@ tracks/3/keys = {
 "points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Game/Title:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-3.0078735, -0.9760132)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Game/Title:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_wbfu4"]
 resource_name = "fade_in"
@@ -139,6 +164,30 @@ tracks/3/keys = {
 "handle_modes": PackedInt32Array(0, 2),
 "points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1.8, -0.8388889, 0, 0, 0),
 "times": PackedFloat32Array(0, 5.0333333)
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Game/Title:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 3.05, 5.0333333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-3.0078735, -0.9760132), Vector2(-3.0078735, -0.9760132), Vector2(-14.141321, -1395.9316)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Game/Title:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 3.03),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xkndl"]
@@ -555,7 +604,8 @@ scale = Vector2(2, 2)
 [node name="Camera" type="Camera2D" parent="Game/Spidey" unique_id=706635895]
 physics_interpolation_mode = 1
 top_level = true
-position = Vector2(1280, 720)
+position = Vector2(1388, 777.99994)
+zoom = Vector2(1.8, 1.8)
 limit_left = 0
 limit_top = 0
 limit_right = 2560
@@ -578,6 +628,9 @@ playback_auto_capture_ease_type = 2
 playback_default_blend_time = 0.2
 
 [node name="Container" type="Node2D" parent="Game/Prey" unique_id=786246001]
+
+[node name="Title" parent="Game" unique_id=1416946305 instance=ExtResource("23_k33hi")]
+position = Vector2(-3.0078735, -0.9760132)
 
 [node name="Specular" type="Parallax2D" parent="." unique_id=1039060562]
 scroll_scale = Vector2(1.2, 1.2)

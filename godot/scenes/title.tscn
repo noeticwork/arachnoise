@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://8lu3to7ghsg8"]
+
+[ext_resource type="Texture2D" uid="uid://cmlqyn7edm88b" path="res://assets/arachnoise.png" id="1_4ignj"]
+
+[node name="Title" type="Node2D" unique_id=1416946305]
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=153010064]
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(1.3347871, 1.3347871)
+texture = ExtResource("1_4ignj")
+stretch_mode = 2
