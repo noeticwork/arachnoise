@@ -2,6 +2,8 @@ extends Node2D
 @onready var line_texture: TextureRect = %LineTexture
 @export var key: String
 
+signal plucked
+
 # We're going to make use of our 'anchor' lines, 1-12 (main scene),
 # which are representative of the following keys, and progressions -
 
@@ -97,6 +99,8 @@ func _play_end_note() -> void:
 func _play_base_note() -> void:
 	var note: String = keys[key][0];
 	_sound_map(note)
+	emit_signal("plucked")
+	
 	#if not %AudioStreamPlayer.playing:
 #
 	#else:
@@ -106,6 +110,7 @@ func _play_base_note() -> void:
 func _play_note(num: int) -> void:
 	#if not %AudioStreamPlayer.playing:
 	var note: String = keys[key][num-1];
+	emit_signal("plucked")
 	_sound_map(note)
 	#else:
 		## wait?

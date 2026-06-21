@@ -1,7 +1,7 @@
-[gd_scene format=3 uid="uid://dltl52vcxgmcf"]
+[gd_scene format=3 uid="uid://d08j3q33vb4l0"]
 
 [ext_resource type="Texture2D" uid="uid://d1xyuj6sj648g" path="res://assets/marta-pawlik-Wr2Ss0fdeWU-unsplash.webp" id="1_wbfu4"]
-[ext_resource type="Script" uid="uid://0e4pgxdgfw2r" path="res://scenes/arachnoise.gd" id="1_xkndl"]
+[ext_resource type="Script" uid="uid://0e4pgxdgfw2r" path="res://scripts/arachnoise.gd" id="1_xkndl"]
 [ext_resource type="Texture2D" uid="uid://b2pawjfwwiey" path="res://assets/outter_web.png" id="3_t88pq"]
 [ext_resource type="PackedScene" uid="uid://cjq1th6ivk3iu" path="res://scenes/simple/keyline.tscn" id="4_sb48q"]
 [ext_resource type="Texture2D" uid="uid://ctesy3rfpt0uw" path="res://assets/plants1.png" id="5_3mrqo"]
@@ -11,7 +11,6 @@
 [ext_resource type="Script" uid="uid://bd046eokvcnu2" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="8_yx171"]
 [ext_resource type="Script" uid="uid://bhexx6mj1xv3q" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="9_yhmtn"]
 [ext_resource type="Script" uid="uid://8umksf8e80fw" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="10_gwjdr"]
-[ext_resource type="PackedScene" uid="uid://b4yvx8smk5w76" path="res://scenes/prey/mozzie.tscn" id="11_yhmtn"]
 [ext_resource type="AudioStream" uid="uid://c6k2mrfpx511g" path="res://assets/audio/Pads/Abmaj.wav" id="12_0mevm"]
 [ext_resource type="AudioStream" uid="uid://v1gq0r8xyk4f" path="res://assets/audio/Pads/Amaj.wav" id="13_w2501"]
 [ext_resource type="AudioStream" uid="uid://cjqthqo7dbii6" path="res://assets/audio/Pads/Gbmaj.wav" id="14_jsoai"]
@@ -55,6 +54,28 @@ tracks/1/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PhantomCamera2D:zoom:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PhantomCamera2D:zoom:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
 
 [sub_resource type="Animation" id="Animation_wbfu4"]
 resource_name = "fade_in"
@@ -82,6 +103,28 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PhantomCamera2D:zoom:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 2.2, -0.8388889, 0, 0, 0),
+"times": PackedFloat32Array(0, 5.0333333)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PhantomCamera2D:zoom:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 2.2, -0.8388889, 0, 0, 0),
+"times": PackedFloat32Array(0, 5.0333333)
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xkndl"]
@@ -128,6 +171,190 @@ _data = {
 &"warble": SubResource("Animation_3mrqo")
 }
 
+[sub_resource type="Animation" id="Animation_i7wek"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-192.1488, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-268.475, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:scale:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:scale:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_gxsx8"]
+resource_name = "flee"
+length = 2.0
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 2, 2, 0, 2, 2, 2, 2, 2),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 169.92041, -0.045100294, -28.32007, 0, 0, 332.60394, -0.040388327, -27.113924, 0, 0, 457.79715, -0.043080866, -20.865534, 0, 0, 669.9125, -0.04106146, -35.352554, 0, 0, 759.12274, -0.044427156, -14.868378, 0, 0, 670.5861, -0.04106146, 14.756103, 0, 0, 486.58078, -0.043080866, 30.667559, 0, 0, 556.99255, -0.035132907, -11.735296, 0, 0),
+"times": PackedFloat32Array(0, 0.27060175, 0.5129317, 0.7714169, 1.0177857, 1.2843486, 1.5307174, 1.7892026, 2)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 2, 2, 2, 2, 2, 2, 2, 2),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 114.64752, -0.045100294, -19.107922, 0, 0, 74.347855, -0.040388327, 6.7166114, 0, 0, 223.35344, -0.043080866, -24.834263, 0, 0, 111.65701, -0.04106146, 18.61607, 0, 0, 262.94983, -0.044427156, -25.21547, 0, 0, 446.6623, -0.04106146, -30.618746, 0, 0, 196.12285, -0.043080866, 41.756573, 0, 0, -128.44945, -0.035132907, 54.095387, 0, 0),
+"times": PackedFloat32Array(0, 0.27060175, 0.5129317, 0.7714169, 1.0177857, 1.2843486, 1.5307174, 1.7892026, 2)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:scale:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:scale:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_rqdwu"]
+resource_name = "lurk"
+length = 13.566667
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2),
+"points": PackedFloat32Array(0, 0, 0, 0.17666666, 3.5897954, 21.538773, -0.17666666, -35.614597, 0, 0, 388.18152, -0.16833334, -61.10713, 0, 0, 737.5056, -0.17166667, -58.220688, 0, 0, 1114.4673, -0.16000001, -62.826946, 0, 0, 1340.9391, -0.16833338, -37.745304, 0, 0, 1662.2504, -0.16833329, -53.55188, 0, 0, 1541.5062, -0.15833339, 42.73295, 0.16833329, -45.431843, 1133.2616, -0.16499996, 65.90476, 0, 0, 891.09686, -0.16666667, 40.36079, 0, 0, 806.7405, -0.1583333, 14.059398, 0, 0, 1117.0419, -0.1850001, -51.7169, 0, 0, 538.5654, -0.17222214, 96.412735, 0, 0, 376.16364, -0.14445274, 27.066965, 0, 0, 221.8915, -0.09443617, 25.712023, 0, 0),
+"times": PackedFloat32Array(0, 1.06, 2.07, 3.1, 4.06, 5.07, 6.08, 7.03, 8.04, 9.04, 9.99, 11.1, 12.133333, 13.00005, 13.566667)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2),
+"points": PackedFloat32Array(0, 0, 0, 0.17666666, -30.52962, -183.17772, -0.17666666, -14.216215, 0, 0, -104.10138, -0.16833334, -13.17939, 0, 0, -64.88806, -0.17166667, -6.535553, 0, 0, 54.1072, -0.16000001, -19.832544, 0, 0, 112.30158, -0.16833338, -9.699064, 0, 0, 24.734428, -0.16833329, 14.594525, 0, 0, -193.30887, -0.15833339, 9.837838, 0.16833329, -10.459169, -97.047615, -0.16499996, -12.193038, 0, 0, 133.89246, -0.16666667, -38.490013, 0, 0, 89.56427, -0.1583333, 7.388031, 0, 0, 126.08894, -0.1850001, -6.0874457, 0, 0, 68.70392, -0.17222214, 9.564171, 0, 0, 18.998459, -0.14445274, 8.284244, 0, 0, -139.77536, -0.09443617, 26.462303, 0, 0),
+"times": PackedFloat32Array(0, 1.06, 2.07, 3.1, 4.06, 5.07, 6.08, 7.03, 8.04, 9.04, 9.99, 11.1, 12.133333, 13.00005, 13.566667)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:scale:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:scale:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i7wek"]
+_data = {
+&"RESET": SubResource("Animation_i7wek"),
+&"flee": SubResource("Animation_gxsx8"),
+&"lurk": SubResource("Animation_rqdwu")
+}
+
 [sub_resource type="Resource" id="Resource_lvtmh"]
 script = ExtResource("10_gwjdr")
 
@@ -146,7 +373,7 @@ stream_9/stream = ExtResource("23_suycs")
 stream_10/stream = ExtResource("14_jsoai")
 stream_11/stream = ExtResource("15_bisgb")
 
-[node name="Game" type="Node2D" unique_id=1250962292]
+[node name="Arachnoise" type="Node2D" unique_id=1250962292]
 rotation = 0.007981051
 script = ExtResource("1_xkndl")
 
@@ -284,31 +511,44 @@ rotation = 0.40026897
 scale = Vector2(0.7978127, 0.7978127)
 key = "E"
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Game/Web" unique_id=1706141425]
+[node name="Borders" type="StaticBody2D" parent="Game/Web" unique_id=1706141425]
 visible = false
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Game/Web/StaticBody2D" unique_id=1997433225]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Game/Web/Borders" unique_id=1997433225]
 polygon = PackedVector2Array(740.67175, 457.1033, 10.095453, 11.919809, 8.516629, 1442.978, 2555.603, 1443.6498, 2560.0142, -8.431654, 21.095104, 11.832018, 741.6717, 457.0953, 893.61334, 323.87842, 1140.1187, 260.90906, 1624.377, 166.0412, 1702.3961, 293.4226, 1906.7089, 331.79318, 1834.6857, 830.38385, 1849.3988, 1170.2773, 1557.0044, 1372.6173, 1140.7144, 1337.9387, 873.0661, 1383.0762, 667.95526, 1244.7087, 537.6369, 954.73956, 572.0076, 750.45874, 722.3428, 541.25226)
 
 [node name="Spidey" parent="Game" unique_id=11989907 instance=ExtResource("5_t88pq")]
 position = Vector2(1394.165, 766.8976)
 scale = Vector2(2, 2)
 
-[node name="Camera2D" type="Camera2D" parent="Game/Spidey" unique_id=706635895]
+[node name="Camera" type="Camera2D" parent="Game/Spidey" unique_id=706635895]
 physics_interpolation_mode = 1
 top_level = true
-position = Vector2(1388, 777.99994)
-zoom = Vector2(2, 2)
+position = Vector2(1280, 720)
 limit_left = 0
 limit_top = 0
 limit_right = 2560
 limit_bottom = 1440
 
-[node name="PhantomCameraHost" type="Node" parent="Game/Spidey/Camera2D" unique_id=85242314]
+[node name="PhantomCameraHost" type="Node" parent="Game/Spidey/Camera" unique_id=85242314]
 process_priority = 300
 process_physics_priority = 300
 script = ExtResource("8_yx171")
 metadata/_custom_type_script = "uid://bd046eokvcnu2"
+
+[node name="SpawnLocation" type="Node2D" parent="Game" unique_id=1534799340]
+unique_name_in_owner = true
+position = Vector2(1.0079651, 0.9920044)
+
+[node name="Prey" type="Node2D" parent="Game" unique_id=251574412]
+unique_name_in_owner = true
+position = Vector2(-192.1488, -268.475)
+
+[node name="Automator" type="AnimationPlayer" parent="Game/Prey" unique_id=1520925992]
+libraries/ = SubResource("AnimationLibrary_i7wek")
+playback_auto_capture_transition_type = 7
+
+[node name="Container" type="Node2D" parent="Game/Prey" unique_id=786246001]
 
 [node name="Specular" type="Parallax2D" parent="." unique_id=1039060562]
 scroll_scale = Vector2(1.2, 1.2)
@@ -321,7 +561,6 @@ position = Vector2(1388, 777.99994)
 script = ExtResource("9_yhmtn")
 follow_mode = 1
 follow_target = NodePath("../Game/Spidey")
-zoom = Vector2(2, 2)
 tween_resource = SubResource("Resource_lvtmh")
 follow_damping = true
 limit_left = 0
@@ -330,30 +569,27 @@ limit_right = 2560
 limit_bottom = 1440
 metadata/_custom_type_script = "uid://bhexx6mj1xv3q"
 
-[node name="Mosquito" parent="." unique_id=486585636 instance=ExtResource("11_yhmtn")]
-position = Vector2(1429, 467)
-
 [node name="Pads" type="AudioStreamPlayer" parent="." unique_id=631962834]
 unique_name_in_owner = true
 stream = SubResource("AudioStreamRandomizer_202ut")
 volume_db = -9.0
 
-[node name="StateChart" type="Node" parent="." unique_id=603539153]
+[node name="State" type="Node" parent="." unique_id=603539153]
 script = ExtResource("25_jsoai")
 track_in_editor = true
 metadata/_custom_type_script = "uid://couw105c3bde4"
 
-[node name="CompoundState" type="Node" parent="StateChart" unique_id=859930531]
+[node name="CompoundState" type="Node" parent="State" unique_id=859930531]
 script = ExtResource("26_bisgb")
 initial_state = NodePath("Loitering")
 metadata/_custom_type_script = "uid://jk2jm1g6q853"
 
-[node name="Loitering" type="Node" parent="StateChart/CompoundState" unique_id=1737078083]
+[node name="Loitering" type="Node" parent="State/CompoundState" unique_id=1737078083]
 editor_description = "We start waiting, "
 script = ExtResource("27_y5ctq")
 metadata/_custom_type_script = "uid://cytafq8i1y8qm"
 
-[node name="PreyStartled" type="Node" parent="StateChart/CompoundState/Loitering" unique_id=1793246992]
+[node name="PreyStartled" type="Node" parent="State/CompoundState/Loitering" unique_id=1793246992]
 editor_description = "Prey scared away, they'll take longer to re-appear. We were jumping or, making a racket."
 script = ExtResource("28_w7ht3")
 to = NodePath("..")
@@ -361,7 +597,7 @@ event = &"StartlePrey"
 delay_in_seconds = "0.0"
 metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
 
-[node name="PreyArrived" type="Node" parent="StateChart/CompoundState/Loitering" unique_id=1904662808]
+[node name="PreyArrived" type="Node" parent="State/CompoundState/Loitering" unique_id=1904662808]
 editor_description = "Not dispelled, and drawing closer, our prey arrives within enticing distance"
 script = ExtResource("28_w7ht3")
 to = NodePath("../../Enticing")
@@ -369,12 +605,12 @@ event = &"PreyArrives"
 delay_in_seconds = "0.0"
 metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
 
-[node name="Enticing" type="Node" parent="StateChart/CompoundState" unique_id=51817268]
+[node name="Enticing" type="Node" parent="State/CompoundState" unique_id=51817268]
 editor_description = "Now we need to entice our prey into the web. Our mozzie will emit the notes of a chord, and will have to locate a corresponding key containing the chord, and pluck the appropriate key-line 'drum'  "
 script = ExtResource("27_y5ctq")
 metadata/_custom_type_script = "uid://cytafq8i1y8qm"
 
-[node name="PreyStartled" type="Node" parent="StateChart/CompoundState/Enticing" unique_id=1081387748]
+[node name="PreyStartled" type="Node" parent="State/CompoundState/Enticing" unique_id=1081387748]
 editor_description = "Prey scared away, they'll take longer to re-appear. We were jumping or, making a racket."
 script = ExtResource("28_w7ht3")
 to = NodePath("../../Loitering")
@@ -382,7 +618,7 @@ event = &"StartlePrey"
 delay_in_seconds = "0.0"
 metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
 
-[node name="KeyFound" type="Node" parent="StateChart/CompoundState/Enticing" unique_id=1781134351]
+[node name="KeyFound" type="Node" parent="State/CompoundState/Enticing" unique_id=1781134351]
 editor_description = "We found the key, and we'll now entrap our hapless prey."
 script = ExtResource("28_w7ht3")
 to = NodePath("../../Trapping")
@@ -390,12 +626,12 @@ event = &"KeyEchoed"
 delay_in_seconds = "0.0"
 metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
 
-[node name="Trapping" type="Node" parent="StateChart/CompoundState" unique_id=1747603141]
+[node name="Trapping" type="Node" parent="State/CompoundState" unique_id=1747603141]
 editor_description = "Our mozzie is moving into the trap, but may still be startled"
 script = ExtResource("27_y5ctq")
 metadata/_custom_type_script = "uid://cytafq8i1y8qm"
 
-[node name="PreyStartled" type="Node" parent="StateChart/CompoundState/Trapping" unique_id=2053269862]
+[node name="PreyStartled" type="Node" parent="State/CompoundState/Trapping" unique_id=2053269862]
 editor_description = "Prey scared away, they'll take longer to re-appear. We were jumping or, making a racket, or we sung out  of key."
 script = ExtResource("28_w7ht3")
 to = NodePath("../../Loitering")
@@ -403,7 +639,7 @@ event = &"StartlePrey"
 delay_in_seconds = "0.0"
 metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
 
-[node name="PreyEnsnared" type="Node" parent="StateChart/CompoundState/Trapping" unique_id=429615053]
+[node name="PreyEnsnared" type="Node" parent="State/CompoundState/Trapping" unique_id=429615053]
 editor_description = "Prey scared away, they'll take longer to re-appear. We were jumping or, making a racket."
 script = ExtResource("28_w7ht3")
 to = NodePath("../../Ensnared")
@@ -411,83 +647,95 @@ event = &"PreySnare"
 delay_in_seconds = "0.0"
 metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
 
-[node name="Ensnared" type="Node" parent="StateChart/CompoundState" unique_id=306911471]
+[node name="Ensnared" type="Node" parent="State/CompoundState" unique_id=306911471]
 script = ExtResource("26_bisgb")
 initial_state = NodePath("Phrase1")
 metadata/_custom_type_script = "uid://jk2jm1g6q853"
 
-[node name="Phrase1" type="Node" parent="StateChart/CompoundState/Ensnared" unique_id=52036655]
+[node name="Phrase1" type="Node" parent="State/CompoundState/Ensnared" unique_id=52036655]
 script = ExtResource("27_y5ctq")
 metadata/_custom_type_script = "uid://cytafq8i1y8qm"
 
-[node name="PreyReleased" type="Node" parent="StateChart/CompoundState/Ensnared/Phrase1" unique_id=297655030]
+[node name="PreyReleased" type="Node" parent="State/CompoundState/Ensnared/Phrase1" unique_id=297655030]
 script = ExtResource("28_w7ht3")
 to = NodePath("../../../Loitering")
 event = &"PreyEscapes"
 delay_in_seconds = "0.0"
 metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
 
-[node name="PhraseResponded" type="Node" parent="StateChart/CompoundState/Ensnared/Phrase1" unique_id=1665331395]
+[node name="PhraseResponded" type="Node" parent="State/CompoundState/Ensnared/Phrase1" unique_id=1665331395]
 script = ExtResource("28_w7ht3")
 to = NodePath("../../Phrase2")
 event = &"PhraseResponded"
 delay_in_seconds = "0.0"
 metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
 
-[node name="Phrase2" type="Node" parent="StateChart/CompoundState/Ensnared" unique_id=1873010558]
+[node name="Phrase2" type="Node" parent="State/CompoundState/Ensnared" unique_id=1873010558]
 script = ExtResource("27_y5ctq")
 metadata/_custom_type_script = "uid://cytafq8i1y8qm"
 
-[node name="PreyReleased" type="Node" parent="StateChart/CompoundState/Ensnared/Phrase2" unique_id=1702450332]
+[node name="PreyReleased" type="Node" parent="State/CompoundState/Ensnared/Phrase2" unique_id=1702450332]
 script = ExtResource("28_w7ht3")
 to = NodePath("../../../Loitering")
 event = &"ReleasePrey"
 delay_in_seconds = "0.0"
 metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
 
-[node name="PhraseResponded" type="Node" parent="StateChart/CompoundState/Ensnared/Phrase2" unique_id=1148824580]
+[node name="PhraseResponded" type="Node" parent="State/CompoundState/Ensnared/Phrase2" unique_id=1148824580]
 script = ExtResource("28_w7ht3")
 to = NodePath("../../Phrase3")
 event = &"PhraseResponded"
 delay_in_seconds = "0.0"
 metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
 
-[node name="Phrase3" type="Node" parent="StateChart/CompoundState/Ensnared" unique_id=1253446240]
+[node name="Phrase3" type="Node" parent="State/CompoundState/Ensnared" unique_id=1253446240]
 script = ExtResource("27_y5ctq")
 metadata/_custom_type_script = "uid://cytafq8i1y8qm"
 
-[node name="PreyReleased" type="Node" parent="StateChart/CompoundState/Ensnared/Phrase3" unique_id=1882426831]
+[node name="PreyReleased" type="Node" parent="State/CompoundState/Ensnared/Phrase3" unique_id=1882426831]
 script = ExtResource("28_w7ht3")
 to = NodePath("../../../Loitering")
 event = &"ReleasePrey"
 delay_in_seconds = "0.0"
 metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
 
-[node name="PhraseResponded" type="Node" parent="StateChart/CompoundState/Ensnared/Phrase3" unique_id=1101919766]
+[node name="PhraseResponded" type="Node" parent="State/CompoundState/Ensnared/Phrase3" unique_id=1101919766]
 script = ExtResource("28_w7ht3")
 to = NodePath("../../../Success")
 event = &"PhraseResponded"
 delay_in_seconds = "0.0"
 metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
 
-[node name="Success" type="Node" parent="StateChart/CompoundState" unique_id=1615214126]
+[node name="Success" type="Node" parent="State/CompoundState" unique_id=1615214126]
 script = ExtResource("27_y5ctq")
 metadata/_custom_type_script = "uid://cytafq8i1y8qm"
 
-[node name="NomNomNom" type="Node" parent="StateChart/CompoundState/Success" unique_id=463923727]
+[node name="NomNomNom" type="Node" parent="State/CompoundState/Success" unique_id=463923727]
 script = ExtResource("28_w7ht3")
 to = NodePath("../../Loitering")
 event = &"NomNomNom"
 delay_in_seconds = "0.0"
 metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1978846586]
-
-[connection signal="state_entered" from="StateChart/CompoundState/Loitering" to="." method="_on_loitering_state_entered"]
-[connection signal="state_entered" from="StateChart/CompoundState/Enticing" to="." method="_on_enticing_state_entered"]
-[connection signal="state_entered" from="StateChart/CompoundState/Trapping" to="." method="_on_trapping_state_entered"]
-[connection signal="state_entered" from="StateChart/CompoundState/Ensnared" to="." method="_on_ensnared_state_entered"]
-[connection signal="state_entered" from="StateChart/CompoundState/Ensnared/Phrase1" to="." method="_on_phrase_1_state_entered"]
-[connection signal="state_entered" from="StateChart/CompoundState/Ensnared/Phrase2" to="." method="_on_phrase_2_state_entered"]
-[connection signal="state_entered" from="StateChart/CompoundState/Ensnared/Phrase3" to="." method="_on_phrase_3_state_entered"]
-[connection signal="state_entered" from="StateChart/CompoundState/Success" to="." method="_on_success_state_entered"]
+[connection signal="plucked" from="Game/Web/Keylines/1" to="." method="_on__plucked"]
+[connection signal="plucked" from="Game/Web/Keylines/2" to="." method="_on__plucked"]
+[connection signal="plucked" from="Game/Web/Keylines/3" to="." method="_on__plucked"]
+[connection signal="plucked" from="Game/Web/Keylines/4" to="." method="_on__plucked"]
+[connection signal="plucked" from="Game/Web/Keylines/5" to="." method="_on__plucked"]
+[connection signal="plucked" from="Game/Web/Keylines/6" to="." method="_on__plucked"]
+[connection signal="plucked" from="Game/Web/Keylines/7" to="." method="_on__plucked"]
+[connection signal="plucked" from="Game/Web/Keylines/8" to="." method="_on__plucked"]
+[connection signal="plucked" from="Game/Web/Keylines/9" to="." method="_on__plucked"]
+[connection signal="plucked" from="Game/Web/Keylines/10" to="." method="_on__plucked"]
+[connection signal="plucked" from="Game/Web/Keylines/11" to="." method="_on__plucked"]
+[connection signal="plucked" from="Game/Web/Keylines/12" to="." method="_on__plucked"]
+[connection signal="plucked" from="Game/Web/Keylines/13" to="." method="_on__plucked"]
+[connection signal="state_entered" from="State/CompoundState/Loitering" to="." method="_on_loitering_state_entered"]
+[connection signal="taken" from="State/CompoundState/Loitering/PreyStartled" to="." method="_on_prey_startled_taken"]
+[connection signal="state_entered" from="State/CompoundState/Enticing" to="." method="_on_enticing_state_entered"]
+[connection signal="state_entered" from="State/CompoundState/Trapping" to="." method="_on_trapping_state_entered"]
+[connection signal="state_entered" from="State/CompoundState/Ensnared" to="." method="_on_ensnared_state_entered"]
+[connection signal="state_entered" from="State/CompoundState/Ensnared/Phrase1" to="." method="_on_phrase_1_state_entered"]
+[connection signal="state_entered" from="State/CompoundState/Ensnared/Phrase2" to="." method="_on_phrase_2_state_entered"]
+[connection signal="state_entered" from="State/CompoundState/Ensnared/Phrase3" to="." method="_on_phrase_3_state_entered"]
+[connection signal="state_entered" from="State/CompoundState/Success" to="." method="_on_success_state_entered"]

@@ -63,6 +63,8 @@ transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition
 scale = Vector2(2, 2)
 script = ExtResource("1_1nlms")
 
+[node name="Automator" type="AnimationPlayer" parent="." unique_id=1227260095]
+
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=368742240]
 texture = ExtResource("2_kyhq6")
 hframes = 3
