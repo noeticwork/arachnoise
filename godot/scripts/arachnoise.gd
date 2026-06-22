@@ -6,6 +6,7 @@ const Mozzie = preload("res://scenes/prey/prey.tscn")
 @onready var game: Parallax2D = %Game
 var current_prey: Prey
 var current_target_note: String
+var current_snare_key: String
 var initial_buzz = false
 
 const notes = [
@@ -74,11 +75,15 @@ func _drop_prey():
 		
 func _on_loitering_state_entered() -> void:
 	print("Loitering ...")
+	if not initial_buzz:
+		%PreyAutomator.play_with_capture("RESET", 1)
+		current_target_note = ""
+		%PreyAutomator.play("lurk")
 	if current_prey: current_prey.state.send_event("Calmed")
 
 func _on_enticing_state_entered() -> void:
 	print("Enticing ...")
-	play_entice_chime()
+	current_target_note = random_chime()
 	current_prey.state.send_event("BuzzSpidey")
 
 func _on_trapping_state_entered() -> void:
@@ -95,6 +100,7 @@ func _on_trapping_state_entered() -> void:
 		current_prey.goto(target_location)
 		current_prey.prey_snared.connect(func():
 			$State.send_event("PreySnared")
+			
 		)
 	else:
 		print("Uhoh")
@@ -105,14 +111,20 @@ func _on_ensnared_state_entered() -> void:
 		var child = $Game/Web/Keylines.get_child(i) as KeyLine
 		if child and child.key == current_target_note:
 			$Game/Web/Keylines.get_child(i).wiggle()
+	$Pads.stream = load("res://assets/audio/Pads/%smaj.wav" % current_target_note)
+	$Pads.play()
+	$Pads.finished.connect(func(): $Pads.play())
+
+	current_snare_key = current_target_note
+	current_target_note = ""
 
 func random_chime() -> String:
 	return notes[randi_range(1,12)-1]
 	
-func play_entice_chime() -> void:
-	current_target_note = random_chime()
-	ChimePlayer.play("celeste_%s" % current_target_note)
-	print("... played ", current_target_note)
+func play_current_entice_chime() -> void:
+	if current_target_note:
+		ChimePlayer.play("celeste_%s" % current_target_note)
+		print("... played ", current_target_note)
 	
 func _on_phrase_1_state_entered() -> void:
 	pass 
@@ -137,6 +149,10 @@ func _on__plucked(key: String, note: int) -> void:
 			$State.send_event("StartlePrey")
 		else:
 			$State.send_event("KeyEchoed")
+	if $State/CompoundState/Ensnared.active:
+		if key == current_snare_key:
+			$State.send_event("PreyEscapes")
+			current_prey.state.send_event("EscapingWeb")
 
 func _on_fleeing_state_entered() -> void:
 	if current_prey:

@@ -530,7 +530,7 @@ tracks/5/path = NodePath("%Game/../BuzzTrack")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(1.1, 5.133333, 9.9),
+"times": PackedFloat32Array(1.1, 5.133333, 10.033334),
 "transitions": PackedFloat32Array(1, 1, 1),
 "values": [{
 "args": [0.0],
@@ -550,9 +550,18 @@ tracks/6/path = NodePath("%Game/..")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(13.5),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(1.1, 5.133, 10.033334, 13.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "values": [{
+"args": [],
+"method": &"play_current_entice_chime"
+}, {
+"args": [],
+"method": &"play_current_entice_chime"
+}, {
+"args": [],
+"method": &"play_current_entice_chime"
+}, {
 "args": [],
 "method": &"_keep_lurking"
 }]
@@ -621,9 +630,9 @@ stream_3/stream = ExtResource("46_4uwls")
 stream_4/stream = ExtResource("47_lda8q")
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_si8k2"]
-vertices = PackedVector2Array(47.726563, 412.65625, -18.078125, 21.679688, -100.89844, -803.5469, 2601.3984, -695.8906, 1684.1094, 259.90625, 533.7422, 517.65625, 1484.5469, 1137.2734, 1190.7813, 1234.8594, 959.03125, 1215.2969, 599.25, 909.7422, 1758.8438, 608.3594, 1717.5625, 899.34375)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedInt32Array(6, 7, 8, 9, 5, 4, 10, 11)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(39, 421, 525, 526, 590, 915, 955, 1225, 1192, 1245, 1490, 1146, 1727, 904, 1769, 608, 1695, 263, 2624, -705, -112, -814, -28, 23)])
+vertices = PackedVector2Array(-837.6875, -56.179688, -1332.6797, 80.296875, -915.9219, -731.0781, -542.8672, -407.1172, 635.52344, 140.57813, 261.5703, -382, 1864.3984, -273.89063, 1684.6484, 262.42188, 1484.5469, 1137.2734, 1190.7813, 1234.8594, 959.03125, 1215.2969, 599.25, 909.7422, 535.21094, 526.46094, 1758.8438, 608.3594, 1717.5625, 899.34375)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 0, 3, 5, 6, 7), PackedInt32Array(8, 9, 10, 11, 12, 4, 7, 13, 14)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(623, 149, 525, 526, 590, 915, 955, 1225, 1192, 1245, 1490, 1146, 1727, 904, 1769, 608, 1695, 263, 1878, -283, 262, -392, -539, -417, -919, -747, -1352, 96, -837, -46)])
 
 [node name="Arachnoise" type="Node2D" unique_id=1250962292]
 script = ExtResource("1_xkndl")
@@ -785,8 +794,7 @@ key = "E"
 collision_mask = 3
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Game/Web/Borders" unique_id=1997433225]
-visible = false
-polygon = PackedVector2Array(700, 446, 10.095453, 11.919809, 8.516629, 1442.978, 2555.603, 1443.6498, 2560.0142, -8.431654, 21.095104, 11.832018, 699, 444, 893.61334, 323.87842, 1127, 292, 1471, 376, 1604, 499, 1658, 786, 1620, 1035, 1565, 1171, 1468, 1253, 1162, 1337, 924, 1317, 747, 1212, 619, 994, 575, 783, 688, 483)
+polygon = PackedVector2Array(564, 186, 237, 124, -925, 14, 8.516629, 1442.978, 2555.603, 1443.6498, 2633, -768, -397, -835, -923, -795, -487, -489, 315, -405, 1377, -282, 1744, -83, 1828, 170, 1796, 488, 1771, 824, 1764, 972, 1565, 1171, 1468, 1253, 1162, 1337, 924, 1317, 747, 1212, 619, 994, 575, 783, 496, 495)
 one_way_collision = true
 
 [node name="Spidey" parent="Game" unique_id=11989907 instance=ExtResource("5_t88pq")]

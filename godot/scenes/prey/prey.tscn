@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b4yvx8smk5w76"]
 
-[ext_resource type="Script" uid="uid://bosf0xbedn6pb" path="res://scripts/prey/prey.gd" id="1_lahln"]
+[ext_resource type="Script" uid="uid://b3msloj0g4hlh" path="res://scripts/prey/prey.gd" id="1_lahln"]
 [ext_resource type="Texture2D" uid="uid://cu2dblhnyoptt" path="res://assets/mosq-sheet.png" id="2_fx0gp"]
 [ext_resource type="AudioStream" uid="uid://vt48wbt6nkhg" path="res://assets/audio/SFX/SFX_Insect_Mosquito_01.wav" id="3_mg21n"]
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="4_ymde0"]
@@ -174,12 +174,11 @@ texture = ExtResource("2_fx0gp")
 hframes = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1653173207]
-visible = false
 shape = SubResource("CircleShape2D_bcyx4")
 
 [node name="NavAgent" type="NavigationAgent2D" parent="." unique_id=246371436]
 target_desired_distance = 15.0
-path_postprocessing = 1
+debug_enabled = true
 
 [node name="SpritePlayer" type="AnimationPlayer" parent="." unique_id=1122754271]
 libraries/ = SubResource("AnimationLibrary_nkwvm")
