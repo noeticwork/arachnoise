@@ -1,6 +1,16 @@
 extends Node2D
+class_name KeyLine
 @export var line_texture: Texture2D
 @export var key: String
+@export var anchors: Node2D
+@export var anchor: Area2D
+@export var i: Area2D
+@export var ii: Area2D
+@export var iii: Area2D
+@export var iv: Area2D
+@export var v: Area2D
+@export var vi: Area2D
+@export var vii: Area2D
 
 const CHORDS_CELESTE_CHORD_A_ = preload("uid://bfjk7g0xsbpor")
 const CHORDS_CELESTE_CHORD_A = preload("uid://cwyhxuygctll7")
@@ -103,7 +113,8 @@ func _sound_map(note: String, global_postition: Vector2) -> void:
 		player.finished.connect(player.queue_free)
 		
 func _ready() -> void:
-	$%LineTexture.texture = line_texture
+	$LineTexture.texture = line_texture
+	$Label.text = key
 	#_randomize()
 
 func _randomize() -> void:
@@ -143,31 +154,35 @@ func _play_note(num: int, global_postition: Vector2) -> void:
 
 
 func _on_anchor_body_entered(body: Node2D) -> void:
-	_play_base_note($anchor.global_position)
+	_play_base_note(%anchor.global_position)
  # Replace with function body.
 
 
 func _on_i_body_entered(body: Node2D) -> void:
-	_play_note(1, $i.global_position)
+	_play_note(1, %i.global_position)
 
 func _on_ii_body_entered(body: Node2D) -> void:
-	_play_note(2, $ii.global_position)
+	_play_note(2, %ii.global_position)
 
 func _on_iii_body_entered(body: Node2D) -> void:
-	_play_note(3, $iii.global_position)
+	_play_note(3, %iii.global_position)
 
 func _on_iv_body_entered(body: Node2D) -> void:
-	_play_note(4, $iv.global_position)
+	_play_note(4, %iv.global_position)
 
 func _on_v_body_entered(body: Node2D) -> void:
-	_play_note(5, $v.global_position)
+	_play_note(5, %v.global_position)
 
 func _on_vi_body_entered(body: Node2D) -> void:
-	_play_note(6, $vi.global_position)
+	_play_note(6, %vi.global_position)
 
 func _on_vii_body_entered(body: Node2D) -> void:
-	_play_note(7, $vii.global_position)
+	_play_note(7, %vii.global_position)
 
 
 func _on_end_anchor_body_entered(body: Node2D) -> void:
 	pass
+
+func wiggle() -> void:
+	$WiggleTimer.timeout.connect(func(): $LineTexture.texture = load("res://assets/line_anim%d.png" % randi_range(1,7)))
+	$WiggleTimer.start()

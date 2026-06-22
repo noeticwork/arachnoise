@@ -56,9 +56,17 @@ _data = {
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_taomk"]
 
-[node name="Keyline" type="Node2D" unique_id=536966445]
+[node name="Keyline" type="Node2D" unique_id=536966445 node_paths=PackedStringArray("anchors", "anchor", "i", "ii", "iii", "iv", "v", "vi", "vii")]
 script = ExtResource("1_v386r")
-key = null
+anchors = NodePath("Anchors")
+anchor = NodePath("Anchors/anchor")
+i = NodePath("Anchors/i")
+ii = NodePath("Anchors/ii")
+iii = NodePath("Anchors/iii")
+iv = NodePath("Anchors/iv")
+v = NodePath("Anchors/v")
+vi = NodePath("Anchors/vi")
+vii = NodePath("Anchors/vii")
 
 [node name="audio" type="AudioStreamPlayer" parent="." unique_id=1589302479]
 unique_name_in_owner = true
@@ -77,82 +85,102 @@ offset_bottom = 694.0
 texture = ExtResource("2_taomk")
 metadata/_edit_use_anchors_ = true
 
-[node name="anchor" type="Area2D" parent="." unique_id=277028738]
+[node name="Label" type="Label" parent="." unique_id=522663400]
+unique_name_in_owner = true
+offset_right = 40.0
+offset_bottom = 23.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="anchor" unique_id=1323083959]
+[node name="Anchors" type="Node2D" parent="." unique_id=1307272448]
+unique_name_in_owner = true
+
+[node name="anchor" type="Area2D" parent="Anchors" unique_id=277028738]
+unique_name_in_owner = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Anchors/anchor" unique_id=1323083959]
 scale = Vector2(0.5, 0.5)
 shape = SubResource("CircleShape2D_taomk")
 
-[node name="i" type="Area2D" parent="." unique_id=846230492]
+[node name="i" type="Area2D" parent="Anchors" unique_id=846230492]
+unique_name_in_owner = true
 position = Vector2(3, 62)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="i" unique_id=2140478228]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Anchors/i" unique_id=2140478228]
 scale = Vector2(0.5, 0.5)
 shape = SubResource("CircleShape2D_taomk")
 
-[node name="ii" type="Area2D" parent="." unique_id=2090790315]
+[node name="ii" type="Area2D" parent="Anchors" unique_id=2090790315]
+unique_name_in_owner = true
 position = Vector2(10, 149)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ii" unique_id=700656625]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Anchors/ii" unique_id=700656625]
 scale = Vector2(0.5, 0.5)
 shape = SubResource("CircleShape2D_taomk")
 
-[node name="iii" type="Area2D" parent="." unique_id=443312610]
+[node name="iii" type="Area2D" parent="Anchors" unique_id=443312610]
+unique_name_in_owner = true
 position = Vector2(19, 238)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="iii" unique_id=1049294329]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Anchors/iii" unique_id=1049294329]
 scale = Vector2(0.5, 0.5)
 shape = SubResource("CircleShape2D_taomk")
 
-[node name="iv" type="Area2D" parent="." unique_id=121378607]
+[node name="iv" type="Area2D" parent="Anchors" unique_id=121378607]
+unique_name_in_owner = true
 position = Vector2(17, 347)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="iv" unique_id=322355708]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Anchors/iv" unique_id=322355708]
 scale = Vector2(0.5, 0.5)
 shape = SubResource("CircleShape2D_taomk")
 
-[node name="v" type="Area2D" parent="." unique_id=1079414515]
+[node name="v" type="Area2D" parent="Anchors" unique_id=1079414515]
+unique_name_in_owner = true
 position = Vector2(17, 434)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="v" unique_id=2142645458]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Anchors/v" unique_id=2142645458]
 scale = Vector2(0.5, 0.5)
 shape = SubResource("CircleShape2D_taomk")
 
-[node name="vi" type="Area2D" parent="." unique_id=298278294]
+[node name="vi" type="Area2D" parent="Anchors" unique_id=298278294]
+unique_name_in_owner = true
 position = Vector2(15, 501)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="vi" unique_id=1030032297]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Anchors/vi" unique_id=1030032297]
 scale = Vector2(0.5, 0.5)
 shape = SubResource("CircleShape2D_taomk")
 
-[node name="vii" type="Area2D" parent="." unique_id=1979234706]
+[node name="vii" type="Area2D" parent="Anchors" unique_id=1979234706]
+unique_name_in_owner = true
 position = Vector2(17, 589)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="vii" unique_id=1228391614]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Anchors/vii" unique_id=1228391614]
 scale = Vector2(0.5, 0.5)
 shape = SubResource("CircleShape2D_taomk")
 
-[node name="end_anchor" type="Area2D" parent="." unique_id=1111661198]
+[node name="end_anchor" type="Area2D" parent="Anchors" unique_id=1111661198]
+unique_name_in_owner = true
 position = Vector2(8, 664)
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="end_anchor" unique_id=299085357]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Anchors/end_anchor" unique_id=299085357]
 shape = SubResource("CircleShape2D_taomk")
 
-[connection signal="area_entered" from="anchor" to="." method="_on_anchor_area_entered"]
-[connection signal="body_entered" from="anchor" to="." method="_on_anchor_body_entered"]
-[connection signal="area_entered" from="i" to="." method="_on_i_area_entered"]
-[connection signal="body_entered" from="i" to="." method="_on_i_body_entered"]
-[connection signal="area_entered" from="ii" to="." method="_on_ii_area_entered"]
-[connection signal="body_entered" from="ii" to="." method="_on_ii_body_entered"]
-[connection signal="area_entered" from="iii" to="." method="_on_iii_area_entered"]
-[connection signal="body_entered" from="iii" to="." method="_on_iii_body_entered"]
-[connection signal="area_entered" from="iv" to="." method="_on_iv_area_entered"]
-[connection signal="body_entered" from="iv" to="." method="_on_iv_body_entered"]
-[connection signal="area_entered" from="v" to="." method="_on_v_area_entered"]
-[connection signal="body_entered" from="v" to="." method="_on_v_body_entered"]
-[connection signal="area_entered" from="vi" to="." method="_on_vi_area_entered"]
-[connection signal="body_entered" from="vi" to="." method="_on_vi_body_entered"]
-[connection signal="area_entered" from="vii" to="." method="_on_vii_area_entered"]
-[connection signal="body_entered" from="vii" to="." method="_on_vii_body_entered"]
-[connection signal="area_entered" from="end_anchor" to="." method="_on_end_anchor_area_entered"]
-[connection signal="body_entered" from="end_anchor" to="." method="_on_end_anchor_body_entered"]
+[node name="WiggleTimer" type="Timer" parent="." unique_id=697138570]
+wait_time = 0.2
+
+[connection signal="area_entered" from="Anchors/anchor" to="." method="_on_anchor_area_entered"]
+[connection signal="body_entered" from="Anchors/anchor" to="." method="_on_anchor_body_entered"]
+[connection signal="area_entered" from="Anchors/i" to="." method="_on_i_area_entered"]
+[connection signal="body_entered" from="Anchors/i" to="." method="_on_i_body_entered"]
+[connection signal="area_entered" from="Anchors/ii" to="." method="_on_ii_area_entered"]
+[connection signal="body_entered" from="Anchors/ii" to="." method="_on_ii_body_entered"]
+[connection signal="area_entered" from="Anchors/iii" to="." method="_on_iii_area_entered"]
+[connection signal="body_entered" from="Anchors/iii" to="." method="_on_iii_body_entered"]
+[connection signal="area_entered" from="Anchors/iv" to="." method="_on_iv_area_entered"]
+[connection signal="body_entered" from="Anchors/iv" to="." method="_on_iv_body_entered"]
+[connection signal="area_entered" from="Anchors/v" to="." method="_on_v_area_entered"]
+[connection signal="body_entered" from="Anchors/v" to="." method="_on_v_body_entered"]
+[connection signal="area_entered" from="Anchors/vi" to="." method="_on_vi_area_entered"]
+[connection signal="body_entered" from="Anchors/vi" to="." method="_on_vi_body_entered"]
+[connection signal="area_entered" from="Anchors/vii" to="." method="_on_vii_area_entered"]
+[connection signal="body_entered" from="Anchors/vii" to="." method="_on_vii_body_entered"]
+[connection signal="area_entered" from="Anchors/end_anchor" to="." method="_on_end_anchor_area_entered"]
+[connection signal="body_entered" from="Anchors/end_anchor" to="." method="_on_end_anchor_body_entered"]

@@ -6,9 +6,20 @@
 [ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="4_6e28j"]
 [ext_resource type="Script" uid="uid://c1vp0ojjvaby1" path="res://addons/godot_state_charts/parallel_state.gd" id="4_wr2nf"]
 [ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="5_nkwvm"]
+[ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="7_woxmh"]
+
+[sub_resource type="Gradient" id="Gradient_kshvn"]
+interpolation_mode = 2
+colors = PackedColorArray(0.2263475, 0.23100546, 0.22956789, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_woxmh"]
+gradient = SubResource("Gradient_kshvn")
+fill = 1
+fill_from = Vector2(0.5243056, 0.50615984)
+fill_to = Vector2(0.50243723, 0.046407584)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bcyx4"]
-radius = 11.045361
+radius = 9.0
 
 [sub_resource type="Animation" id="Animation_s6tvk"]
 length = 0.16666667
@@ -107,11 +118,99 @@ states/walk/node = SubResource("AnimationNodeAnimation_vnujn")
 states/walk/position = Vector2(319.7143, 104)
 transitions = ["Start", "walk", SubResource("AnimationNodeStateMachineTransition_s6tvk"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_6e28j"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_nkwvm")]
 
-[node name="Spidey" type="CharacterBody2D" unique_id=11989907 node_paths=PackedStringArray("state_chart") groups=["spider"]]
+[sub_resource type="AtlasTexture" id="AtlasTexture_my27l"]
+atlas = ExtResource("2_vnujn")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_371o6"]
+atlas = ExtResource("2_vnujn")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kshvn"]
+atlas = ExtResource("2_vnujn")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_woxmh"]
+atlas = ExtResource("2_vnujn")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1oeeq"]
+atlas = ExtResource("2_vnujn")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kshvn"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_my27l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_371o6")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kshvn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_woxmh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1oeeq")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[node name="Spidey" type="CharacterBody2D" unique_id=11989907 node_paths=PackedStringArray("state_chart", "PlayerSprite", "PlayerCollider") groups=["spider"]]
 collision_layer = 3
-collision_mask = 3
 script = ExtResource("1_vnujn")
 state_chart = NodePath("Gestalt")
+PlayerSprite = NodePath("AnimatedSprite2D")
+PlayerCollider = NodePath("CollisionShape2D2")
+jumpHeight = 4.0
+jumps = 3
+gravityScale = 12.0
+wallJump = true
+wallLatching = true
+wallLatchingModifer = true
+dashType = 4
+dashes = 2
+dashLength = 3.0
+groundPound = true
+idle = true
+walk = true
+
+[node name="Halo" type="TextureRect" parent="." unique_id=335311381]
+modulate = Color(1, 1, 1, 0.827451)
+self_modulate = Color(0.875407, 0.69987595, 0.3548132, 0.29411766)
+offset_left = 17.763817
+offset_top = 8.675724
+offset_right = 81.76382
+offset_bottom = 72.67572
+scale = Vector2(2.8088095, 2.8088095)
+pivot_offset = Vector2(64, 54)
+texture = SubResource("GradientTexture2D_woxmh")
+
+[node name="Shadow" type="TextureRect" parent="." unique_id=1688990588]
+modulate = Color(1, 1, 1, 0.9254902)
+self_modulate = Color(0.324789, 0.21909785, 0.1184719, 0.5921569)
+offset_left = -31.0
+offset_top = -30.0
+offset_right = 33.0
+offset_bottom = 34.0
+scale = Vector2(0.9502735, 0.9502735)
+pivot_offset = Vector2(64, 54)
+texture = SubResource("GradientTexture2D_woxmh")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=368742240]
 texture = ExtResource("2_kshvn")
@@ -131,6 +230,7 @@ anim_player = NodePath("../AnimationPlayer")
 
 [node name="Gestalt" type="Node" parent="." unique_id=1362935359]
 script = ExtResource("3_s6tvk")
+track_in_editor = true
 metadata/_custom_type_script = "uid://couw105c3bde4"
 
 [node name="ParallelState" type="Node" parent="Gestalt" unique_id=325612221]
@@ -148,17 +248,39 @@ script = ExtResource("5_nkwvm")
 
 [node name="Interacting" type="Node" parent="Gestalt/ParallelState" unique_id=284531658]
 script = ExtResource("4_6e28j")
-initial_state = NodePath("Loitering")
+initial_state = NodePath("Web")
 metadata/_custom_type_script = "uid://jk2jm1g6q853"
 
-[node name="Loitering" type="Node" parent="Gestalt/ParallelState/Interacting" unique_id=2098864098]
+[node name="Web" type="Node" parent="Gestalt/ParallelState/Interacting" unique_id=542182351]
 script = ExtResource("5_nkwvm")
 metadata/_custom_type_script = "uid://cytafq8i1y8qm"
 
-[node name="Enticing" type="Node" parent="Gestalt/ParallelState/Interacting" unique_id=1278358897]
+[node name="Transition" type="Node" parent="Gestalt/ParallelState/Interacting/Web" unique_id=717591394]
+script = ExtResource("7_woxmh")
+to = NodePath("../../Jumping")
+event = &"Jump"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="Jumping" type="Node" parent="Gestalt/ParallelState/Interacting" unique_id=1112550745]
 script = ExtResource("5_nkwvm")
 metadata/_custom_type_script = "uid://cytafq8i1y8qm"
 
-[node name="Trapping" type="Node" parent="Gestalt/ParallelState/Interacting" unique_id=2145242576]
-script = ExtResource("5_nkwvm")
-metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+[node name="Stuck" type="Node" parent="Gestalt/ParallelState/Interacting/Jumping" unique_id=732152284]
+script = ExtResource("7_woxmh")
+to = NodePath("../../Web")
+event = &"WebMode"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=123204967]
+unique_name_in_owner = true
+visible = false
+sprite_frames = SubResource("SpriteFrames_kshvn")
+animation = &"idle"
+
+[connection signal="state_entered" from="Gestalt/ParallelState/Interacting/Web" to="." method="_on_web_state_entered"]
+[connection signal="state_input" from="Gestalt/ParallelState/Interacting/Web" to="." method="_on_web_state_input"]
+[connection signal="state_physics_processing" from="Gestalt/ParallelState/Interacting/Web" to="." method="_on_web_state_physics_processing"]
+[connection signal="state_entered" from="Gestalt/ParallelState/Interacting/Jumping" to="." method="_on_jumping_state_entered"]
+[connection signal="state_physics_processing" from="Gestalt/ParallelState/Interacting/Jumping" to="." method="_on_jumping_state_physics_processing"]

@@ -1,0 +1,297 @@
+[gd_scene format=3 uid="uid://b4yvx8smk5w76"]
+
+[ext_resource type="Script" uid="uid://bosf0xbedn6pb" path="res://scripts/prey/prey.gd" id="1_lahln"]
+[ext_resource type="Texture2D" uid="uid://cu2dblhnyoptt" path="res://assets/mosq-sheet.png" id="2_fx0gp"]
+[ext_resource type="AudioStream" uid="uid://vt48wbt6nkhg" path="res://assets/audio/SFX/SFX_Insect_Mosquito_01.wav" id="3_mg21n"]
+[ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="4_ymde0"]
+[ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="5_3qfkw"]
+[ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="6_ff7yg"]
+[ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="7_3qfkw"]
+
+[sub_resource type="Animation" id="Animation_ff7yg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_4o1i2"]
+resource_name = "flee"
+length = 3.0333333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.51, 1.05, 1.66, 2.04, 2.6, 3.0333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-20, 15.5), Vector2(-22.5, -15), Vector2(13, -12), Vector2(15, 10.5), Vector2(11, 29.5), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_3qfkw"]
+resource_name = "lurk"
+length = 12.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.59, 1.05, 1.54, 2.06, 2.57, 3.09, 3.56, 4.09, 4.61, 5.08, 5.6, 6.07, 6.55, 7.12, 7.56, 8.08, 8.57, 9.04, 9.61, 10.01, 10.52, 11.04, 11.51, 11.92, 12.43),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(7, 4), Vector2(16.5, 6.5), Vector2(29.5, 5.5), Vector2(33.5, -0.5), Vector2(29, -8), Vector2(22, -12), Vector2(13, -14.5), Vector2(3.5, -15), Vector2(-9.5, -14.5), Vector2(-17.5, -10), Vector2(-24, -4), Vector2(-28, 7), Vector2(-23.5, 14), Vector2(-14.5, 16.5), Vector2(-9.5, 9), Vector2(-7, -2.5), Vector2(-3.5, -5.5), Vector2(6, -9), Vector2(15.5, -13), Vector2(26, -11), Vector2(28.5, -3), Vector2(27, 6.5), Vector2(18, 9.5), Vector2(2, 4.5), Vector2(1, 1)]
+}
+tracks/1/type = "animation"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpritePlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": PackedStringArray("idle"),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_wceoj"]
+resource_name = "trapped"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.03333334, 0.43333334, 0.93333334),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [2.792526803190927, 3.14857397059777, 2.792526803190927]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ff7yg"]
+_data = {
+&"RESET": SubResource("Animation_ff7yg"),
+&"flee": SubResource("Animation_4o1i2"),
+&"lurk": SubResource("Animation_3qfkw"),
+&"trapped": SubResource("Animation_wceoj")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bcyx4"]
+radius = 14.142136
+
+[sub_resource type="Animation" id="Animation_s6tvk"]
+length = 0.16666667
+loop_mode = 1
+step = 0.16666667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_iqj86"]
+resource_name = "idle"
+length = 0.3333417
+loop_mode = 2
+step = 0.083333336
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.16666667, 0.33333334),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nkwvm"]
+_data = {
+&"RESET": SubResource("Animation_s6tvk"),
+&"idle": SubResource("Animation_iqj86")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_s6tvk"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0jdj5"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_wr2nf"]
+states/idle/node = SubResource("AnimationNodeAnimation_s6tvk")
+states/idle/position = Vector2(437.4286, 110.28571)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_0jdj5")]
+
+[node name="Prey" type="CharacterBody2D" unique_id=11989907 node_paths=PackedStringArray("state", "nav_agent") groups=["prey"]]
+scale = Vector2(2, 2)
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_lahln")
+state = NodePath("State")
+nav_agent = NodePath("NavAgent")
+
+[node name="Automator" type="AnimationPlayer" parent="." unique_id=1227260095]
+libraries/ = SubResource("AnimationLibrary_ff7yg")
+playback_auto_capture_duration = 2.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=368742240]
+texture = ExtResource("2_fx0gp")
+hframes = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1653173207]
+visible = false
+shape = SubResource("CircleShape2D_bcyx4")
+
+[node name="NavAgent" type="NavigationAgent2D" parent="." unique_id=246371436]
+target_desired_distance = 15.0
+path_postprocessing = 1
+
+[node name="SpritePlayer" type="AnimationPlayer" parent="." unique_id=1122754271]
+libraries/ = SubResource("AnimationLibrary_nkwvm")
+autoplay = &"idle"
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=1641555617]
+tree_root = SubResource("AnimationNodeStateMachine_wr2nf")
+anim_player = NodePath("../SpritePlayer")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1783092621]
+stream = ExtResource("3_mg21n")
+
+[node name="State" type="Node" parent="." unique_id=1258330055]
+script = ExtResource("4_ymde0")
+track_in_editor = true
+metadata/_custom_type_script = "uid://couw105c3bde4"
+
+[node name="CompoundState" type="Node" parent="State" unique_id=15214333]
+script = ExtResource("5_3qfkw")
+initial_state = NodePath("Lurking")
+
+[node name="Lurking" type="Node" parent="State/CompoundState" unique_id=1448127036]
+script = ExtResource("6_ff7yg")
+
+[node name="ToFleeing" type="Node" parent="State/CompoundState/Lurking" unique_id=287043923]
+script = ExtResource("7_3qfkw")
+to = NodePath("../../Fleeing")
+event = &"Startled"
+delay_in_seconds = "0.0"
+
+[node name="ToEnticing" type="Node" parent="State/CompoundState/Lurking" unique_id=1469491139]
+script = ExtResource("7_3qfkw")
+to = NodePath("../../Enticement")
+event = &"BuzzSpidey"
+delay_in_seconds = "0.0"
+
+[node name="Enticement" type="Node" parent="State/CompoundState" unique_id=903607586]
+script = ExtResource("6_ff7yg")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="WrongAnswer" type="Node" parent="State/CompoundState/Enticement" unique_id=934939683]
+script = ExtResource("7_3qfkw")
+to = NodePath("../../Fleeing")
+event = &"Startled"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="RightAnswer" type="Node" parent="State/CompoundState/Enticement" unique_id=1754220183]
+script = ExtResource("7_3qfkw")
+to = NodePath("../../Stuck")
+event = &"HarmonizeEnticement"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="Fleeing" type="Node" parent="State/CompoundState" unique_id=541510186]
+script = ExtResource("6_ff7yg")
+
+[node name="Relurk" type="Node" parent="State/CompoundState/Fleeing" unique_id=920320460]
+script = ExtResource("7_3qfkw")
+to = NodePath("../../Lurking")
+event = &"Calmed"
+delay_in_seconds = "0.0"
+
+[node name="Stuck" type="Node" parent="State/CompoundState" unique_id=658430526]
+script = ExtResource("5_3qfkw")
+initial_state = NodePath("Sticking")
+
+[node name="Sticking" type="Node" parent="State/CompoundState/Stuck" unique_id=1656422038]
+script = ExtResource("6_ff7yg")
+metadata/_custom_type_script = "uid://cytafq8i1y8qm"
+
+[node name="ArrivedStuck" type="Node" parent="State/CompoundState/Stuck/Sticking" unique_id=2116160746]
+script = ExtResource("7_3qfkw")
+to = NodePath("../../Struggling")
+event = &"GotStuck"
+delay_in_seconds = "0.0"
+metadata/_custom_type_script = "uid://cf1nsco3w0mf6"
+
+[node name="Struggling" type="Node" parent="State/CompoundState/Stuck" unique_id=511053503]
+script = ExtResource("6_ff7yg")
+
+[node name="TryChiming" type="Node" parent="State/CompoundState/Stuck/Struggling" unique_id=1692734468]
+script = ExtResource("7_3qfkw")
+to = NodePath("../../Chiming")
+event = &"TryChime"
+delay_in_seconds = "0.0"
+
+[node name="ToEscaping" type="Node" parent="State/CompoundState/Stuck/Struggling" unique_id=296558835]
+script = ExtResource("7_3qfkw")
+to = NodePath("../../../Escaping")
+event = &"EscapingWeb"
+delay_in_seconds = "0.0"
+
+[node name="Chiming" type="Node" parent="State/CompoundState/Stuck" unique_id=56036584]
+script = ExtResource("6_ff7yg")
+
+[node name="TryStruggle" type="Node" parent="State/CompoundState/Stuck/Chiming" unique_id=1550206866]
+script = ExtResource("7_3qfkw")
+to = NodePath("../../Struggling")
+event = &"Chimed"
+delay_in_seconds = "0.0"
+
+[node name="Escaping" type="Node" parent="State/CompoundState" unique_id=903659387]
+script = ExtResource("6_ff7yg")
+
+[node name="ToFleeing" type="Node" parent="State/CompoundState/Escaping" unique_id=604615600]
+script = ExtResource("7_3qfkw")
+to = NodePath("../../Fleeing")
+event = &"EscapedWeb"
+delay_in_seconds = "0.0"
+
+[connection signal="navigation_finished" from="NavAgent" to="." method="_on_nav_agent_navigation_finished"]
+[connection signal="state_entered" from="State/CompoundState/Lurking" to="." method="_on_lurking_state_entered"]
+[connection signal="state_entered" from="State/CompoundState/Fleeing" to="." method="_on_fleeing_state_entered"]
+[connection signal="state_entered" from="State/CompoundState/Stuck/Struggling" to="." method="_on_struggling_state_entered"]
