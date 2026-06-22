@@ -108,8 +108,8 @@ func _sound_map(note: String, global_postition: Vector2) -> void:
 		var player:= AudioStreamPlayer2D.new()
 		add_child(player)
 		player.stream = audio_stream
-		player.play()
 		player.position = global_postition
+		player.play()
 		player.finished.connect(player.queue_free)
 		
 func _ready() -> void:
