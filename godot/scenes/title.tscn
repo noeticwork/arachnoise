@@ -1,12 +1,11 @@
 [gd_scene format=3 uid="uid://8lu3to7ghsg8"]
 
-[ext_resource type="Texture2D" uid="uid://m1bmn5paa1di" path="res://assets/title_img.png" id="1_4ignj"]
+[ext_resource type="Texture2D" uid="uid://dwov6k21ag3xd" path="res://assets/title-screen-join.png" id="1_4ignj"]
 
 [node name="Title" type="Node2D" unique_id=1416946305]
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=153010064]
 offset_right = 1920.0
 offset_bottom = 1080.0
-scale = Vector2(1.3347871, 1.3347871)
 texture = ExtResource("1_4ignj")
 stretch_mode = 2

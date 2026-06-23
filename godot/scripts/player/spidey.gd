@@ -382,7 +382,7 @@ func _on_jumping_state_physics_processing(delta: float) -> void:
 	rightTap = Input.is_action_just_pressed("ui_right")
 	leftRelease = Input.is_action_just_released("ui_left")
 	rightRelease = Input.is_action_just_released("ui_right")
-	jumpTap = Input.is_action_just_pressed("jump")
+	jumpTap = mode_switching or Input.is_action_just_pressed("jump")
 	jumpRelease = mode_switching or Input.is_action_just_released("jump")
 	runHold = Input.is_action_pressed("run")
 	latchHold = Input.is_action_pressed("latch")
