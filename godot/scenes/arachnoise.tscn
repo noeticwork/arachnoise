@@ -714,12 +714,7 @@ position = Vector2(-1, -1442)
 [node name="Camera2D" type="Camera2D" parent="Game/Title" unique_id=1624204100]
 physics_interpolation_mode = 1
 top_level = true
-position = Vector2(1318, 731)
-zoom = Vector2(1.8, 1.8)
-limit_left = 0
-limit_top = 0
-limit_right = 2560
-limit_bottom = 1440
+position = Vector2(1280, 720)
 
 [node name="PhantomCameraHost" type="Node" parent="Game/Title/Camera2D" unique_id=1772150461]
 process_priority = 300
@@ -862,12 +857,7 @@ collision_layer = 1
 [node name="Camera" type="Camera2D" parent="Game/Spidey" unique_id=706635895]
 physics_interpolation_mode = 1
 top_level = true
-position = Vector2(1318, 731)
-zoom = Vector2(1.8, 1.8)
-limit_left = 0
-limit_top = 0
-limit_right = 2560
-limit_bottom = 1440
+position = Vector2(1280, 720)
 
 [node name="PhantomCameraHost" type="Node" parent="Game/Spidey/Camera" unique_id=85242314]
 process_priority = 300
@@ -927,6 +917,13 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = SubResource("GradientTexture2D_4tgpc")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PhantomCamera2D/CanvasLayer" unique_id=909841942]
+offset_left = 560.0
+offset_top = 1250.0
+offset_right = 1739.0
+offset_bottom = 1383.0
+scroll_following = true
 
 [node name="TitleCamera2D" type="Node2D" parent="." unique_id=1757548155 node_paths=PackedStringArray("follow_target")]
 top_level = true
