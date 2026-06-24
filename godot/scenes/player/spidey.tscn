@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dej0ennxt7r3" path="res://scripts/player/spidey.gd" id="1_vnujn"]
 [ext_resource type="Texture2D" uid="uid://ryj21ldgr7r6" path="res://assets/spideranim.png" id="2_vnujn"]
+[ext_resource type="AnimationLibrary" uid="uid://wllfk56u80xi" path="res://assets/player_anims.res" id="3_my27l"]
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="3_s6tvk"]
 [ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="4_6e28j"]
 [ext_resource type="Script" uid="uid://c1vp0ojjvaby1" path="res://addons/godot_state_charts/parallel_state.gd" id="4_wr2nf"]
@@ -287,6 +288,16 @@ scale = Vector2(0.9502735, 0.9502735)
 pivot_offset = Vector2(64, 54)
 texture = SubResource("GradientTexture2D_woxmh")
 
+[node name="JumpShadow" type="TextureRect" parent="ShadowNode" unique_id=1707234846]
+visible = false
+modulate = Color(1, 1, 1, 0.9254902)
+self_modulate = Color(0.324789, 0.21909785, 0.1184719, 0.5921569)
+offset_right = 64.0
+offset_bottom = 64.0
+scale = Vector2(0.9502735, 0.9502735)
+pivot_offset = Vector2(64, 54)
+texture = SubResource("GradientTexture2D_woxmh")
+
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=368742240]
 texture = ExtResource("2_vnujn")
 hframes = 3
@@ -302,6 +313,7 @@ shape = SubResource("CircleShape2D_bcyx4")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1122754271]
 libraries/ = SubResource("AnimationLibrary_nkwvm")
+libraries/player = ExtResource("3_my27l")
 playback_auto_capture_duration = 1.0
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=1641555617]
@@ -359,8 +371,12 @@ visible = false
 sprite_frames = SubResource("SpriteFrames_kshvn")
 animation = &"jump"
 
+[node name="ShadowPlayer" type="AnimationPlayer" parent="." unique_id=1290657366]
+libraries/player_anims = ExtResource("3_my27l")
+
 [connection signal="state_entered" from="Gestalt/ParallelState/Interacting/Web" to="." method="_on_web_state_entered"]
 [connection signal="state_input" from="Gestalt/ParallelState/Interacting/Web" to="." method="_on_web_state_input"]
 [connection signal="state_physics_processing" from="Gestalt/ParallelState/Interacting/Web" to="." method="_on_web_state_physics_processing"]
 [connection signal="state_entered" from="Gestalt/ParallelState/Interacting/Jumping" to="." method="_on_jumping_state_entered"]
 [connection signal="state_physics_processing" from="Gestalt/ParallelState/Interacting/Jumping" to="." method="_on_jumping_state_physics_processing"]
+[connection signal="state_processing" from="Gestalt/ParallelState/Interacting/Jumping" to="." method="_on_jumping_state_processing"]

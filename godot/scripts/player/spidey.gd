@@ -294,7 +294,7 @@ func _updateData():
 	
 	
 
-func _process(_delta):
+func _on_jumping_state_processing(delta: float) -> void:
 	#INFO animations
 	#directions
 	if is_on_wall() and !_is_on_floor() and latch and wallLatching and ((wallLatchingModifer and latchHold) or !wallLatchingModifer):
@@ -332,10 +332,14 @@ func _process(_delta):
 	if velocity.y < 0 and jump and !dashing:
 		anim.speed_scale = 1
 		anim.play("jump")
+		$ShadowPlayer.play("player_anims/jump_shadow_%d" % (jumpCount+1))
+		print("Playing ", "player_anims/jump_shadow_%d" % (jumpCount+1))
 		
 	if velocity.y > 40 and falling and !dashing and !crouching:
 		anim.speed_scale = 1
 		anim.play("falling")
+		$ShadowPlayer.play("player_anims/jump_shadow_1")
+		print("Playing ", "player_anims/jump_shadow_1")
 		
 	if latch and slide:
 		#wall slide and latch
@@ -383,12 +387,12 @@ func _on_jumping_state_physics_processing(delta: float) -> void:
 	leftRelease = Input.is_action_just_released("ui_left")
 	rightRelease = Input.is_action_just_released("ui_right")
 	jumpTap = mode_switching or Input.is_action_just_pressed("jump")
-	jumpRelease = mode_switching or Input.is_action_just_released("jump")
+	jumpRelease =  Input.is_action_just_released("jump")
 	runHold = Input.is_action_pressed("run")
 	latchHold = Input.is_action_pressed("latch")
 	dashTap = Input.is_action_just_pressed("dash")
 	rollTap = Input.is_action_just_pressed("roll")
-	downTap = Input.is_action_just_pressed("down")
+	downTap = Input.is_action_just_pressed("ui_down")
 	twirlTap = Input.is_action_just_pressed("twirl")
 	
 	if Input.is_action_just_pressed("web_mode"):
@@ -645,15 +649,18 @@ func _coyoteTime():
 	coyoteActive = false
 	jumpCount += -1
 
-	
+		
 func _jump():
+	print("Jumpin...")
 	if jumpCount > 0:
 		velocity.y = -jumpMagnitude
 		jumpCount += -1
 		jumpWasPressed = false
-		$AnimationPlayer.play_with_capture("jump_shadow_%d" % (jumps - jumpCount), 0.1)
+		$AnimationPlayer.play("jump_shadow_%d" % (jumpCount+1))
+		print("Playing ", "jump_shadow_%d" % (jumpCount+1))
 		
 func _wallJump():
+	print("wallJumpin...")
 	var horizontalWallKick = abs(jumpMagnitude * cos(wallKickAngle * (PI / 180)))
 	var verticalWallKick = abs(jumpMagnitude * sin(wallKickAngle * (PI / 180)))
 	velocity.y = -verticalWallKick
@@ -730,12 +737,18 @@ func _on_web_state_input(event: InputEvent) -> void:
 func _on_web_state_entered() -> void:
 	$Sprite2D.show()
 	$AnimationPlayer.play_with_capture("RESET")
+	$ShadowPlayer.play_with_capture("RESET")
+	$ShadowNode/JumpShadow.hide()
+	$ShadowNode/Shadow.show()
 	$AnimatedSprite2D.hide()
 	collision_layer = 1
 
 
 func _on_jumping_state_entered() -> void:
-	$AnimationPlayer.play_with_capture("jump_shadow", 0)
 	$AnimatedSprite2D.show()
+	$ShadowNode/JumpShadow.show()
+	$ShadowNode/Shadow.hide()
+
+	$ShadowPlayer.play_with_capture("jump_shadow_1", 0.2)
 	$Sprite2D.hide()
 	collision_layer = 2

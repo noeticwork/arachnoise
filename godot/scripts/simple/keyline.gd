@@ -122,7 +122,7 @@ func _randomize() -> void:
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 	
 func _input(event: InputEvent) -> void:
@@ -153,32 +153,30 @@ func _play_note(num: int, global_postition: Vector2) -> void:
 		#pass
 
 
-func _on_anchor_body_entered(body: Node2D) -> void:
+func _on_anchor_body_entered(_body: Node2D) -> void:
 	_play_base_note(%anchor.global_position)
- # Replace with function body.
 
 
-func _on_i_body_entered(body: Node2D) -> void:
+func _on_i_body_entered(_body: Node2D) -> void:
 	_play_note(1, %i.global_position)
 
-func _on_ii_body_entered(body: Node2D) -> void:
+func _on_ii_body_entered(_body: Node2D) -> void:
 	_play_note(2, %ii.global_position)
 
-func _on_iii_body_entered(body: Node2D) -> void:
+func _on_iii_body_entered(_body: Node2D) -> void:
 	_play_note(3, %iii.global_position)
 
-func _on_iv_body_entered(body: Node2D) -> void:
+func _on_iv_body_entered(_body: Node2D) -> void:
 	_play_note(4, %iv.global_position)
 
-func _on_v_body_entered(body: Node2D) -> void:
+func _on_v_body_entered(_body: Node2D) -> void:
 	_play_note(5, %v.global_position)
 
-func _on_vi_body_entered(body: Node2D) -> void:
+func _on_vi_body_entered(_body: Node2D) -> void:
 	_play_note(6, %vi.global_position)
 
-func _on_vii_body_entered(body: Node2D) -> void:
+func _on_vii_body_entered(_body: Node2D) -> void:
 	_play_note(7, %vii.global_position)
-
 
 func _on_end_anchor_body_entered(body: Node2D) -> void:
 	pass
