@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://43tsl7svsk3w"]
+
+[ext_resource type="Script" uid="uid://0dn7o21o6apf" path="res://addons/rope2d/wind_area2d.gd" id="1_ogr0l"]
+[ext_resource type="Script" uid="uid://d6l4h8ybcayp" path="res://scenes/web_test.gd" id="1_u3w7r"]
+[ext_resource type="Script" uid="uid://e4erd0bi0dy6" path="res://addons/rope2d/rope2d.gd" id="2_6w84w"]
+[ext_resource type="Script" uid="uid://bfxcw3p1krtyi" path="res://addons/rope2d/rope_piece_parameters.gd" id="4_s5jjl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ogr0l"]
+size = Vector2(123.7652, 147.56776)
+
+[sub_resource type="Resource" id="Resource_s5jjl"]
+script = ExtResource("4_s5jjl")
+freeze = true
+metadata/_custom_type_script = "uid://bfxcw3p1krtyi"
+
+[sub_resource type="Resource" id="Resource_ut04k"]
+script = ExtResource("4_s5jjl")
+freeze = true
+metadata/_custom_type_script = "uid://bfxcw3p1krtyi"
+
+[node name="WebTest" type="Node2D" unique_id=870211888]
+script = ExtResource("1_u3w7r")
+
+[node name="WindArea2D" type="Area2D" parent="." unique_id=1783636958]
+position = Vector2(46, 43)
+scale = Vector2(4.087366, 2.5805466)
+script = ExtResource("1_ogr0l")
+pulse_mode = 1
+speed = Vector2(0.1, 0.1)
+metadata/_custom_type_script = "uid://0dn7o21o6apf"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WindArea2D" unique_id=2071513869]
+position = Vector2(48.1973, 68.97763)
+scale = Vector2(0.9999998, 0.9999998)
+shape = SubResource("RectangleShape2D_ogr0l")
+
+[node name="Node2D" type="Node2D" parent="WindArea2D" unique_id=1504297912]
+
+[node name="Rope2D" type="Node2D" parent="WindArea2D/Node2D" unique_id=1756673964 node_paths=PackedStringArray("ending_anchor_mount_point")]
+position = Vector2(11.254194, 30.22615)
+scale = Vector2(0.99999994, 0.99999994)
+script = ExtResource("2_6w84w")
+rope_starting_anchor_parameters = SubResource("Resource_s5jjl")
+rope_ending_anchor_parameters = SubResource("Resource_ut04k")
+ready_action = 2
+ending_anchor_mount_point = NodePath("")
+metadata/_custom_type_script = "uid://e4erd0bi0dy6"
+
+[node name="Target" type="Node2D" parent="WindArea2D/Node2D" unique_id=1136596123]
+position = Vector2(911.2541, 30.22615)
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="Node2D2" type="Node2D" parent="WindArea2D" unique_id=1968877339]
+
+[node name="Rope2D2" type="Node2D" parent="WindArea2D/Node2D2" unique_id=1196948691 node_paths=PackedStringArray("ending_anchor_mount_point")]
+position = Vector2(11.25419, 80.21556)
+scale = Vector2(0.24465628, 0.38751468)
+script = ExtResource("2_6w84w")
+rope_starting_anchor_parameters = SubResource("Resource_s5jjl")
+rope_ending_anchor_parameters = SubResource("Resource_ut04k")
+ready_action = 2
+ending_anchor_mount_point = NodePath("")
+metadata/_custom_type_script = "uid://e4erd0bi0dy6"
+
+[node name="Target2" type="Node2D" parent="WindArea2D/Node2D2" unique_id=1981074362]
+position = Vector2(73.641556, 119.74208)
+scale = Vector2(0.24465631, 0.38751474)
+
+[node name="Node2D3" type="Node2D" parent="WindArea2D" unique_id=97879768]
+
+[node name="Rope2D3" type="Node2D" parent="WindArea2D/Node2D3" unique_id=429594526 node_paths=PackedStringArray("ending_anchor_mount_point")]
+position = Vector2(82.69383, 23.638397)
+scale = Vector2(0.24465628, 0.38751468)
+script = ExtResource("2_6w84w")
+rope_starting_anchor_parameters = SubResource("Resource_s5jjl")
+rope_ending_anchor_parameters = SubResource("Resource_ut04k")
+ready_action = 2
+ending_anchor_mount_point = NodePath("")
+metadata/_custom_type_script = "uid://e4erd0bi0dy6"
+
+[node name="Target3" type="Node2D" parent="WindArea2D/Node2D3" unique_id=1555175838]
+position = Vector2(25.1996, 109.66671)
+scale = Vector2(0.2446563, 0.3875147)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=155189728]
+position = Vector2(559, 321)
+zoom = Vector2(2, 2)

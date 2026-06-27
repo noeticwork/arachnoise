@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://ce5iflcxraf4k" path="res://assets/keylines4.png" id="11_c8j4q"]
 [ext_resource type="AudioStream" uid="uid://c6k2mrfpx511g" path="res://assets/audio/Pads/Abmaj.wav" id="12_0mevm"]
 [ext_resource type="Texture2D" uid="uid://dtj8brjd2lsfb" path="res://assets/keylines5.png" id="12_hflis"]
+[ext_resource type="Script" uid="uid://dvxegqp0cf77n" path="res://addons/ropesim/RopeInteraction.gd" id="12_lda8q"]
 [ext_resource type="Texture2D" uid="uid://14xux7b2lxcs" path="res://assets/keylines6.png" id="13_n13yo"]
 [ext_resource type="AudioStream" uid="uid://v1gq0r8xyk4f" path="res://assets/audio/Pads/Amaj.wav" id="13_w2501"]
 [ext_resource type="AudioStream" uid="uid://cjqthqo7dbii6" path="res://assets/audio/Pads/Gbmaj.wav" id="14_jsoai"]
@@ -38,6 +39,7 @@
 [ext_resource type="AudioStream" uid="uid://2qwhp3i6ipm5" path="res://assets/audio/SFX/AMBIENCE_Environment_Loop.wav" id="23_cqhyb"]
 [ext_resource type="PackedScene" uid="uid://8lu3to7ghsg8" path="res://scenes/title.tscn" id="23_k33hi"]
 [ext_resource type="AudioStream" uid="uid://2gaj2mcdriaw" path="res://assets/audio/Pads/Fmaj.wav" id="23_suycs"]
+[ext_resource type="Script" uid="uid://b2shq2gjd4fvt" path="res://addons/ropesim/Rope.gd" id="24_4tgpc"]
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="25_jsoai"]
 [ext_resource type="Script" uid="uid://jk2jm1g6q853" path="res://addons/godot_state_charts/compound_state.gd" id="26_bisgb"]
 [ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="27_y5ctq"]
@@ -300,6 +302,15 @@ _data = {
 &"RESET": SubResource("Animation_joorw"),
 &"warble": SubResource("Animation_3mrqo")
 }
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_1ojfu"]
+noise_type = 3
+
+[sub_resource type="RopeWindParameters" id="RopeWindParameters_4uwls"]
+direction = 2.0978858
+wind_strength = 0.05
+oscillation_strength = 0.1
+noise = SubResource("FastNoiseLite_1ojfu")
 
 [sub_resource type="Animation" id="Animation_i7wek"]
 length = 0.001
@@ -615,7 +626,7 @@ _data = {
 
 [sub_resource type="Resource" id="Resource_lvtmh"]
 script = ExtResource("10_gwjdr")
-duration = 3.0
+duration = 2.5
 transition = 7
 
 [sub_resource type="Gradient" id="Gradient_si8k2"]
@@ -715,6 +726,10 @@ position = Vector2(-1, -1442)
 physics_interpolation_mode = 1
 top_level = true
 position = Vector2(1280, 720)
+limit_left = 0
+limit_top = 0
+limit_right = 2560
+limit_bottom = 1440
 
 [node name="PhantomCameraHost" type="Node" parent="Game/Title/Camera2D" unique_id=1772150461]
 process_priority = 300
@@ -756,6 +771,25 @@ rotation = -0.07602821
 scale = Vector2(0.9, 0.9)
 line_texture = ExtResource("8_4mxpu")
 key = "B"
+
+[node name="Rope" type="Node2D" parent="Game/Web/Keylines/1" unique_id=1713257425]
+position = Vector2(338.33005, -96.804016)
+rotation = 0.076028205
+scale = Vector2(1.111111, 1.111111)
+script = ExtResource("24_4tgpc")
+num_segments = 50
+rope_length = 600.0
+stiffness = 1.0
+gravity = 20.0
+wind = SubResource("RopeWindParameters_4uwls")
+damping = 20.0
+max_endpoint_distance = 800.0
+resolve_to_begin = true
+render_debug = true
+enable_collisions = true
+resolve_collisions_while_constraining = true
+collision_mask = 3
+metadata/_custom_type_script = "uid://b2shq2gjd4fvt"
 
 [node name="2" parent="Game/Web/Keylines" unique_id=958637222 instance=ExtResource("4_sb48q")]
 position = Vector2(1169, 854.00006)
@@ -850,7 +884,7 @@ polygon = PackedVector2Array(564, 186, 237, 124, -925, 14, 8.516629, 1442.978, 2
 one_way_collision = true
 
 [node name="Spidey" parent="Game" unique_id=11989907 instance=ExtResource("5_t88pq")]
-position = Vector2(1318, 731)
+position = Vector2(981, 679)
 scale = Vector2(2, 2)
 collision_layer = 1
 
@@ -858,12 +892,25 @@ collision_layer = 1
 physics_interpolation_mode = 1
 top_level = true
 position = Vector2(1280, 720)
+limit_left = 0
+limit_top = 0
+limit_right = 2560
+limit_bottom = 1440
 
 [node name="PhantomCameraHost" type="Node" parent="Game/Spidey/Camera" unique_id=85242314]
 process_priority = 300
 process_physics_priority = 300
 script = ExtResource("8_yx171")
 metadata/_custom_type_script = "uid://bd046eokvcnu2"
+
+[node name="RopeInteraction" type="Node" parent="Game/Spidey" unique_id=1421113998 node_paths=PackedStringArray("target_node", "input_node_override", "rope")]
+script = ExtResource("12_lda8q")
+target_node = NodePath("..")
+input_node_override = NodePath("..")
+rope = NodePath("../../Web/Keylines/1/Rope")
+strength = 1.0
+offset = Vector2(-8, -8)
+metadata/_custom_type_script = "uid://dvxegqp0cf77n"
 
 [node name="Prey" type="Node2D" parent="Game" unique_id=251574412]
 unique_name_in_owner = true
@@ -879,6 +926,8 @@ playback_default_blend_time = 0.2
 [node name="PreyContainer" type="Node2D" parent="Game/Prey" unique_id=786246001]
 unique_name_in_owner = true
 
+[node name="Test" type="Node2D" parent="Game" unique_id=503509310]
+
 [node name="Specular" type="Parallax2D" parent="." unique_id=1039060562]
 scroll_scale = Vector2(1.2, 1.2)
 
@@ -889,7 +938,7 @@ autoplay = true
 
 [node name="PhantomCamera2D" type="Node2D" parent="." unique_id=1378882844 node_paths=PackedStringArray("follow_target")]
 top_level = true
-position = Vector2(1318, 731)
+position = Vector2(981, 679)
 script = ExtResource("9_yhmtn")
 priority = 1
 follow_mode = 1

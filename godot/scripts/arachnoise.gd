@@ -93,7 +93,19 @@ func _printt(args) -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action("refresh_random"):
 		get_tree().reload_current_scene()
+	if event.is_action("poot"):
+		_poot_web($"Game/Web/Keylines/7/Anchors/vii", $Game/Spidey/CollisionShape2D2)
 
+
+func _poot_web(starting_anchor: Node2D, ending_anchor: Node2D):
+	var rope: Rope2D = Rope2D.new()
+	rope.ending_anchor_mount_point = starting_anchor
+	rope.ready_action = Rope2D.ReadyAction.CREATE_TO_MOUNT
+	ending_anchor.add_child(rope)
+	var drawer := RopeDrawSimpleLine.new(rope)
+	rope.add_child(drawer)
+	#drawers.push_back(drawer)
+	
 func _new_prey() -> Prey: 
 	var prey: = Mozzie.instantiate()
 	return prey

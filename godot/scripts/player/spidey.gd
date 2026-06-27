@@ -282,13 +282,15 @@ func _on_jumping_state_processing(_delta: float) -> void:
 	if velocity.y < 0 and jump and !dashing:
 		anim.speed_scale = 1
 		anim.play("jump")
-		$ShadowPlayer.play("player_anims/jump_shadow_%d" % (jumpCount + 1))
+		$ShadowPlayer.play_with_capture("jump_%d" % (jumps - jumpCount), 0.2)
 
 	if velocity.y > 40 and falling and !dashing and !crouching:
 		anim.speed_scale = 1
 		anim.play("falling")
 		$AnimatedSprite2D.flip_v = false
-		$ShadowPlayer.play("player_anims/jump_shadow_1")
+		$ShadowPlayer.play_with_capture("jump_1", 0.2)
+		if Input.is_action_just_pressed("jump") or Input.is_action_just_released("jump"):
+			$Gestalt.send_event("WebMode")
 
 	if latch and slide:
 		if latched and !wasLatched:
@@ -586,7 +588,7 @@ func _jump():
 		velocity.y = -jumpMagnitude
 		jumpCount += -1
 		jumpWasPressed = false
-		$AnimationPlayer.play("jump_shadow_%d" % (jumpCount + 1))
+		#$AnimationPlayer.play("jump_shadow_%d" % (jumpCount + 1))
 
 func _wallJump():
 	var horizontalWallKick = abs(jumpMagnitude * cos(wallKickAngle * (PI / 180)))
@@ -653,12 +655,12 @@ func _on_web_state_input(event: InputEvent) -> void:
 func _on_web_state_entered() -> void:
 	$AnimationPlayer.play_with_capture("RESET")
 	$ShadowPlayer.play_with_capture("RESET")
-	$ShadowNode/JumpShadow.hide()
-	$ShadowNode/Shadow.show()
+	#$ShadowNode/JumpShadow.hide()
+	#$ShadowNode/Shadow.show()
 	collision_layer = 1
 
 func _on_jumping_state_entered() -> void:
-	$ShadowNode/JumpShadow.show()
-	$ShadowNode/Shadow.hide()
-	$ShadowPlayer.play_with_capture("jump_shadow_1", 0.2)
+	#$ShadowNode/JumpShadow.show()
+	#$ShadowNode/Shadow.hide()
+	$ShadowPlayer.play_with_capture("jump_1", 0.2)
 	collision_layer = 2
