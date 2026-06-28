@@ -8,6 +8,9 @@
 [ext_resource type="Script" uid="uid://bkyn6gsfgjmwm" path="res://addons/simple_shadow_2d_1.0/addons/simple_shadow_2d/shadow_2d.gd" id="6_y6ddq"]
 [ext_resource type="Script" uid="uid://1xluodkpnre3" path="res://addons/ropesim/RopeHandle.gd" id="8_y6ddq"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_lypgq"]
+radius = 42.0119
+
 [sub_resource type="Curve2D" id="Curve2D_cektt"]
 
 [sub_resource type="Resource" id="Resource_u8njm"]
@@ -35,6 +38,9 @@ height = 77
 fill = 1
 fill_from = Vector2(0.50676084, 0.49684495)
 fill_to = Vector2(0.45836672, 0)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u8njm"]
+radius = 38.013157
 
 [sub_resource type="Curve" id="Curve_y6ddq"]
 _data = [Vector2(0, 0.094987154), 0.0, 3.1216388, 0, 1, Vector2(0.13527396, 0.5172636), 0.0, 0.0, 0, 0, Vector2(0.85402393, 0.6840422), 0.0, 0.0, 0, 0, Vector2(1, 0.27868056), -2.776905, 0.0, 1, 0]
@@ -1518,6 +1524,14 @@ static func set_ellipse_points(curve : Curve2D, size: Vector2, offset := Vector2
 	curve.changed.emit()
 "
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_y6ddq"]
+radius = 25.079872
+
+[sub_resource type="Curve2D" id="Curve2D_y6ddq"]
+
+[sub_resource type="Resource" id="Resource_lypgq"]
+script = ExtResource("3_xtfs4")
+
 [sub_resource type="Curve2D" id="Curve2D_u8njm"]
 resource_local_to_scene = true
 _data = {
@@ -1529,12 +1543,20 @@ point_count = 8
 resource_local_to_scene = true
 script = ExtResource("3_xtfs4")
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u8njm"]
+radius = 7.0
+height = 16.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y6ddq"]
+radius = 7.0
+height = 16.0
+
 [sub_resource type="Animation" id="Animation_y6ddq"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Node2D/Head:rotation")
+tracks/0/path = NodePath("Spider/HeadBdy/Head:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -1546,7 +1568,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Node2D/Head:position")
+tracks/1/path = NodePath("Spider/HeadBdy/Head:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -1556,13 +1578,17 @@ tracks/1/keys = {
 "values": [Vector2(-1, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_lypgq"]
+resource_name = "body_rocking"
+
 [sub_resource type="Animation" id="Animation_u8njm"]
 resource_name = "head_shake"
 length = 2.1
+loop_mode = 2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Node2D/Head:rotation")
+tracks/0/path = NodePath("Spider/HeadBdy/Head:rotation")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -1574,7 +1600,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Node2D/Head:position")
+tracks/1/path = NodePath("Spider/HeadBdy/Head:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -1587,39 +1613,58 @@ tracks/1/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_y6ddq"]
 _data = {
 &"RESET": SubResource("Animation_y6ddq"),
+&"body_rocking": SubResource("Animation_lypgq"),
 &"head_shake": SubResource("Animation_u8njm")
 }
 
-[node name="VectorSpider" type="Node2D" unique_id=605656563]
+[node name="VectorSpider" type="CharacterBody2D" unique_id=1599693744]
 
-[node name="Node2D" type="Node2D" parent="." unique_id=1310144381]
-position = Vector2(6, 0)
+[node name="Spider" type="Node2D" parent="." unique_id=1310144381]
+position = Vector2(4, 8)
 
-[node name="SpirderShapes" type="Node2D" parent="Node2D" unique_id=1654315418]
+[node name="StaticBody2D" type="StaticBody2D" parent="Spider" unique_id=1590019568]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spider/StaticBody2D" unique_id=1411373749]
+visible = false
+position = Vector2(-5, -10)
+shape = SubResource("CircleShape2D_lypgq")
+
+[node name="DampedSpringJoint2D2" type="DampedSpringJoint2D" parent="Spider" unique_id=1528117297]
+position = Vector2(-5, -12)
+node_a = NodePath("../StaticBody2D")
+node_b = NodePath("../ThoraxBdy")
+bias = 0.518
+length = 10.0
+stiffness = 40.0
+
+[node name="ThoraxBdy" type="RigidBody2D" parent="Spider" unique_id=1365440727]
+mass = 0.01
+gravity_scale = 0.0
+
+[node name="SpiderShapes" type="Node2D" parent="Spider/ThoraxBdy" unique_id=1654315418]
 position = Vector2(-1, 0)
 script = ExtResource("1_4yd52")
 curve = SubResource("Curve2D_cektt")
 arc_list = SubResource("Resource_u8njm")
 metadata/_custom_type_script = "uid://de3jpss66xjfh"
-metadata/_hover_closest_point_on_curve_ = Object(Object,"script":Resource("res://addons/curved_lines_2d/closest_point_on_curve_meta.gd"),"before_segment":1,"point_position":Vector2(4.8969116, 57.170162),"local_point_position":Vector2(4.8969116, 57.170162),"segment_rotation":0.0)
+metadata/_hover_closest_point_on_curve_ = Object(Object,"script":Resource("res://addons/curved_lines_2d/closest_point_on_curve_meta.gd"),"before_segment":1,"point_position":Vector2(-63.615936, -16.807587),"local_point_position":Vector2(-66.61594, -24.807587),"segment_rotation":0.0)
 
 
-[node name="BodyBase" type="Node2D" parent="Node2D/SpirderShapes" unique_id=1873339868 node_paths=PackedStringArray("polygon")]
+[node name="BodyBase" type="Node2D" parent="Spider/ThoraxBdy/SpiderShapes" unique_id=1873339868 node_paths=PackedStringArray("polygon")]
 position = Vector2(-5, 1)
 script = ExtResource("1_4yd52")
 polygon = NodePath("Fill")
 curve = SubResource("Curve2D_xtfs4")
 update_curve_at_runtime = true
 arc_list = SubResource("Resource_cektt")
-metadata/_select_hint_ = true
 
-[node name="Fill" type="Polygon2D" parent="Node2D/SpirderShapes/BodyBase" unique_id=1041292798]
+[node name="Fill" type="Polygon2D" parent="Spider/ThoraxBdy/SpiderShapes/BodyBase" unique_id=1041292798]
 texture = SubResource("GradientTexture2D_lypgq")
 texture_offset = Vector2(40.153267, 51.330368)
 polygon = PackedVector2Array(29.32325, 20.747677, 33.795994, 16.111506, 35.80373, 13.46969, 37.62043, 10.52034, 39.21714, 7.1946683, 40.564907, 3.423891, 41.634773, -0.86077857, 42.39778, -5.7281265, 42.800045, -10.814499, 42.809513, -15.688939, 42.43001, -20.319271, 41.665363, -24.673328, 40.519382, -28.718933, 38.995884, -32.42392, 37.098694, -35.75612, 36.011158, -37.27236, 34.831627, -38.683346, 30.549398, -42.111225, 26.436775, -44.83742, 22.437895, -46.948925, 18.496899, -48.532707, 14.557923, -49.67576, 10.565106, -50.465065, 2.1944962, -51.330368, -5.944191, -50.573498, -14.044966, -48.90378, -17.858776, -47.703377, -21.39628, -46.246895, -24.568535, -44.52504, -25.989895, -43.561695, -27.28659, -42.528526, -28.991764, -40.840096, -30.60926, -38.99433, -33.54796, -34.8804, -36.03615, -30.28593, -38.00731, -25.310137, -39.3949, -20.052217, -40.1324, -14.611378, -40.153267, -9.086823, -39.874176, -6.324155, -39.390984, -3.5777588, -39.179756, -1.3972293, -38.740044, 0.81978774, -38.080006, 3.0910249, -37.207775, 5.4342155, -34.859333, 10.407387, -31.759888, 15.881165, -29.101955, 18.315516, -26.254713, 20.400017, -23.154276, 22.139866, -19.736774, 23.540272, -15.938324, 24.606436, -11.695047, 25.34356, -1.6184998, 25.851501, 11.335213, 24.998674, 21.656794, 23.45662, 26.06652, 22.267843, 27.869585, 21.551662, 28.643913, 21.160957)
 metadata/_edit_lock_ = true
 
-[node name="Shadow2D" type="Node2D" parent="Node2D/SpirderShapes" unique_id=852294112]
+[node name="Shadow2D" type="Node2D" parent="Spider/ThoraxBdy/SpiderShapes" unique_id=852294112]
 show_behind_parent = true
 texture_filter = 1
 position = Vector2(-5, 28)
@@ -1630,15 +1675,22 @@ color = Color(0.09803922, 0.09803922, 0.09803922, 0.3137255)
 shadow_steps = 3
 metadata/_custom_type_script = "uid://bkyn6gsfgjmwm"
 
-[node name="Legs" type="Node2D" parent="Node2D" unique_id=1329462272]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spider/ThoraxBdy" unique_id=1535254907]
+visible = false
+position = Vector2(-4, -12)
+shape = SubResource("CircleShape2D_u8njm")
+
+[node name="Legs" type="Node2D" parent="Spider" unique_id=1329462272]
 position = Vector2(-2, -1)
 
-[node name="RLEGS" type="Node2D" parent="Node2D/Legs" unique_id=1736836376]
+[node name="RLEGS" type="RigidBody2D" parent="Spider/Legs" unique_id=1469863395]
+mass = 0.001
+gravity_scale = 0.0
 
-[node name="Leg1" type="Node2D" parent="Node2D/Legs/RLEGS" unique_id=535259402 groups=["legs"]]
+[node name="Leg1" type="Node2D" parent="Spider/Legs/RLEGS" unique_id=535259402 groups=["legs"]]
 position = Vector2(-43, 5)
 
-[node name="Rope" type="Node2D" parent="Node2D/Legs/RLEGS/Leg1" unique_id=729620765]
+[node name="Rope" type="Node2D" parent="Spider/Legs/RLEGS/Leg1" unique_id=729620765]
 position = Vector2(74, -39)
 script = ExtResource("5_xtfs4")
 num_segments = 4
@@ -1649,8 +1701,8 @@ gravity_direction = Vector2(0, -2)
 render_line = false
 metadata/_custom_type_script = "uid://b2shq2gjd4fvt"
 
-[node name="RopeRendererLine2D" type="Line2D" parent="Node2D/Legs/RLEGS/Leg1/Rope" unique_id=1157752801]
-points = PackedVector2Array(0, 0, 12.336807, -3.015522, 24.13787, 5.3729496, 27.420113, 21.251251, 27.032146, 27.92482)
+[node name="RopeRendererLine2D" type="Line2D" parent="Spider/Legs/RLEGS/Leg1/Rope" unique_id=1157752801]
+points = PackedVector2Array(0, 0, 11.479126, -5.401699, 25.596775, -2.2921543, 29.92667, 13.305099, 29.041447, 19.931063)
 width = 8.0
 width_curve = SubResource("Curve_u8njm")
 default_color = Color(0.13725491, 0.16862746, 0.26666668, 1)
@@ -1660,10 +1712,10 @@ begin_cap_mode = 2
 script = ExtResource("6_cektt")
 metadata/_custom_type_script = "uid://dfppmnngy2wx4"
 
-[node name="Leg2" type="Node2D" parent="Node2D/Legs/RLEGS" unique_id=617669821 groups=["legs"]]
+[node name="Leg2" type="Node2D" parent="Spider/Legs/RLEGS" unique_id=617669821 groups=["legs"]]
 position = Vector2(-39, 24)
 
-[node name="Rope" type="Node2D" parent="Node2D/Legs/RLEGS/Leg2" unique_id=1419629516]
+[node name="Rope" type="Node2D" parent="Spider/Legs/RLEGS/Leg2" unique_id=1419629516]
 position = Vector2(73, -40)
 script = ExtResource("5_xtfs4")
 num_segments = 4
@@ -1674,8 +1726,8 @@ gravity_direction = Vector2(0, -2)
 render_line = false
 metadata/_custom_type_script = "uid://b2shq2gjd4fvt"
 
-[node name="RopeRendererLine2D" type="Line2D" parent="Node2D/Legs/RLEGS/Leg2/Rope" unique_id=148454519]
-points = PackedVector2Array(0, 0, 13.961433, -6.062292, 28.81884, 2.8936205, 28.521698, 22.317142, 26.039848, 29.945362)
+[node name="RopeRendererLine2D" type="Line2D" parent="Spider/Legs/RLEGS/Leg2/Rope" unique_id=148454519]
+points = PackedVector2Array(0, 0, 13.075951, -7.7853336, 30.185143, -4.9427624, 30.921371, 14.462304, 28.043655, 21.950165)
 width = 8.0
 width_curve = SubResource("Curve_u8njm")
 default_color = Color(0.13725491, 0.16862746, 0.26666668, 1)
@@ -1685,10 +1737,10 @@ begin_cap_mode = 2
 script = ExtResource("6_cektt")
 metadata/_custom_type_script = "uid://dfppmnngy2wx4"
 
-[node name="Leg3" type="Node2D" parent="Node2D/Legs/RLEGS" unique_id=1437294771 groups=["legs"]]
+[node name="Leg3" type="Node2D" parent="Spider/Legs/RLEGS" unique_id=1437294771 groups=["legs"]]
 position = Vector2(-37, 43)
 
-[node name="Rope" type="Node2D" parent="Node2D/Legs/RLEGS/Leg3" unique_id=1616884471]
+[node name="Rope" type="Node2D" parent="Spider/Legs/RLEGS/Leg3" unique_id=1616884471]
 position = Vector2(72, -40)
 script = ExtResource("5_xtfs4")
 num_segments = 4
@@ -1700,8 +1752,8 @@ damping = 20.0
 render_line = false
 metadata/_custom_type_script = "uid://b2shq2gjd4fvt"
 
-[node name="RopeRendererLine2D" type="Line2D" parent="Node2D/Legs/RLEGS/Leg3/Rope" unique_id=307659669]
-points = PackedVector2Array(0, 0, 10.698963, -6.811866, 22.042824, 2.1552281, 20.905102, 18.308546, 19.136223, 24.755104)
+[node name="RopeRendererLine2D" type="Line2D" parent="Spider/Legs/RLEGS/Leg3/Rope" unique_id=307659669]
+points = PackedVector2Array(0, 0, 9.692043, -8.178827, 24.140827, -7.823107, 26.376083, 8.205027, 25.125675, 14.771875)
 width = 9.0
 width_curve = SubResource("Curve_u8njm")
 default_color = Color(0.13725491, 0.16862746, 0.26666668, 1)
@@ -1711,10 +1763,10 @@ begin_cap_mode = 2
 script = ExtResource("6_cektt")
 metadata/_custom_type_script = "uid://dfppmnngy2wx4"
 
-[node name="Leg4" type="Node2D" parent="Node2D/Legs/RLEGS" unique_id=204978775 groups=["legs"]]
+[node name="Leg4" type="Node2D" parent="Spider/Legs/RLEGS" unique_id=204978775 groups=["legs"]]
 position = Vector2(-48, 61)
 
-[node name="Rope" type="Node2D" parent="Node2D/Legs/RLEGS/Leg4" unique_id=1988793406]
+[node name="Rope" type="Node2D" parent="Spider/Legs/RLEGS/Leg4" unique_id=1988793406]
 position = Vector2(72, -40)
 script = ExtResource("5_xtfs4")
 num_segments = 4
@@ -1726,8 +1778,8 @@ damping = 20.0
 render_line = false
 metadata/_custom_type_script = "uid://b2shq2gjd4fvt"
 
-[node name="RopeRendererLine2D" type="Line2D" parent="Node2D/Legs/RLEGS/Leg4/Rope" unique_id=1345140934]
-points = PackedVector2Array(0, 0, 9.973183, -1.9612522, 16.756565, 7.471941, 18.225666, 20.396072, 18.072266, 25.741737)
+[node name="RopeRendererLine2D" type="Line2D" parent="Spider/Legs/RLEGS/Leg4/Rope" unique_id=1345140934]
+points = PackedVector2Array(0, 0, 8.675232, -5.266945, 19.179794, -0.42189217, 20.71313, 12.442413, 20.108131, 17.75595)
 width = 9.0
 width_curve = SubResource("Curve_u8njm")
 default_color = Color(0.13725491, 0.16862746, 0.26666668, 1)
@@ -1737,13 +1789,14 @@ begin_cap_mode = 2
 script = ExtResource("6_cektt")
 metadata/_custom_type_script = "uid://dfppmnngy2wx4"
 
-[node name="LLEGS" type="Node2D" parent="Node2D/Legs" unique_id=476231948]
+[node name="LLEGS" type="RigidBody2D" parent="Spider/Legs" unique_id=1039561816]
 position = Vector2(-73, 3)
+mass = 0.001
 
-[node name="Leg1" type="Node2D" parent="Node2D/Legs/LLEGS" unique_id=126759761 groups=["legs"]]
+[node name="Leg1" type="Node2D" parent="Spider/Legs/LLEGS" unique_id=126759761 groups=["legs"]]
 position = Vector2(-36, 5)
 
-[node name="Rope" type="Node2D" parent="Node2D/Legs/LLEGS/Leg1" unique_id=1189761797]
+[node name="Rope" type="Node2D" parent="Spider/Legs/LLEGS/Leg1" unique_id=1189761797]
 position = Vector2(74, -39)
 script = ExtResource("5_xtfs4")
 num_segments = 4
@@ -1754,8 +1807,8 @@ gravity_direction = Vector2(0, -2)
 render_line = false
 metadata/_custom_type_script = "uid://b2shq2gjd4fvt"
 
-[node name="RopeRendererLine2D" type="Line2D" parent="Node2D/Legs/LLEGS/Leg1/Rope" unique_id=1283417588]
-points = PackedVector2Array(0, 0, -11.517765, -5.3242264, -25.767021, -2.8814163, -31.490585, 12.261295, -31.037834, 18.930782)
+[node name="RopeRendererLine2D" type="Line2D" parent="Spider/Legs/LLEGS/Leg1/Rope" unique_id=1283417588]
+points = PackedVector2Array(0, 0, -10.479233, -7.1435413, -24.565212, -10.379398, -30.893486, 4.513382, -29.052883, 10.939828)
 width = 8.0
 width_curve = SubResource("Curve_u8njm")
 default_color = Color(0.13725491, 0.16862746, 0.26666668, 1)
@@ -1765,10 +1818,10 @@ begin_cap_mode = 2
 script = ExtResource("6_cektt")
 metadata/_custom_type_script = "uid://dfppmnngy2wx4"
 
-[node name="Leg2" type="Node2D" parent="Node2D/Legs/LLEGS" unique_id=373385318 groups=["legs"]]
+[node name="Leg2" type="Node2D" parent="Spider/Legs/LLEGS" unique_id=373385318 groups=["legs"]]
 position = Vector2(-41, 24)
 
-[node name="Rope" type="Node2D" parent="Node2D/Legs/LLEGS/Leg2" unique_id=1269104254]
+[node name="Rope" type="Node2D" parent="Spider/Legs/LLEGS/Leg2" unique_id=1269104254]
 position = Vector2(73, -40)
 script = ExtResource("5_xtfs4")
 num_segments = 4
@@ -1779,8 +1832,8 @@ gravity_direction = Vector2(0, -2)
 render_line = false
 metadata/_custom_type_script = "uid://b2shq2gjd4fvt"
 
-[node name="RopeRendererLine2D" type="Line2D" parent="Node2D/Legs/LLEGS/Leg2/Rope" unique_id=1045781717]
-points = PackedVector2Array(0, 0, -13.486317, -7.0522747, -29.277985, 0.12213516, -28.034126, 19.503954, -25.043884, 26.947594)
+[node name="RopeRendererLine2D" type="Line2D" parent="Spider/Legs/LLEGS/Leg2/Rope" unique_id=1045781717]
+points = PackedVector2Array(0, 0, -12.448296, -8.752157, -29.725067, -7.234562, -27.045067, 11.99831, -23.050999, 18.955086)
 width = 8.0
 width_curve = SubResource("Curve_u8njm")
 default_color = Color(0.13725491, 0.16862746, 0.26666668, 1)
@@ -1790,10 +1843,10 @@ begin_cap_mode = 2
 script = ExtResource("6_cektt")
 metadata/_custom_type_script = "uid://dfppmnngy2wx4"
 
-[node name="Leg3" type="Node2D" parent="Node2D/Legs/LLEGS" unique_id=884119015 groups=["legs"]]
+[node name="Leg3" type="Node2D" parent="Spider/Legs/LLEGS" unique_id=884119015 groups=["legs"]]
 position = Vector2(-37, 43)
 
-[node name="Rope" type="Node2D" parent="Node2D/Legs/LLEGS/Leg3" unique_id=953504878]
+[node name="Rope" type="Node2D" parent="Spider/Legs/LLEGS/Leg3" unique_id=953504878]
 position = Vector2(72, -40)
 script = ExtResource("5_xtfs4")
 num_segments = 4
@@ -1805,8 +1858,8 @@ damping = 20.0
 render_line = false
 metadata/_custom_type_script = "uid://b2shq2gjd4fvt"
 
-[node name="RopeRendererLine2D" type="Line2D" parent="Node2D/Legs/LLEGS/Leg3/Rope" unique_id=830706382]
-points = PackedVector2Array(0, 0, -12.111832, -3.8011444, -21.83075, 6.944936, -23.556488, 23.076822, -23.085136, 29.745018)
+[node name="RopeRendererLine2D" type="Line2D" parent="Spider/Legs/LLEGS/Leg3/Rope" unique_id=830706382]
+points = PackedVector2Array(0, 0, -10.299088, -7.401585, -23.21252, -0.9039793, -22.778889, 15.278475, -21.13375, 21.757713)
 width = 9.0
 width_curve = SubResource("Curve_u8njm")
 default_color = Color(0.13725491, 0.16862746, 0.26666668, 1)
@@ -1816,10 +1869,10 @@ begin_cap_mode = 2
 script = ExtResource("6_cektt")
 metadata/_custom_type_script = "uid://dfppmnngy2wx4"
 
-[node name="Leg4" type="Node2D" parent="Node2D/Legs/LLEGS" unique_id=2057722380 groups=["legs"]]
+[node name="Leg4" type="Node2D" parent="Spider/Legs/LLEGS" unique_id=2057722380 groups=["legs"]]
 position = Vector2(-25, 58)
 
-[node name="Rope" type="Node2D" parent="Node2D/Legs/LLEGS/Leg4" unique_id=1423618595]
+[node name="Rope" type="Node2D" parent="Spider/Legs/LLEGS/Leg4" unique_id=1423618595]
 position = Vector2(72, -40)
 script = ExtResource("5_xtfs4")
 num_segments = 4
@@ -1831,8 +1884,8 @@ damping = 20.0
 render_line = false
 metadata/_custom_type_script = "uid://b2shq2gjd4fvt"
 
-[node name="RopeRendererLine2D" type="Line2D" parent="Node2D/Legs/LLEGS/Leg4/Rope" unique_id=1753901374]
-points = PackedVector2Array(0, 0, -10.0586815, -1.4050522, -14.250595, 9.443789, -13.846806, 22.454254, -13.089291, 27.7482)
+[node name="RopeRendererLine2D" type="Line2D" parent="Spider/Legs/LLEGS/Leg4/Rope" unique_id=1753901374]
+points = PackedVector2Array(0, 0, -8.143417, -6.051338, -16.231865, 2.219448, -13.208992, 14.818039, -11.166641, 19.76056)
 width = 9.0
 width_curve = SubResource("Curve_u8njm")
 default_color = Color(0.13725491, 0.16862746, 0.26666668, 1)
@@ -1842,7 +1895,18 @@ begin_cap_mode = 2
 script = ExtResource("6_cektt")
 metadata/_custom_type_script = "uid://dfppmnngy2wx4"
 
-[node name="Head" type="Node2D" parent="Node2D" unique_id=145452657]
+[node name="PinJoint2D" type="PinJoint2D" parent="Spider/Legs" unique_id=1405809590]
+node_a = NodePath("../LLEGS")
+node_b = NodePath("../../ThoraxBdy")
+
+[node name="PinJoint2D2" type="PinJoint2D" parent="Spider/Legs" unique_id=1374051409]
+node_a = NodePath("../RLEGS")
+node_b = NodePath("../../ThoraxBdy")
+
+[node name="HeadBdy" type="RigidBody2D" parent="Spider" unique_id=795790854]
+mass = 0.01
+
+[node name="Head" type="Node2D" parent="Spider/HeadBdy" unique_id=145452657]
 position = Vector2(-1, 0)
 script = ExtResource("1_4yd52")
 curve = SubResource("Curve2D_cektt")
@@ -1851,68 +1915,91 @@ metadata/_custom_type_script = "uid://de3jpss66xjfh"
 metadata/_hover_closest_point_on_curve_ = Object(Object,"script":Resource("res://addons/curved_lines_2d/closest_point_on_curve_meta.gd"),"before_segment":1,"point_position":Vector2(-22.026459, -18.311039),"local_point_position":Vector2(-28.026459, -22.311039),"segment_rotation":0.0)
 
 
-[node name="HeadBase" type="Node2D" parent="Node2D/Head" unique_id=1819846524 node_paths=PackedStringArray("polygon")]
+[node name="HeadBase" type="Node2D" parent="Spider/HeadBdy/Head" unique_id=1819846524 node_paths=PackedStringArray("polygon")]
 script = ExtResource("1_4yd52")
 polygon = NodePath("Fill")
 curve = SubResource("Curve2D_m8pqf")
 update_curve_at_runtime = true
 arc_list = SubResource("Resource_xtfs4")
-metadata/_select_hint_ = true
 
-[node name="Fill" type="Polygon2D" parent="Node2D/Head/HeadBase" unique_id=1500960114]
+[node name="Fill" type="Polygon2D" parent="Spider/HeadBdy/Head/HeadBase" unique_id=1500960114]
 texture = SubResource("GradientTexture2D_uwm4s")
 texture_offset = Vector2(35.293243, 23.282333)
 polygon = PackedVector2Array(-4.1776733, -23.282333, -0.21515918, -23.214886, 3.5337718, -22.742754, 7.0691195, -21.865944, 10.390884, -20.58445, 13.499066, -18.898273, 16.393665, -16.807419, 19.07468, -14.31188, 21.542114, -11.411659, 23.19305, -7.6949453, 24.45877, -4.093823, 25.344969, -0.6245034, 25.857351, 2.6968024, 26.00162, 5.8538833, 25.783468, 8.830528, 25.208609, 11.610525, 24.78919, 12.921717, 24.282732, 14.177668, 23.689949, 15.37635, 23.011549, 16.51574, 22.248247, 17.593811, 21.400751, 18.608534, 20.469786, 19.557884, 19.45605, 20.439838, 18.360264, 21.252365, 17.18314, 21.993439, 15.925386, 22.661037, 14.587722, 23.25313, 11.6755, 24.2027, 8.452174, 24.825935, 4.9234467, 25.106625, -5.0980024, 25.461132, -13.529551, 24.90889, -17.174572, 24.291088, -20.452667, 23.444614, -23.37402, 22.368809, -25.94882, 21.063015, -28.187248, 19.526566, -29.183504, 18.67164, -30.099483, 17.758804, -30.936466, 16.787973, -31.69572, 15.759066, -32.378517, 14.671999, -32.98613, 13.5266905, -33.980904, 11.061018, -34.690224, 8.361388, -35.124275, 5.4271374, -35.293243, 2.2576065, -34.919823, -0.8243619, -34.336903, -3.708234, -33.544468, -6.39401, -32.542534, -8.881689, -31.331087, -11.171273, -29.910126, -13.26276, -28.279667, -15.15615, -26.439697, -16.851444, -24.390223, -18.348642, -22.131237, -19.647745, -19.662745, -20.74875, -16.984745, -21.651659, -14.097238, -22.356472, -11.000224, -22.86319)
 metadata/_edit_lock_ = true
 
-[node name="Eyes" type="Node2D" parent="Node2D/Head/HeadBase" unique_id=1796231662]
+[node name="Eyes" type="Node2D" parent="Spider/HeadBdy/Head/HeadBase" unique_id=1796231662]
 position = Vector2(-4.000001, 6.0000005)
 scale = Vector2(0.6539513, 0.6539513)
 
-[node name="RLarge" type="Node2D" parent="Node2D/Head/HeadBase/Eyes" unique_id=1211773954]
+[node name="RLarge" type="Node2D" parent="Spider/HeadBdy/Head/HeadBase/Eyes" unique_id=1211773954]
 position = Vector2(17, 0)
 script = SubResource("GDScript_4yd52")
 metadata/_select_hint_ = true
 
-[node name="Fill" type="Polygon2D" parent="Node2D/Head/HeadBase/Eyes/RLarge" unique_id=700657956]
+[node name="Fill" type="Polygon2D" parent="Spider/HeadBdy/Head/HeadBase/Eyes/RLarge" unique_id=700657956]
 color = Color(0.14758757, 0.19006658, 0.34096703, 1)
 polygon = PackedVector2Array(15.18465, 0, 15.1062565, 1.5525804, 14.876162, 3.0603032, 14.501998, 4.515537, 13.991397, 5.910649, 13.351991, 7.2380085, 12.591412, 8.489984, 11.717289, 9.658944, 10.737256, 10.737255, 9.658944, 11.717289, 8.4899845, 12.591412, 7.2380085, 13.351991, 5.910649, 13.991398, 4.5155363, 14.501998, 3.0603032, 14.876162, 1.5525804, 15.1062565, 0, 15.18465, -1.5525804, 15.1062565, -3.0603032, 14.876162, -4.515537, 14.501998, -5.910649, 13.991397, -7.2380085, 13.351991, -8.489984, 12.591412, -9.658944, 11.717289, -10.737255, 10.737256, -11.717289, 9.658944, -12.591412, 8.4899845, -13.351991, 7.2380085, -13.991398, 5.910649, -14.501998, 4.5155363, -14.876162, 3.0603032, -15.1062565, 1.5525804, -15.18465, 0, -15.1062565, -1.5525804, -14.876162, -3.0603032, -14.501998, -4.515537, -13.991397, -5.910649, -13.351991, -7.2380085, -12.591412, -8.489984, -11.717289, -9.658944, -10.737256, -10.737255, -9.658944, -11.717289, -8.4899845, -12.591412, -7.2380085, -13.351991, -5.910649, -13.991398, -4.5155363, -14.501998, -3.0603032, -14.876162, -1.5525804, -15.1062565, 0, -15.18465, 1.5525804, -15.1062565, 3.0603032, -14.876162, 4.515537, -14.501998, 5.910649, -13.991397, 7.2380085, -13.351991, 8.489984, -12.591412, 9.658944, -11.717289, 10.737255, -10.737256, 11.717289, -9.658944, 12.591412, -8.4899845, 13.351991, -7.2380085, 13.991398, -5.910649, 14.501998, -4.5155363, 14.876162, -3.0603032, 15.1062565, -1.5525804)
 metadata/_edit_lock_ = true
 
-[node name="RSmall" type="Node2D" parent="Node2D/Head/HeadBase/Eyes" unique_id=1849969509]
+[node name="RSmall" type="Node2D" parent="Spider/HeadBdy/Head/HeadBase/Eyes" unique_id=1849969509]
 position = Vector2(39.75831, -7.64583)
 scale = Vector2(0.46435118, 0.46435118)
 script = SubResource("GDScript_4yd52")
 metadata/_select_hint_ = true
 
-[node name="Fill" type="Polygon2D" parent="Node2D/Head/HeadBase/Eyes/RSmall" unique_id=1566698341]
+[node name="Fill" type="Polygon2D" parent="Spider/HeadBdy/Head/HeadBase/Eyes/RSmall" unique_id=1566698341]
 color = Color(0.1404, 0.17064004, 0.27, 1)
 polygon = PackedVector2Array(15.18465, 0, 15.1062565, 1.5525804, 14.876162, 3.0603032, 14.501998, 4.515537, 13.991397, 5.910649, 13.351991, 7.2380085, 12.591412, 8.489984, 11.717289, 9.658944, 10.737256, 10.737255, 9.658944, 11.717289, 8.4899845, 12.591412, 7.2380085, 13.351991, 5.910649, 13.991398, 4.5155363, 14.501998, 3.0603032, 14.876162, 1.5525804, 15.1062565, 0, 15.18465, -1.5525804, 15.1062565, -3.0603032, 14.876162, -4.515537, 14.501998, -5.910649, 13.991397, -7.2380085, 13.351991, -8.489984, 12.591412, -9.658944, 11.717289, -10.737255, 10.737256, -11.717289, 9.658944, -12.591412, 8.4899845, -13.351991, 7.2380085, -13.991398, 5.910649, -14.501998, 4.5155363, -14.876162, 3.0603032, -15.1062565, 1.5525804, -15.18465, 0, -15.1062565, -1.5525804, -14.876162, -3.0603032, -14.501998, -4.515537, -13.991397, -5.910649, -13.351991, -7.2380085, -12.591412, -8.489984, -11.717289, -9.658944, -10.737256, -10.737255, -9.658944, -11.717289, -8.4899845, -12.591412, -7.2380085, -13.351991, -5.910649, -13.991398, -4.5155363, -14.501998, -3.0603032, -14.876162, -1.5525804, -15.1062565, 0, -15.18465, 1.5525804, -15.1062565, 3.0603032, -14.876162, 4.515537, -14.501998, 5.910649, -13.991397, 7.2380085, -13.351991, 8.489984, -12.591412, 9.658944, -11.717289, 10.737255, -10.737256, 11.717289, -9.658944, 12.591412, -8.4899845, 13.351991, -7.2380085, 13.991398, -5.910649, 14.501998, -4.5155363, 14.876162, -3.0603032, 15.1062565, -1.5525804)
 metadata/_edit_lock_ = true
 
-[node name="LLarge" type="Node2D" parent="Node2D/Head/HeadBase/Eyes" unique_id=949585678]
+[node name="LLarge" type="Node2D" parent="Spider/HeadBdy/Head/HeadBase/Eyes" unique_id=949585678]
 position = Vector2(-18, 0)
 script = SubResource("GDScript_4yd52")
 metadata/_select_hint_ = true
 
-[node name="Fill" type="Polygon2D" parent="Node2D/Head/HeadBase/Eyes/LLarge" unique_id=1016201948]
+[node name="Fill" type="Polygon2D" parent="Spider/HeadBdy/Head/HeadBase/Eyes/LLarge" unique_id=1016201948]
 color = Color(0.14758757, 0.19006658, 0.34096703, 1)
 polygon = PackedVector2Array(15.18465, 0, 15.1062565, 1.5525804, 14.876162, 3.0603032, 14.501998, 4.515537, 13.991397, 5.910649, 13.351991, 7.2380085, 12.591412, 8.489984, 11.717289, 9.658944, 10.737256, 10.737255, 9.658944, 11.717289, 8.4899845, 12.591412, 7.2380085, 13.351991, 5.910649, 13.991398, 4.5155363, 14.501998, 3.0603032, 14.876162, 1.5525804, 15.1062565, 0, 15.18465, -1.5525804, 15.1062565, -3.0603032, 14.876162, -4.515537, 14.501998, -5.910649, 13.991397, -7.2380085, 13.351991, -8.489984, 12.591412, -9.658944, 11.717289, -10.737255, 10.737256, -11.717289, 9.658944, -12.591412, 8.4899845, -13.351991, 7.2380085, -13.991398, 5.910649, -14.501998, 4.5155363, -14.876162, 3.0603032, -15.1062565, 1.5525804, -15.18465, 0, -15.1062565, -1.5525804, -14.876162, -3.0603032, -14.501998, -4.515537, -13.991397, -5.910649, -13.351991, -7.2380085, -12.591412, -8.489984, -11.717289, -9.658944, -10.737256, -10.737255, -9.658944, -11.717289, -8.4899845, -12.591412, -7.2380085, -13.351991, -5.910649, -13.991398, -4.5155363, -14.501998, -3.0603032, -14.876162, -1.5525804, -15.1062565, 0, -15.18465, 1.5525804, -15.1062565, 3.0603032, -14.876162, 4.515537, -14.501998, 5.910649, -13.991397, 7.2380085, -13.351991, 8.489984, -12.591412, 9.658944, -11.717289, 10.737255, -10.737256, 11.717289, -9.658944, 12.591412, -8.4899845, 13.351991, -7.2380085, 13.991398, -5.910649, 14.501998, -4.5155363, 14.876162, -3.0603032, 15.1062565, -1.5525804)
 metadata/_edit_lock_ = true
 
-[node name="LSmall" type="Node2D" parent="Node2D/Head/HeadBase/Eyes" unique_id=471944195]
+[node name="LSmall" type="Node2D" parent="Spider/HeadBdy/Head/HeadBase/Eyes" unique_id=471944195]
 position = Vector2(-41.287468, -6.116665)
 scale = Vector2(0.46435118, 0.46435118)
 script = SubResource("GDScript_4yd52")
 metadata/_select_hint_ = true
 
-[node name="Fill" type="Polygon2D" parent="Node2D/Head/HeadBase/Eyes/LSmall" unique_id=1046162827]
+[node name="Fill" type="Polygon2D" parent="Spider/HeadBdy/Head/HeadBase/Eyes/LSmall" unique_id=1046162827]
 color = Color(0.1404, 0.17064004, 0.27, 1)
 polygon = PackedVector2Array(15.18465, 0, 15.1062565, 1.5525804, 14.876162, 3.0603032, 14.501998, 4.515537, 13.991397, 5.910649, 13.351991, 7.2380085, 12.591412, 8.489984, 11.717289, 9.658944, 10.737256, 10.737255, 9.658944, 11.717289, 8.4899845, 12.591412, 7.2380085, 13.351991, 5.910649, 13.991398, 4.5155363, 14.501998, 3.0603032, 14.876162, 1.5525804, 15.1062565, 0, 15.18465, -1.5525804, 15.1062565, -3.0603032, 14.876162, -4.515537, 14.501998, -5.910649, 13.991397, -7.2380085, 13.351991, -8.489984, 12.591412, -9.658944, 11.717289, -10.737255, 10.737256, -11.717289, 9.658944, -12.591412, 8.4899845, -13.351991, 7.2380085, -13.991398, 5.910649, -14.501998, 4.5155363, -14.876162, 3.0603032, -15.1062565, 1.5525804, -15.18465, 0, -15.1062565, -1.5525804, -14.876162, -3.0603032, -14.501998, -4.515537, -13.991397, -5.910649, -13.351991, -7.2380085, -12.591412, -8.489984, -11.717289, -9.658944, -10.737256, -10.737255, -9.658944, -11.717289, -8.4899845, -12.591412, -7.2380085, -13.351991, -5.910649, -13.991398, -4.5155363, -14.501998, -3.0603032, -14.876162, -1.5525804, -15.1062565, 0, -15.18465, 1.5525804, -15.1062565, 3.0603032, -14.876162, 4.515537, -14.501998, 5.910649, -13.991397, 7.2380085, -13.351991, 8.489984, -12.591412, 9.658944, -11.717289, 10.737255, -10.737256, 11.717289, -9.658944, 12.591412, -8.4899845, 13.351991, -7.2380085, 13.991398, -5.910649, 14.501998, -4.5155363, 14.876162, -3.0603032, 15.1062565, -1.5525804)
 metadata/_edit_lock_ = true
 
-[node name="mand1" type="Node2D" parent="Node2D/Head" unique_id=1021613149 node_paths=PackedStringArray("polygon")]
-position = Vector2(7, 0)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spider/HeadBdy" unique_id=1543735619]
+visible = false
+position = Vector2(-5, 2)
+shape = SubResource("CircleShape2D_y6ddq")
+
+[node name="LeftMandiblePin" type="PinJoint2D" parent="Spider" unique_id=1720935929]
+position = Vector2(-15, 22)
+node_a = NodePath("../HeadBdy")
+node_b = NodePath("../LeftMandible")
+
+[node name="RightMandiblePin" type="PinJoint2D" parent="Spider" unique_id=2049948825]
+position = Vector2(3, 22)
+node_a = NodePath("../HeadBdy")
+node_b = NodePath("../RightMandible")
+
+[node name="LeftMandible" type="RigidBody2D" parent="Spider" unique_id=2025654691]
+mass = 0.001
+
+[node name="LeftMandibleVector" type="Node2D" parent="Spider/LeftMandible" unique_id=1643525623]
+script = ExtResource("1_4yd52")
+curve = SubResource("Curve2D_y6ddq")
+arc_list = SubResource("Resource_lypgq")
+metadata/_custom_type_script = "uid://de3jpss66xjfh"
+
+[node name="mand1" type="Node2D" parent="Spider/LeftMandible/LeftMandibleVector" unique_id=1021613149 node_paths=PackedStringArray("polygon")]
+position = Vector2(6, 0)
 script = ExtResource("1_4yd52")
 fill_color = Color(0.25490198, 0.31764707, 0.5372549, 1)
 polygon = NodePath("Fill")
@@ -1920,14 +2007,29 @@ curve = SubResource("Curve2D_u8njm")
 update_curve_at_runtime = true
 arc_list = SubResource("Resource_y6ddq")
 
-[node name="Fill" type="Polygon2D" parent="Node2D/Head/mand1" unique_id=569797195]
+[node name="Fill" type="Polygon2D" parent="Spider/LeftMandible/LeftMandibleVector/mand1" unique_id=569797195]
 color = Color(0.25490198, 0.31764707, 0.5372549, 1)
 polygon = PackedVector2Array(-27.129787, 18.450867, -24.274515, 17.985365, -21.748795, 17.858341, -20.611128, 17.920452, -19.557783, 18.065607, -18.589407, 18.293287, -17.70664, 18.602964, -16.91013, 18.994114, -16.20052, 19.466213, -15.878504, 19.732456, -15.578453, 20.018738, -15.300452, 20.324995, -15.044578, 20.651161, -14.810913, 20.997171, -14.599537, 21.36296, -14.243976, 22.153608, -13.978537, 23.022585, -13.803867, 23.96936, -14.047874, 24.965485, -14.20775, 26.027874, -14.63443, 30.227459, -14.845015, 31.086714, -14.987499, 31.463251, -15.160015, 31.798456, -15.273385, 31.962528, -15.422229, 32.14075, -15.811794, 32.53405, -16.856627, 33.42873, -19.194593, 35.336006, -19.667109, 35.77791, -20.070156, 36.21709, -20.410538, 36.67845, -20.695051, 37.186867, -20.930502, 37.767235, -21.123692, 38.444435, -21.410503, 40.18891, -22.437653, 39.466225, -23.492428, 38.56896, -24.70431, 37.319836, -25.920527, 35.722908, -26.48252, 34.795288, -26.988304, 33.78224, -27.418789, 32.68428, -27.754873, 31.501905, -27.97746, 30.235628, -28.06746, 28.885956, -27.904808, 22.885712)
 metadata/_edit_lock_ = true
 
-[node name="mand2" type="Node2D" parent="Node2D/Head" unique_id=32095164 node_paths=PackedStringArray("polygon")]
-position = Vector2(-17, 0)
-scale = Vector2(-1, 1)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spider/LeftMandible" unique_id=586608452]
+visible = false
+position = Vector2(-15, 26)
+shape = SubResource("CapsuleShape2D_u8njm")
+
+[node name="RightMandible" type="RigidBody2D" parent="Spider" unique_id=1257726397]
+mass = 0.002
+
+[node name="RightMandibleVector2" type="Node2D" parent="Spider/RightMandible" unique_id=1068822595]
+script = ExtResource("1_4yd52")
+curve = SubResource("Curve2D_y6ddq")
+arc_list = SubResource("Resource_lypgq")
+metadata/_custom_type_script = "uid://de3jpss66xjfh"
+
+[node name="mand2" type="Node2D" parent="Spider/RightMandible/RightMandibleVector2" unique_id=1104899177 node_paths=PackedStringArray("polygon")]
+position = Vector2(-18, 0)
+rotation = 3.1415927
+scale = Vector2(1, -1)
 script = ExtResource("1_4yd52")
 fill_color = Color(0.25490198, 0.31764707, 0.5372549, 1)
 polygon = NodePath("Fill")
@@ -1935,10 +2037,22 @@ curve = SubResource("Curve2D_u8njm")
 update_curve_at_runtime = true
 arc_list = SubResource("Resource_y6ddq")
 
-[node name="Fill" type="Polygon2D" parent="Node2D/Head/mand2" unique_id=1044516532]
+[node name="Fill" type="Polygon2D" parent="Spider/RightMandible/RightMandibleVector2/mand2" unique_id=1340233434]
 color = Color(0.25490198, 0.31764707, 0.5372549, 1)
 polygon = PackedVector2Array(-27.129787, 18.450867, -24.274515, 17.985365, -21.748795, 17.858341, -20.611128, 17.920452, -19.557783, 18.065607, -18.589407, 18.293287, -17.70664, 18.602964, -16.91013, 18.994114, -16.20052, 19.466213, -15.878504, 19.732456, -15.578453, 20.018738, -15.300452, 20.324995, -15.044578, 20.651161, -14.810913, 20.997171, -14.599537, 21.36296, -14.243976, 22.153608, -13.978537, 23.022585, -13.803867, 23.96936, -14.047874, 24.965485, -14.20775, 26.027874, -14.63443, 30.227459, -14.845015, 31.086714, -14.987499, 31.463251, -15.160015, 31.798456, -15.273385, 31.962528, -15.422229, 32.14075, -15.811794, 32.53405, -16.856627, 33.42873, -19.194593, 35.336006, -19.667109, 35.77791, -20.070156, 36.21709, -20.410538, 36.67845, -20.695051, 37.186867, -20.930502, 37.767235, -21.123692, 38.444435, -21.410503, 40.18891, -22.437653, 39.466225, -23.492428, 38.56896, -24.70431, 37.319836, -25.920527, 35.722908, -26.48252, 34.795288, -26.988304, 33.78224, -27.418789, 32.68428, -27.754873, 31.501905, -27.97746, 30.235628, -28.06746, 28.885956, -27.904808, 22.885712)
 metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spider/RightMandible" unique_id=361619847]
+visible = false
+position = Vector2(3, 26)
+shape = SubResource("CapsuleShape2D_y6ddq")
+
+[node name="DampedSpringJoint2D" type="DampedSpringJoint2D" parent="Spider" unique_id=94518834]
+position = Vector2(-5, -9)
+node_a = NodePath("../ThoraxBdy")
+node_b = NodePath("../HeadBdy")
+bias = 0.53
+length = 15.0
 
 [node name="RFEET" type="Node2D" parent="." unique_id=317700538]
 position = Vector2(-10, -4)
@@ -1947,7 +2061,7 @@ position = Vector2(-10, -4)
 position = Vector2(72, -3)
 script = ExtResource("8_y6ddq")
 strength = 0.986
-rope_path = NodePath("../../Node2D/Legs/RLEGS/Leg1/Rope")
+rope_path = NodePath("../../Spider/Legs/RLEGS/Leg1/Rope")
 precise = true
 metadata/_custom_type_script = "uid://1xluodkpnre3"
 
@@ -1955,15 +2069,15 @@ metadata/_custom_type_script = "uid://1xluodkpnre3"
 position = Vector2(74, 17)
 script = ExtResource("8_y6ddq")
 strength = 0.989
-rope_path = NodePath("../../Node2D/Legs/RLEGS/Leg2/Rope")
+rope_path = NodePath("../../Spider/Legs/RLEGS/Leg2/Rope")
 precise = true
 metadata/_custom_type_script = "uid://1xluodkpnre3"
 
 [node name="foot3" type="Marker2D" parent="RFEET" unique_id=191571464]
-position = Vector2(68, 31)
+position = Vector2(72, 29)
 script = ExtResource("8_y6ddq")
 strength = 0.958
-rope_path = NodePath("../../Node2D/Legs/RLEGS/Leg3/Rope")
+rope_path = NodePath("../../Spider/Legs/RLEGS/Leg3/Rope")
 precise = true
 metadata/_custom_type_script = "uid://1xluodkpnre3"
 
@@ -1971,7 +2085,7 @@ metadata/_custom_type_script = "uid://1xluodkpnre3"
 position = Vector2(56, 50)
 script = ExtResource("8_y6ddq")
 strength = 0.958
-rope_path = NodePath("../../Node2D/Legs/RLEGS/Leg4/Rope")
+rope_path = NodePath("../../Spider/Legs/RLEGS/Leg4/Rope")
 metadata/_custom_type_script = "uid://1xluodkpnre3"
 
 [node name="LFEET" type="Node2D" parent="." unique_id=461253435]
@@ -1981,7 +2095,7 @@ position = Vector2(-1, -12)
 position = Vector2(-61, -1)
 script = ExtResource("8_y6ddq")
 strength = 0.986
-rope_path = NodePath("../../Node2D/Legs/LLEGS/Leg1/Rope")
+rope_path = NodePath("../../Spider/Legs/LLEGS/Leg1/Rope")
 precise = true
 metadata/_custom_type_script = "uid://1xluodkpnre3"
 
@@ -1989,7 +2103,7 @@ metadata/_custom_type_script = "uid://1xluodkpnre3"
 position = Vector2(-61, 25)
 script = ExtResource("8_y6ddq")
 strength = 0.989
-rope_path = NodePath("../../Node2D/Legs/LLEGS/Leg2/Rope")
+rope_path = NodePath("../../Spider/Legs/LLEGS/Leg2/Rope")
 precise = true
 metadata/_custom_type_script = "uid://1xluodkpnre3"
 
@@ -1997,7 +2111,7 @@ metadata/_custom_type_script = "uid://1xluodkpnre3"
 position = Vector2(-56, 47)
 script = ExtResource("8_y6ddq")
 strength = 0.958
-rope_path = NodePath("../../Node2D/Legs/LLEGS/Leg3/Rope")
+rope_path = NodePath("../../Spider/Legs/LLEGS/Leg3/Rope")
 precise = true
 metadata/_custom_type_script = "uid://1xluodkpnre3"
 
@@ -2005,9 +2119,14 @@ metadata/_custom_type_script = "uid://1xluodkpnre3"
 position = Vector2(-34, 60)
 script = ExtResource("8_y6ddq")
 strength = 0.958
-rope_path = NodePath("../../Node2D/Legs/LLEGS/Leg4/Rope")
+rope_path = NodePath("../../Spider/Legs/LLEGS/Leg4/Rope")
 precise = true
 metadata/_custom_type_script = "uid://1xluodkpnre3"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1012660393]
 libraries/ = SubResource("AnimationLibrary_y6ddq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1970251661]
+visible = false
+position = Vector2(-5, -10)
+shape = SubResource("CircleShape2D_lypgq")

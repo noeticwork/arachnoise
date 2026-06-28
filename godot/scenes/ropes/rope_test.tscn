@@ -7,8 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://dbcoikmgx1kmt" path="res://scenes/player/spidey.tscn" id="5_h8wd1"]
 [ext_resource type="Script" uid="uid://cep2bvkhu72ic" path="res://addons/rope2d/test/mouse.gd" id="5_qsf7i"]
 [ext_resource type="PackedScene" uid="uid://n34p15xh4o7v" path="res://scenes/player/vector_spider.tscn" id="7_c1c4s"]
-[ext_resource type="Script" uid="uid://dlbv4pit17dnu" path="res://addons/curved_lines_2d/scalable_arc.gd" id="8_e16xp"]
-[ext_resource type="Script" uid="uid://dl1t88tthmwts" path="res://addons/curved_lines_2d/scalable_arc_list.gd" id="9_cuh64"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_e6l2p"]
 noise_type = 3
@@ -29,38 +27,7 @@ point_count = 5
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_h8wd1"]
 
-[sub_resource type="Curve2D" id="Curve2D_vgmgs"]
-resource_local_to_scene = true
-_data = {
-"points": PackedVector2Array(0, 0, 6.2929077, -5.7894707, 29.32325, 20.747677, -1.5998077, 13.817642, 1.5998077, -13.817642, 42.39778, -5.7281265, 9.2030945, 16.677021, -15.525787, -13.051693, 34.831627, -38.683346, 11.651978, 0.7516403, -11.440463, 1.2951025, 2.1944962, -51.330368, 10.251373, -5.8239937, -11.337764, 11.547501, -27.088493, -42.77202, -3.1361034, -14.582006, 0.25139365, 5.781858, -39.390984, -3.5777588, -4.604299, -7.6951575, 6.8921814, 6.962696, -31.759888, 15.881165, -15.019066, 0.16780853, 0, 0, -1.6184998, 25.851501, -6.712433, 4.5308914, 0, 0, 29.32325, 20.747677)
-}
-point_count = 9
-
-[sub_resource type="Resource" id="Resource_prsts"]
-resource_local_to_scene = true
-script = ExtResource("9_cuh64")
-
-[sub_resource type="Curve2D" id="Curve2D_wfc7k"]
-resource_local_to_scene = true
-_data = {
-"points": PackedVector2Array(0, 0, 10.851481, -0.35971326, -4.1776733, -23.282333, -6.295044, -8.273497, 9.842387, 20.101904, 21.542114, -11.411659, 19.624153, -0.5547447, -28.916153, 2.149643, 4.9234467, 25.106625, 0.21236166, 17.532757, 1.4328716, -16.965422, -35.293243, 2.2576065, -19.310843, 0.061205547, 0, 0, -4.1776733, -23.282333)
-}
-point_count = 5
-
-[sub_resource type="Resource" id="Resource_asv81"]
-resource_local_to_scene = true
-script = ExtResource("9_cuh64")
-
-[sub_resource type="Curve2D" id="Curve2D_is3mj"]
-resource_local_to_scene = true
-_data = {
-"points": PackedVector2Array(0, 0, 8.048878, -1.696387, -27.129787, 18.450867, -0.6883787, -5.256011, -0.7907931, 2.536316, -13.803867, 23.96936, 1.0071526, -1.6696186, -0.5035763, 0.83481026, -15.160015, 31.798456, 1.358717, -1.2041435, -1.358717, 1.2041473, -19.194593, 35.336006, 0.31204605, -2.7390594, 0, 0, -21.410503, 40.18891, 0.09245682, 7.4197364, 0, 0, -28.06746, 28.885956, 0, 0, 0, 0, -27.904808, 22.885712, 0, 0, 0, 0, -27.129787, 18.450867)
-}
-point_count = 8
-
-[sub_resource type="Resource" id="Resource_10r41"]
-resource_local_to_scene = true
-script = ExtResource("9_cuh64")
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e16xp"]
 
 [node name="RopeTest" type="Node2D" unique_id=1674417321]
 
@@ -612,53 +579,17 @@ script = ExtResource("5_qsf7i")
 shape = SubResource("CircleShape2D_h8wd1")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=15187972]
-position = Vector2(196, 602)
+position = Vector2(128, 489)
+scale = Vector2(8.824757, 5.7020187)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1599143991]
 position = Vector2(-10, 0)
 shape = SubResource("WorldBoundaryShape2D_h8wd1")
 
-[node name="VectorSpider" parent="." unique_id=605656563 instance=ExtResource("7_c1c4s")]
-position = Vector2(-129, 315)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1471189742]
+position = Vector2(-16, 392)
+scale = Vector2(32.99297, 1)
+shape = SubResource("RectangleShape2D_e16xp")
 
-[node name="BodyBase" parent="VectorSpider/Node2D/SpirderShapes" parent_id_path=PackedInt32Array(605656563, 1654315418) index="0" unique_id=1873339868]
-curve = SubResource("Curve2D_vgmgs")
-arc_list = SubResource("Resource_prsts")
-
-[node name="RopeRendererLine2D" parent="VectorSpider/Node2D/Legs/RLEGS/Leg1/Rope" parent_id_path=PackedInt32Array(605656563, 729620765) index="0" unique_id=1157752801]
-points = PackedVector2Array(0, 0, 11.761902, -4.7704163, 25.713226, -0.96499634, 31.262192, 14.247986, 31.034687, 20.928955)
-
-[node name="RopeRendererLine2D" parent="VectorSpider/Node2D/Legs/RLEGS/Leg2/Rope" parent_id_path=PackedInt32Array(605656563, 1419629516) index="0" unique_id=148454519]
-points = PackedVector2Array(0, 0, 13.882385, -6.240753, 29.21914, 1.8652649, 29.431675, 21.288818, 27.039436, 28.945618)
-
-[node name="RopeRendererLine2D" parent="VectorSpider/Node2D/Legs/RLEGS/Leg3/Rope" parent_id_path=PackedInt32Array(605656563, 1616884471) index="0" unique_id=307659669]
-points = PackedVector2Array(0, 0, 11.930954, -4.312744, 19.510864, 8.03244, 18.554604, 24.224792, 17.115768, 30.75296)
-
-[node name="RopeRendererLine2D" parent="VectorSpider/Node2D/Legs/RLEGS/Leg4/Rope" parent_id_path=PackedInt32Array(605656563, 1988793406) index="0" unique_id=1345140934]
-points = PackedVector2Array(0, 0, 9.842117, -2.4539795, 12.281494, 8.910156, 9.744156, 21.669312, 8.126419, 26.766632)
-
-[node name="RopeRendererLine2D" parent="VectorSpider/Node2D/Legs/LLEGS/Leg1/Rope" parent_id_path=PackedInt32Array(605656563, 1189761797) index="0" unique_id=1283417588]
-points = PackedVector2Array(0, 0, -11.3181, -5.7299805, -25.672287, -4.02594, -30.876694, 11.299805, -30.04181, 17.932312)
-
-[node name="RopeRendererLine2D" parent="VectorSpider/Node2D/Legs/LLEGS/Leg2/Rope" parent_id_path=PackedInt32Array(605656563, 1269104254) index="0" unique_id=1045781717]
-points = PackedVector2Array(0, 0, -13.290619, -7.4134827, -29.282715, -0.6991577, -27.310715, 18.621307, -24.045929, 25.94867)
-
-[node name="RopeRendererLine2D" parent="VectorSpider/Node2D/Legs/LLEGS/Leg3/Rope" parent_id_path=PackedInt32Array(605656563, 953504878) index="0" unique_id=830706382]
-points = PackedVector2Array(0, 0, 11.292938, 5.570526, -2.1680756, 11.250244, -15.153519, 21.165161, -19.917358, 25.854828)
-
-[node name="RopeRendererLine2D" parent="VectorSpider/Node2D/Legs/LLEGS/Leg4/Rope" parent_id_path=PackedInt32Array(605656563, 1423618595) index="0" unique_id=1753901374]
-points = PackedVector2Array(0, 0, -9.897705, -2.2540588, -14.175537, 8.547211, -13.165649, 21.51236, -12.105957, 26.75418)
-
-[node name="HeadBase" parent="VectorSpider/Node2D/Head" parent_id_path=PackedInt32Array(605656563, 145452657) index="0" unique_id=1819846524]
-curve = SubResource("Curve2D_wfc7k")
-arc_list = SubResource("Resource_asv81")
-
-[node name="mand1" parent="VectorSpider/Node2D/Head" parent_id_path=PackedInt32Array(605656563, 145452657) index="1" unique_id=1021613149]
-curve = SubResource("Curve2D_is3mj")
-arc_list = SubResource("Resource_10r41")
-
-[node name="mand2" parent="VectorSpider/Node2D/Head" parent_id_path=PackedInt32Array(605656563, 145452657) index="2" unique_id=32095164]
-curve = SubResource("Curve2D_is3mj")
-arc_list = SubResource("Resource_10r41")
-
-[editable path="VectorSpider"]
+[node name="VectorSpider" parent="." unique_id=1599693744 instance=ExtResource("7_c1c4s")]
+position = Vector2(-103, 314)

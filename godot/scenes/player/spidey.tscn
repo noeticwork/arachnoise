@@ -10,7 +10,6 @@
 [ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="7_woxmh"]
 [ext_resource type="Texture2D" uid="uid://dmbsader58lv2" path="res://assets/sprites/spidey/spider-sprite-sheet-dark.png" id="10_371o6"]
 [ext_resource type="Script" uid="uid://bkyn6gsfgjmwm" path="res://addons/simple_shadow_2d_1.0/addons/simple_shadow_2d/shadow_2d.gd" id="10_f7j1b"]
-[ext_resource type="PackedScene" uid="uid://n34p15xh4o7v" path="res://scenes/player/vector_spider.tscn" id="11_f7j1b"]
 
 [sub_resource type="Gradient" id="Gradient_kshvn"]
 interpolation_mode = 2
@@ -685,10 +684,6 @@ color = Color(0, 0, 0, 0.19607843)
 shadow_steps = 3
 smoothing_amount = 0.45
 metadata/_custom_type_script = "uid://bkyn6gsfgjmwm"
-
-[node name="VectorSpider" parent="." unique_id=605656563 instance=ExtResource("11_f7j1b")]
-position = Vector2(-96, 6)
-scale = Vector2(0.5, 0.5)
 
 [connection signal="state_entered" from="Gestalt/ParallelState/Interacting/Web" to="." method="_on_web_state_entered"]
 [connection signal="state_input" from="Gestalt/ParallelState/Interacting/Web" to="." method="_on_web_state_input"]
